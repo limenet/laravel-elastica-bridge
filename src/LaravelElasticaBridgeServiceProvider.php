@@ -2,9 +2,9 @@
 
 namespace Limenet\LaravelElasticaBridge;
 
+use Limenet\LaravelElasticaBridge\Commands\LaravelElasticaBridgeCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Limenet\LaravelElasticaBridge\Commands\LaravelElasticaBridgeCommand;
 
 class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
 {
