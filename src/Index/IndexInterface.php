@@ -71,7 +71,7 @@ interface IndexInterface
     /**
      * Defines the types of documents found in this index. Array of classes implementing ElasticsearchableInterface.
      *
-     * @return array<class-string<Model>> Class names of Model classes
+     * @return array<string> Class names of Model classes
      */
     public function getAllowedDocuments(): array;
 

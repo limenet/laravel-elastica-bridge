@@ -35,13 +35,18 @@ class PopulateIndex extends AbstractIndexJob
         $index->delete();
         $index->create($this->indexConfig->getCreateArguments());
 
+        $jobs = [];
+
         foreach ($this->indexConfig->getAllowedDocuments() as $indexDocument) {
             $modelCount = $indexDocument::count();
 
             for ($batchNumber = 0; $batchNumber < ceil($modelCount / $this->indexConfig->getBatchSize()); $batchNumber++) {
-                $this->batch()->add(new PopulateBatchIndex($index, $indexDocument, $this->indexConfig->getBatchSize(), $batchNumber * $this->indexConfig->getBatchSize()));
+                $jobs[]=new PopulateBatchIndex($index, $indexDocument, $this->indexConfig->getBatchSize(), $batchNumber * $this->indexConfig->getBatchSize());
             }
         }
+
+
+        $this->batch()->add($jobs);
 
         $index->refresh();
     }

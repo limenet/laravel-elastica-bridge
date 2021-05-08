@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.7.2@83a0325c0a95c0ab531d6b90c877068b464377b5">
+  <file src="src/Commands/IndexCommand.php">
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$this-&gt;argument('index')</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="src/Jobs/PopulateBatchIndex.php">
+    <PossiblyNullReference occurrences="1">
+      <code>cancelled</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="src/Jobs/PopulateIndex.php">
+    <PossiblyNullReference occurrences="2">
+      <code>add</code>
+      <code>cancelled</code>
+    </PossiblyNullReference>
+  </file>
+</files>

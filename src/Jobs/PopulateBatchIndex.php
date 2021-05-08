@@ -8,6 +8,7 @@ use Elastica\Index;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -52,9 +53,10 @@ class PopulateBatchIndex implements ShouldQueue
             $esDocuments[] = $record->toElasticaDocument();
         }
 
-        if (count($esDocuments) > 0) {
-            $this->index->addDocuments($esDocuments);
-            $esDocuments = [];
+        if (count($esDocuments) === 0) {
+            return;
         }
+
+        $this->index->addDocuments($esDocuments);
     }
 }

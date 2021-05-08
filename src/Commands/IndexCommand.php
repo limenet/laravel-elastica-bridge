@@ -61,7 +61,7 @@ class IndexCommand extends Command
             Bus::batch([
                 [new PopulateIndex($indexConfig)],
             ])
-                ->then(function (Batch $batch) use ($indexConfig): void {
+                ->then(function () use ($indexConfig): void {
                     dispatch(new ActivateIndex($indexConfig));
                 })
                 ->name('ES index: '.$indexConfig->getName())
