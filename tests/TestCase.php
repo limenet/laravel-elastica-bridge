@@ -3,8 +3,8 @@
 namespace Limenet\LaravelElasticaBridge\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
