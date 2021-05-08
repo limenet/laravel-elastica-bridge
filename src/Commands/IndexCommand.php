@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Limenet\LaravelElasticaBridge\Commands;
 
-use Illuminate\Bus\Batch;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Bus;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
