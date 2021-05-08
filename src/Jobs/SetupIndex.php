@@ -33,7 +33,7 @@ class SetupIndex extends AbstractIndexJob
                 $aliasIndex->delete();
             }
 
-            if (!$aliasIndex->exists()) {
+            if (! $aliasIndex->exists()) {
                 $aliasIndex->create($this->indexConfig->getCreateArguments());
             }
         }

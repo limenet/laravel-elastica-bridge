@@ -66,7 +66,8 @@ abstract class AbstractIndex implements IndexInterface
                 ->search(
                     (new Query($query))
                         ->setSize($size)
-                        ->setFrom($from))
+                        ->setFrom($from)
+                )
         );
     }
 
@@ -110,7 +111,7 @@ abstract class AbstractIndex implements IndexInterface
 
     final public function getBlueGreenActiveSuffix(): string
     {
-        if (!$this->hasBlueGreenIndices()) {
+        if (! $this->hasBlueGreenIndices()) {
             throw new BlueGreenIndicesIncorrectlySetupException();
         }
 
@@ -125,7 +126,7 @@ abstract class AbstractIndex implements IndexInterface
 
         $suffix = substr((string) array_keys($aliases)[0], strlen($this->getName()));
 
-        if (!in_array($suffix, self::INDEX_SUFFIXES, true)) {
+        if (! in_array($suffix, self::INDEX_SUFFIXES, true)) {
             throw new BlueGreenIndicesIncorrectlySetupException();
         }
 

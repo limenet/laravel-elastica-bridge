@@ -25,7 +25,7 @@ trait ElasticsearchableTrait
             $this->getElasticsearchId(),
             array_merge(
                 $this->toElasticsearch(),
-                 [
+                [
                      IndexInterface::DOCUMENT_MODEL_CLASS => $this::class,
                      IndexInterface::DOCUMENT_MODEL_ID => $this->id,
                  ]

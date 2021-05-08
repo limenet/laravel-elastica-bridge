@@ -15,7 +15,10 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 
 abstract class AbstractIndexJob implements ShouldQueue, ShouldBeUnique
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected IndexInterface $indexConfig;
 
