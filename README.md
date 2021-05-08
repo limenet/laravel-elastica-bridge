@@ -32,15 +32,22 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'elasticsearch' => [
+        'host' => env('ELASTICSEARCH_HOST', 'localhost'),
+        'port' => env('ELASTICSEARCH_PORT', '9200'),
+    ],
+    'indices' => [],
 ];
+
 ```
 
 ## Usage
 
-```php
-$laravel-elastica-bridge = new Limenet\LaravelElasticaBridge();
-echo $laravel-elastica-bridge->echoPhrase('Hello, Spatie!');
-```
+1. Add `Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface` and `Limenet\LaravelElasticaBridge\Model\ElasticsearchableTrait` to a model
+2. Create a class extending `Limenet\LaravelElasticaBridge\Index\AbstractIndex`
+3. Add the index to your config (`elastica-bridge.indices`)
+4. Run `php artisan elastica-bridge:index`
+5. Check using `php artisan elastica-bridge:status`
 
 ## Testing
 
