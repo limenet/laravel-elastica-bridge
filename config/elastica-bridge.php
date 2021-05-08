@@ -1,5 +1,9 @@
 <?php
-// config for Limenet/ClassName
-return [
 
+return [
+    'elasticsearch' => [
+        'host' => env('ELASTICSEARCH_HOST', 'localhost'),
+        'port' => env('ELASTICSEARCH_PORT', '9200'),
+    ],
+    'indices' => [],
 ];

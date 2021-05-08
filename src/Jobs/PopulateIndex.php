@@ -1,0 +1,48 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Limenet\LaravelElasticaBridge\Jobs;
+
+use Illuminate\Bus\Batchable;
+use Limenet\LaravelElasticaBridge\Index\IndexInterface;
+
+class PopulateIndex extends AbstractIndexJob
+{
+    use Batchable;
+
+    /**
+     * Create a new job instance.
+     *
+     * @return void
+     */
+    public function __construct(protected IndexInterface $indexConfig)
+    {
+        //
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
+    {
+        if ($this->batch()->cancelled()) {
+            return;
+        }
+
+        $index = $this->indexConfig->getBlueGreenInactiveElasticaIndex();
+
+        $index->delete();
+        $index->create($this->indexConfig->getCreateArguments());
+
+        foreach ($this->indexConfig->getAllowedDocuments() as $indexDocument) {
+            $modelCount = $indexDocument::count();
+
+            for ($batchNumber = 0; $batchNumber < ceil($modelCount / $this->indexConfig->getBatchSize()); $batchNumber++) {
+                $this->batch()->add(new PopulateBatchIndex($index, $indexDocument, $this->indexConfig->getBatchSize(), $batchNumber * $this->indexConfig->getBatchSize()));
+            }
+        }
+
+        $index->refresh();
+    }
+}

@@ -19,13 +19,13 @@ composer require limenet/laravel-elastica-bridge
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider" --tag="laravel-elastica-bridge-migrations"
+php artisan vendor:publish --provider="Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider" --tag="elastica-bridge-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider" --tag="laravel-elastica-bridge-config"
+php artisan vendor:publish --provider="Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider" --tag="elastica-bridge-config"
 ```
 
 This is the contents of the published config file:
