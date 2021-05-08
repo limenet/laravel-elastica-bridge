@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Limenet\LaravelElasticaBridge\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelElasticaBridgeCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-elastica-bridge';
 
     public $description = 'My command';
 

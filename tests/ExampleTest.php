@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Limenet\LaravelElasticaBridge\Tests;
 
 class ExampleTest extends TestCase
 {
