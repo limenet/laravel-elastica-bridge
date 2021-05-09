@@ -59,10 +59,10 @@ class IndexCommand extends Command
                     [new SetupIndex($indexConfig, (bool) $this->option('delete'))],
                     [new PopulateIndex($indexConfig)],
                 ])
-                ->onQueue(config('elastica-bridge.queue'))
+                ->onConnection(config('elastica-bridge.connection'))
                 ->then(function () use ($indexConfig): void {
                     ActivateIndex::dispatch($indexConfig)
-                        ->onQueue(config('elastica-bridge.queue'));
+                        ->onConnection(config('elastica-bridge.connection'));
                 })
                 ->name('ES index: '.$indexConfig->getName())
                 ->dispatch();
