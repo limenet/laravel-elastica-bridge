@@ -1,8 +1,9 @@
 # Laravel-Elastica Bridge
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/limenet/laravel-elastica-bridge.svg?style=flat-square)](https://packagist.org/packages/limenet/laravel-elastica-bridge)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/run-tests?label=tests)](https://github.com/limenet/laravel-elastica-bridge/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/Check%20&%20fix%20styling?label=code%20style)](https://github.com/limenet/laravel-elastica-bridge/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/run-tests?label=tests)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/run-tests.yml?query=workflow%3APsalm+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/Check%20&%20fix%20styling?label=code%20style)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/psalm.yml?query=workflow%3APsalm+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/Psalm?label=psalm)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/php-cs-fixer.yml?query=workflow%3APsalm+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/limenet/laravel-elastica-bridge.svg?style=flat-square)](https://packagist.org/packages/limenet/laravel-elastica-bridge)
 
 A simple bridge between Laravel and Elasticsearch using Elastica, based on [https://github.com/valantic/pimcore-elastica-bridge](https://github.com/valantic/pimcore-elastica-bridge).
