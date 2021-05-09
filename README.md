@@ -1,4 +1,4 @@
-#
+# Laravel-Elastica Bridge
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/limenet/laravel-elastica-bridge.svg?style=flat-square)](https://packagist.org/packages/limenet/laravel-elastica-bridge)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/run-tests?label=tests)](https://github.com/limenet/laravel-elastica-bridge/actions?query=workflow%3Arun-tests+branch%3Amaster)
@@ -7,6 +7,12 @@
 
 A simple bridge between Laravel and Elasticsearch using Elastica, based on [https://github.com/valantic/pimcore-elastica-bridge](https://github.com/valantic/pimcore-elastica-bridge).
 
+
+## Requirements
+
+- PHP 8.0+
+- Laravel 8.0
+- [Job Batching](https://laravel.com/docs/8.x/queues#job-batching) is setup
 
 ## Installation
 
