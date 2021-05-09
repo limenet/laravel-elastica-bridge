@@ -6,4 +6,5 @@ return [
         'port' => env('ELASTICSEARCH_PORT', '9200'),
     ],
     'indices' => [],
+    'queue' => env('ELASTICSEARCH_QUEUE', config('queue.default')),
 ];
