@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Limenet\LaravelElasticaBridge\Jobs;
 
+use Illuminate\Bus\Batchable;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 
 class SetupIndex extends AbstractIndexJob
 {
+    use Batchable;
     /**
      * Create a new job instance.
      *
@@ -25,6 +27,10 @@ class SetupIndex extends AbstractIndexJob
      */
     public function handle(ElasticaClient $elastica): void
     {
+        if ($this->batch()->cancelled()) {
+            return;
+        }
+
         foreach (IndexInterface::INDEX_SUFFIXES as $suffix) {
             $name = $this->indexConfig->getName().$suffix;
             $aliasIndex = $elastica->getIndex($name);
