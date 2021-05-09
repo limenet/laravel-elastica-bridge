@@ -19,12 +19,12 @@ trait ElasticsearchableTrait
         return $this::class.'|'.$this->id;
     }
 
-    public function toElasticaDocument(): Document
+    public function toElasticaDocument(IndexInterface $indexConfig): Document
     {
         return new Document(
             $this->getElasticsearchId(),
             array_merge(
-                $this->toElasticsearch(),
+                $this->toElasticsearch($indexConfig),
                 [
                      IndexInterface::DOCUMENT_MODEL_CLASS => $this::class,
                      IndexInterface::DOCUMENT_MODEL_ID => $this->id,

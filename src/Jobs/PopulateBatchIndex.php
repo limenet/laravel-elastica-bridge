@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 
 class PopulateBatchIndex implements ShouldQueue
@@ -26,7 +27,7 @@ class PopulateBatchIndex implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(protected Index $index, protected string $indexDocument, protected int $limit, protected int $offset)
+    public function __construct(protected Index $index, protected IndexInterface $indexConfig, protected string $indexDocument, protected int $limit, protected int $offset)
     {
         //
     }
@@ -45,11 +46,11 @@ class PopulateBatchIndex implements ShouldQueue
         /** @var ElasticsearchableInterface[] $records */
         $records = $this->indexDocument::offset($this->offset)->limit($this->limit)->get();
         foreach ($records as $record) {
-            if (! $record->shouldIndex()) {
+            if (! $record->shouldIndex($this->indexConfig)) {
                 continue;
             }
 
-            $esDocuments[] = $record->toElasticaDocument();
+            $esDocuments[] = $record->toElasticaDocument($this->indexConfig);
         }
 
         if (count($esDocuments) === 0) {
