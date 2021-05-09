@@ -4,6 +4,9 @@
     <PossiblyInvalidArgument occurrences="1">
       <code>$this-&gt;argument('index')</code>
     </PossiblyInvalidArgument>
+    <PossiblyInvalidCast occurrences="1">
+      <code>config('elastica-bridge.connection')</code>
+    </PossiblyInvalidCast>
   </file>
   <file src="src/Jobs/PopulateBatchIndex.php">
     <PossiblyNullReference occurrences="1">
@@ -13,6 +16,11 @@
   <file src="src/Jobs/PopulateIndex.php">
     <PossiblyNullReference occurrences="2">
       <code>add</code>
+      <code>cancelled</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="src/Jobs/SetupIndex.php">
+    <PossiblyNullReference occurrences="1">
       <code>cancelled</code>
     </PossiblyNullReference>
   </file>
