@@ -24,7 +24,7 @@ class IndexCommand extends Command
     /**
      * The console command description.
      *
-     * @var string
+     * @var string|null
      */
     protected $description = 'Re-create the ES index and populate with data';
 

@@ -22,7 +22,7 @@ class StatusCommand extends Command
     /**
      * The console command description.
      *
-     * @var string
+     * @var string|null
      */
     protected $description = 'Displays the status of the configured Elasticsearch indices';
 
