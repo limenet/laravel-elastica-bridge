@@ -37,13 +37,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Limenet\\LaravelElasticaBridge\\Tests\\": "tests"
+            "Limenet\\LaravelElasticaBridge\\Tests\\": "tests",
+            "Limenet\\LaravelElasticaBridge\\Tests\\Database\\Factories\\": "tests/database/factories",
+            "Limenet\\LaravelElasticaBridge\\Tests\\Database\\Seeders\\": "tests/database/seeders"
         }
     },
     "scripts": {
         "psalm": "vendor/bin/psalm",
         "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test-coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html coverage",
+        "code-swift": "docker exec -it --user=laradock -w /var/www/$(git rev-parse --show-toplevel | xargs basename | cat) $(docker ps -q --filter name=laradock_workspace-8.0_) zsh"
     },
     "config": {
         "sort-packages": true

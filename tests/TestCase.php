@@ -3,17 +3,21 @@
 namespace Limenet\LaravelElasticaBridge\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider;
+use Limenet\LaravelElasticaBridge\Tests\Database\Seeders\DatabaseSeeder;
 use Orchestra\Testbench\TestCase as Orchestra;
+use SetupTables;
 
 class TestCase extends Orchestra
 {
+   // use RefreshDatabase;
     public function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\LaravelElasticaBridge\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Limenet\\LaravelElasticaBridge\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
@@ -27,10 +31,11 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
-
-        /*
-        include_once __DIR__.'/../database/migrations/create_laravel-elastica-bridge_table.php.stub';
-        (new \CreatePackageTable())->up();
-        */
+    }
+    protected function defineDatabaseMigrations():void
+    {
+        include_once __DIR__.'/database/migrations/SetupTables.php';
+        (new SetupTables())->up();
+        $this->artisan('db:seed', ['--class' => DatabaseSeeder::class])->run();
     }
 }
