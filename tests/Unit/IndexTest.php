@@ -3,6 +3,9 @@
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Elastica\Index;
+use Elastica\Query;
+use Elastica\Response;
+use Elastica\ResultSet;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
@@ -81,5 +84,10 @@ class IndexTest extends TestCase
         $this->expectException(BlueGreenIndicesIncorrectlySetupException::class);
         $this->customerIndex->getBlueGreenActiveElasticaIndex();
         $this->customerIndex->getBlueGreenInactiveElasticaIndex();
+    }
+    /** @test */
+    public function results_base_case()
+    {
+        $this->assertSame([], $this->customerIndex->documentResultToElements(new ResultSet(new Response('{}'), new Query(), [])));
     }
 }
