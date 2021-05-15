@@ -21,7 +21,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-elastica-bridge')
             ->hasConfigFile()
-            ->hasCommands([IndexCommand::class,StatusCommand::class]);
+            ->hasCommands([IndexCommand::class, StatusCommand::class]);
     }
 
     public function packageRegistered():void
