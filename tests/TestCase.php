@@ -11,7 +11,6 @@ use SetupTables;
 
 class TestCase extends Orchestra
 {
-    // use RefreshDatabase;
     public function setUp(): void
     {
         parent::setUp();
