@@ -5,7 +5,6 @@ namespace Limenet\LaravelElasticaBridge\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider;
-use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 use Limenet\LaravelElasticaBridge\Tests\Database\Seeders\DatabaseSeeder;
 use Orchestra\Testbench\TestCase as Orchestra;
 use SetupTables;

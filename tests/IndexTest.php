@@ -2,7 +2,6 @@
 
 namespace Limenet\LaravelElasticaBridge\Tests;
 
-use Elastica\Client;
 use Elastica\Index;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 
@@ -22,7 +21,7 @@ class IndexTest extends TestCase
         $index = $this->customerIndex->getElasticaIndex();
 
         $this->assertInstanceOf(Index::class, $index);
-        $this->assertSame($this->customerIndex->getName(),$index->getName());
+        $this->assertSame($this->customerIndex->getName(), $index->getName());
     }
 
     /** @test */
