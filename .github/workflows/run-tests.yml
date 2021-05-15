@@ -34,7 +34,7 @@ jobs:
       - name: Start Elasticsearch
         uses: elastic/elastic-github-actions/elasticsearch@master
         with:
-          stack-version: { { matrix.elasticsearch } }
+          stack-version: ${{ matrix.elasticsearch }}
 
       - name: Checkout code
         uses: actions/checkout@v2
