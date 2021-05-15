@@ -4,7 +4,6 @@ namespace Limenet\LaravelElasticaBridge\Tests;
 
 use Elastica\Index;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
-use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 use RuntimeException;
