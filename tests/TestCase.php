@@ -29,6 +29,9 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
+
+        config()->set('elastica-bridge.elasticseach.host', 'localhost');
+        config()->set('elastica-bridge.elasticseach.port', 9200);
     }
 
     protected function defineDatabaseMigrations():void
