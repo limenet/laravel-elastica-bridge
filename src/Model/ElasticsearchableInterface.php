@@ -9,8 +9,6 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 
 interface ElasticsearchableInterface
 {
-    public function getModel(): string;
-
     /**
      * @internal
      */

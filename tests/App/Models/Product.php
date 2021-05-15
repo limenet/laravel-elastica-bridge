@@ -15,11 +15,6 @@ class Product extends Model implements ElasticsearchableInterface
     use HasFactory;
     use ElasticsearchableTrait;
 
-    public function shouldIndex(IndexInterface $indexConfig): bool
-    {
-        return true;
-    }
-
     protected static function newFactory(): Factory
     {
         return ProductFactory::new();

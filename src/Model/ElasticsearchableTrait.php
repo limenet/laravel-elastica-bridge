@@ -9,11 +9,6 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 
 trait ElasticsearchableTrait
 {
-    final public function getModel(): string
-    {
-        return __CLASS__;
-    }
-
     final public function getElasticsearchId(): string
     {
         return $this::class.'|'.$this->id;
@@ -21,6 +16,11 @@ trait ElasticsearchableTrait
     public function toElasticsearch(IndexInterface $indexConfig): array
     {
         return $this->toArray();
+    }
+
+    public function shouldIndex(IndexInterface $indexConfig): bool
+    {
+        return true;
     }
 
     public function toElasticaDocument(IndexInterface $indexConfig): Document
