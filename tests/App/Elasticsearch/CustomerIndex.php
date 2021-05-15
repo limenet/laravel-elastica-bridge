@@ -26,6 +26,6 @@ class CustomerIndex extends AbstractIndex
                     'type' => 'keyword',
                 ],
              ],
-                ];
+        ];
     }
 }

@@ -20,6 +20,7 @@ class IndexTest extends TestCase
     public function raw_index()
     {
         $index = $this->customerIndex->getElasticaIndex();
+
         $this->assertInstanceOf(Index::class, $index);
         $this->assertSame($this->customerIndex->getName(),$index->getName());
     }
@@ -29,8 +30,9 @@ class IndexTest extends TestCase
     {
         $settings = $this->customerIndex->getCreateArguments();
         $mappings = $this->customerIndex->getMapping();
+
         $this->assertTrue($this->customerIndex->hasMapping());
-            $this->assertArrayHasKey('mappings', $settings);
-            $this->assertSame($settings['mappings'],$mappings);
+        $this->assertArrayHasKey('mappings', $settings);
+        $this->assertSame($settings['mappings'],$mappings);
     }
 }

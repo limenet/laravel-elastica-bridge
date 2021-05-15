@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class SetupTables extends Migration
 {
-    public function up()
+    public function up():void
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
