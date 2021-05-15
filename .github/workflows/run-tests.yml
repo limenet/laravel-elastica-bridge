@@ -33,7 +33,7 @@ jobs:
       - name: Start Elasticsearch
         uses: elastic/elastic-github-actions/elasticsearch@master
         with:
-          stack-version: 7.11
+          stack-version: 7.11.0
 
       - name: Checkout code
         uses: actions/checkout@v2
