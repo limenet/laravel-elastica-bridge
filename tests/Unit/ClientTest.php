@@ -1,6 +1,6 @@
 <?php
 
-namespace Limenet\LaravelElasticaBridge\Tests;
+namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 

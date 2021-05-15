@@ -1,6 +1,6 @@
 <?php
 
-namespace Limenet\LaravelElasticaBridge\Tests;
+namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Elastica\Index;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
