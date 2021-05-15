@@ -15,5 +15,11 @@ class SetupTables extends Migration
             $table->string('type');
             $table->timestamps();
         });
+
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
     }
 };

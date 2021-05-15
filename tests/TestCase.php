@@ -30,7 +30,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        config()->set('elastica-bridge.elasticseach.host', 'localhost');
+        config()->set('elastica-bridge.elasticseach.host', env('ELASTICSEARCH_HOST', 'localhost'));
         config()->set('elastica-bridge.elasticseach.port', 9200);
     }
 

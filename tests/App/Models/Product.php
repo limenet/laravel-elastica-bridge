@@ -8,17 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableTrait;
-use Limenet\LaravelElasticaBridge\Tests\Database\Factories\CustomerFactory;
+use Limenet\LaravelElasticaBridge\Tests\Database\Factories\ProductFactory;
 
-class Customer extends Model implements ElasticsearchableInterface
+class Product extends Model implements ElasticsearchableInterface
 {
     use HasFactory;
     use ElasticsearchableTrait;
-
-    public function toElasticsearch(IndexInterface $indexConfig): array
-    {
-        return $this->toArray();
-    }
 
     public function shouldIndex(IndexInterface $indexConfig): bool
     {
@@ -27,6 +22,6 @@ class Customer extends Model implements ElasticsearchableInterface
 
     protected static function newFactory(): Factory
     {
-        return CustomerFactory::new();
+        return ProductFactory::new();
     }
 }

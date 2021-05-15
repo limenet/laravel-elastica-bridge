@@ -4,6 +4,7 @@ namespace Limenet\LaravelElasticaBridge\Tests\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
+use Limenet\LaravelElasticaBridge\Tests\App\Models\Product;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,8 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run():void
     {
-        Customer::factory()
-                ->count(50)
-                ->create();
+        Customer::factory()->count(50)->create();
+        Product::factory()->count(50)->create();
     }
 }
