@@ -55,6 +55,7 @@ class IndexTest extends TestCase
         $customer = Customer::first();
         $document = $customer->toElasticaDocument($this->customerIndex);
         $document->setId(null);
+
         $this->expectException(RuntimeException::class);
         $this->customerIndex->getModelInstance($document);
     }
