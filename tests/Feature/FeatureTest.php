@@ -8,9 +8,8 @@ class FeatureTest extends TestCase
 {
 
     /** @test */
-    public function index_repository()
+    public function status()
     {
-        $this->assertCount(2, $this->indexRepository->all());
-        $this->assertInstanceOf(CustomerIndex::class, $this->indexRepository->get($this->customerIndex::class));
+       $this->assertSame(0, $this->artisan('elastica-bridge:status')->run());
     }
 }

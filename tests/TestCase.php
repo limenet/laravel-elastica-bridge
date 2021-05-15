@@ -4,6 +4,8 @@ namespace Limenet\LaravelElasticaBridge\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider;
+use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
+use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 use Limenet\LaravelElasticaBridge\Tests\Database\Seeders\DatabaseSeeder;
 use Orchestra\Testbench\TestCase as Orchestra;
 use SetupTables;
@@ -17,6 +19,11 @@ class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Limenet\\LaravelElasticaBridge\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+    }
+    protected function resolveApplicationConfiguration($app){
+        parent::resolveApplicationConfiguration($app);
+
+        $app['config']->set('elastica-bridge.indices', [CustomerIndex::class,ProductIndex::class]);
     }
 
     protected function getPackageProviders($app)
