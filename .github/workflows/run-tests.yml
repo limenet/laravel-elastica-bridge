@@ -56,3 +56,11 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: composer run test-coverage -- --coverage-text
+
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./build/logs/clover.xml
+          fail_ci_if_error: true
+          verbose: true
+          env_vars: P${{ matrix.php }},L${{ matrix.laravel }} ,E${{ matrix.elasticsearch }},${{ matrix.stability }},${{ matrix.os }}
