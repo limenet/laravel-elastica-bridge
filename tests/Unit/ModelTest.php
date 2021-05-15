@@ -25,7 +25,7 @@ class ModelTest extends TestCase
     public function convert_to_elastica_document_customized()
     {
         Customer::all()
-            ->filter(fn(Customer $customer):bool=>$customer->shouldIndex($this->customerIndex))
+            ->filter(fn (Customer $customer):bool => $customer->shouldIndex($this->customerIndex))
             ->each(function (Customer $customer):void {
                 $document = $customer->toElasticaDocument($this->customerIndex);
                 $this->assertInstanceOf(Document::class, $document);
@@ -45,7 +45,7 @@ class ModelTest extends TestCase
     public function convert_to_elastica_document_default()
     {
         Product::all()
-        ->filter(fn(Product $product):bool=>$product->shouldIndex($this->productIndex))
+        ->filter(fn (Product $product):bool => $product->shouldIndex($this->productIndex))
             ->each(function (Product $product):void {
                 $document = $product->toElasticaDocument($this->productIndex);
                 $this->assertInstanceOf(Document::class, $document);
