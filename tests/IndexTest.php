@@ -32,6 +32,6 @@ class IndexTest extends TestCase
 
         $this->assertTrue($this->customerIndex->hasMapping());
         $this->assertArrayHasKey('mappings', $settings);
-        $this->assertSame($settings['mappings'],$mappings);
+        $this->assertSame($settings['mappings'], $mappings);
     }
 }

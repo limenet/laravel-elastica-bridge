@@ -4,7 +4,6 @@ namespace Limenet\LaravelElasticaBridge\Tests;
 
 use Elastica\Document;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
-use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 
@@ -22,7 +21,7 @@ class ModelTest extends TestCase
     public function convert_to_elastica_document()
     {
         Customer::all()
-            ->each(function(Customer $customer):void{
+            ->each(function (Customer $customer):void {
                 $document = $customer->toElasticaDocument($this->customerIndex);
                 $this->assertInstanceOf(Document::class, $document);
 
