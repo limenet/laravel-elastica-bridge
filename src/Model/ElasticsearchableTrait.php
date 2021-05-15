@@ -18,6 +18,9 @@ trait ElasticsearchableTrait
     {
         return $this::class.'|'.$this->id;
     }
+    public function toElasticsearch(IndexInterface $indexConfig): array{
+        return $this->toArray();
+    }
 
     public function toElasticaDocument(IndexInterface $indexConfig): Document
     {
