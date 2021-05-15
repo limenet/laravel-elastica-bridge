@@ -10,15 +10,22 @@ use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableTrait;
 use Limenet\LaravelElasticaBridge\Tests\Database\Factories\CustomerFactory;
 
-class Customer extends Model implements ElasticsearchableInterface{
-use HasFactory;
-use ElasticsearchableTrait;
-
-public function toElasticsearch(IndexInterface $indexConfig): array { return $this->toArray(); }
-
-public function shouldIndex(IndexInterface $indexConfig): bool { return true;}
-protected static function newFactory():Factory
+class Customer extends Model implements ElasticsearchableInterface
 {
-    return CustomerFactory::new();
-}
+    use HasFactory;
+    use ElasticsearchableTrait;
+
+    public function toElasticsearch(IndexInterface $indexConfig): array
+    {
+        return $this->toArray();
+    }
+
+    public function shouldIndex(IndexInterface $indexConfig): bool
+    {
+        return true;
+    }
+    protected static function newFactory():Factory
+    {
+        return CustomerFactory::new();
+    }
 }

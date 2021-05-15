@@ -8,10 +8,10 @@ use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 
 class ModelTest extends TestCase
 {
-    protected  CustomerIndex $customerIndex;
+    protected CustomerIndex $customerIndex;
 
-    public function setUp():void {
-
+    public function setUp():void
+    {
         parent::setUp();
 
         $this->customerIndex = $this->app->make(CustomerIndex::class);
@@ -20,11 +20,11 @@ class ModelTest extends TestCase
     public function convert_to_elastica_document()
     {
         /** @var Customer $customer */
-        $customer=Customer::first();
+        $customer = Customer::first();
         $document = $customer->toElasticaDocument($this->customerIndex);
         $this->assertInstanceOf(Document::class, $document);
 
-        $this->assertSame($customer->name,$document->get('name'));
-        $this->assertSame($customer->email,$document->get('email'));
+        $this->assertSame($customer->name, $document->get('name'));
+        $this->assertSame($customer->email, $document->get('email'));
     }
 }

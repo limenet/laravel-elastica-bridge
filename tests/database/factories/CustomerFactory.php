@@ -2,9 +2,7 @@
 
 namespace Limenet\LaravelElasticaBridge\Tests\Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 
 class CustomerFactory extends Factory
@@ -26,7 +24,7 @@ class CustomerFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'type'=>$this->faker->randomElement(['small','medium','big'])
+            'type' => $this->faker->randomElement(['small','medium','big']),
         ];
     }
 }
