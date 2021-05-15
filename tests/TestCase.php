@@ -20,7 +20,8 @@ class TestCase extends Orchestra
             fn (string $modelName) => 'Limenet\\LaravelElasticaBridge\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
-    protected function resolveApplicationConfiguration($app){
+    protected function resolveApplicationConfiguration($app)
+    {
         parent::resolveApplicationConfiguration($app);
 
         $app['config']->set('elastica-bridge.indices', [CustomerIndex::class,ProductIndex::class]);

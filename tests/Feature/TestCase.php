@@ -2,7 +2,6 @@
 
 namespace Limenet\LaravelElasticaBridge\Tests\Feature;
 
-use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
@@ -19,6 +18,6 @@ class TestCase extends TestsTestCase
 
         $this->customerIndex = $this->app->make(CustomerIndex::class);
         $this->productIndex = $this->app->make(ProductIndex::class);
-        $this->indexRepository =$this->app->make(IndexRepository::class);
+        $this->indexRepository = $this->app->make(IndexRepository::class);
     }
 }
