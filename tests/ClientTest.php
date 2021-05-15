@@ -2,11 +2,7 @@
 
 namespace Limenet\LaravelElasticaBridge\Tests;
 
-use Elastica\Document;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
-use Limenet\LaravelElasticaBridge\Index\IndexInterface;
-use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
-use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 
 class ClientTest extends TestCase
 {
