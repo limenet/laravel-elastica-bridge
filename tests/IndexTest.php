@@ -43,7 +43,7 @@ class IndexTest extends TestCase
         Customer::all()
             ->each(function (Customer $customer):void {
                 $document = $customer->toElasticaDocument($this->customerIndex);
-$model =$this->customerIndex->getModelInstance($document);
+                $model = $this->customerIndex->getModelInstance($document);
                 $this->assertInstanceOf(Customer::class, $model);
                 $this->assertSame($customer->id, $model->id);
             });
