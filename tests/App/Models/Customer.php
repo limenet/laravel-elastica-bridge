@@ -22,7 +22,7 @@ class Customer extends Model implements ElasticsearchableInterface
 
     public function shouldIndex(IndexInterface $indexConfig): bool
     {
-        return true;
+        return ($this->id % 2) === 0;
     }
 
     protected static function newFactory(): Factory
