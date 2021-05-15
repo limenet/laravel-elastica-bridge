@@ -13,8 +13,12 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
  */
 class IndexRepository
 {
-    public function __construct(protected array $indices)
+    protected array $indices;
+    public function __construct(array $indices)
     {
+        foreach ($indices as $index) {
+            $this->indices[$index::class] = $index;
+        }
     }
 
     /**
