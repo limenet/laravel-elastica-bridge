@@ -66,5 +66,6 @@ class IndexTest extends TestCase
         $this->assertFalse($this->customerIndex->hasBlueGreenIndices());
         $this->expectException(BlueGreenIndicesIncorrectlySetupException::class);
         $this->customerIndex->getBlueGreenActiveElasticaIndex();
+        $this->customerIndex->getBlueGreenInactiveElasticaIndex();
     }
 }
