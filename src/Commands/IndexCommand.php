@@ -19,7 +19,7 @@ class IndexCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'elasticsearch:index {index?*} {--delete}';
+    protected $signature = 'elastica-bridge:index {index?*} {--delete}';
 
     /**
      * The console command description.

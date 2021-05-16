@@ -8,6 +8,7 @@ All notable changes to `laravel-elastica-bridge` will be documented in this file
 - provide default implementation for `Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface::shouldIndex()` in `ElasticsearchableTrait`
 - remove unused method `Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface::getModel()`
 - added tests
+- rename `elasticsearch:index` to  `elastica-bridge:index` for consistency with package name and  `elastica-bridge:status`
 
 ## 1.0.0 - 2021-05-09
 
