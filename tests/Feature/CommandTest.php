@@ -2,8 +2,6 @@
 
 namespace Limenet\LaravelElasticaBridge\Tests\Feature;
 
-use Limenet\LaravelElasticaBridge\Index\IndexInterface;
-
 class CommandTest extends TestCase
 {
     /** @test */

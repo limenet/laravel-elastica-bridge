@@ -24,7 +24,7 @@ class TestCase extends TestsTestCase
         $this->customerIndex = $this->app->make(CustomerIndex::class);
         $this->productIndex = $this->app->make(ProductIndex::class);
         $this->indexRepository = $this->app->make(IndexRepository::class);
-        $this->elasticaClient=$this->app->make(ElasticaClient::class);
+        $this->elasticaClient = $this->app->make(ElasticaClient::class);
 
         $this->cleanupIndices();
     }
@@ -35,28 +35,28 @@ class TestCase extends TestsTestCase
 
         $this->cleanupIndices();
     }
-    protected function cleanupIndices(){
-
-        foreach([$this->customerIndex, $this->productIndex] as $index){
-            try{
-            if($index->getElasticaIndex()->hasAlias($index->getName())){
-                $index->getElasticaIndex()->removeAlias($index->getName());
+    protected function cleanupIndices()
+    {
+        foreach ([$this->customerIndex, $this->productIndex] as $index) {
+            try {
+                if ($index->getElasticaIndex()->hasAlias($index->getName())) {
+                    $index->getElasticaIndex()->removeAlias($index->getName());
+                }
+                $active = $index->getBlueGreenActiveElasticaIndex();
+                $inactive = $index->getBlueGreenInactiveElasticaIndex();
+                if ($active->exists()) {
+                    $active->delete();
+                }
+                if ($inactive->exists()) {
+                    $inactive->delete();
+                }
+            } catch (BaseException | ResponseException) {
             }
-            $active=$index->getBlueGreenActiveElasticaIndex();
-            $inactive=$index->getBlueGreenInactiveElasticaIndex();
-            if($active->exists()){
-                $active->delete();
-            }
-            if($inactive->exists()){
-                $inactive->delete();
-            }
-        }catch(BaseException|ResponseException){
-
-        }
         }
     }
 
-    protected function index(IndexInterface $index):int{
+    protected function index(IndexInterface $index):int
+    {
         return $this->artisan('elastica-bridge:index', ['index' => [$index->getName()]])->run();
     }
 }
