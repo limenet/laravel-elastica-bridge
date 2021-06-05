@@ -13,7 +13,6 @@ $finder = Symfony\Component\Finder\Finder::create()
 return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR2' => true,
-        '@PSR4' => true,
         '@PSR12' => true,
         'array_indentation' => true,
         'array_syntax' => ['syntax' => 'short'],
