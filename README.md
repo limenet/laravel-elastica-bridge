@@ -1,9 +1,9 @@
 # Laravel-Elastica Bridge
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/limenet/laravel-elastica-bridge.svg?style=flat)](https://packagist.org/packages/limenet/laravel-elastica-bridge)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/run-tests?label=tests)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/run-tests.yml?query=workflow%3APsalm+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/Check%20&%20fix%20styling?label=code%20style)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/psalm.yml?query=workflow%3APsalm+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/Psalm?label=psalm)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/php-cs-fixer.yml?query=workflow%3APsalm+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/run-tests?label=tests)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/run-tests.yml)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/Check%20&%20fix%20styling?label=code%20style)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/php-cs-fixer.yml)
+[![GitHub Psalm Action Status](https://img.shields.io/github/workflow/status/limenet/laravel-elastica-bridge/Psalm?label=psalm)](https://github.com/limenet/laravel-elastica-bridge/actions/workflows/psalm.yml)
 [![codecov](https://codecov.io/gh/limenet/laravel-elastica-bridge/branch/main/graph/badge.svg?token=2ZE85IILKR)](https://codecov.io/gh/limenet/laravel-elastica-bridge)
 [![Total Downloads](https://img.shields.io/packagist/dt/limenet/laravel-elastica-bridge.svg?style=flat)](https://packagist.org/packages/limenet/laravel-elastica-bridge)
 [![License](https://img.shields.io/github/license/limenet/laravel-elastica-bridge)](LICENSE.md)
