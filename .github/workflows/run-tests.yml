@@ -21,7 +21,7 @@ jobs:
           - laravel: 8.*
             testbench: ^6.6
           - laravel: 9.x-dev
-            testbench: 7.0-dev
+            testbench: 7.0.x-dev
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - E${{ matrix.elasticsearch }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
