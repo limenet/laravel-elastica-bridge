@@ -3,7 +3,6 @@
 namespace Limenet\LaravelElasticaBridge\Tests\Feature;
 
 use Elastica\Document;
-use Elastica\Query\MatchQuery;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeFacade;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
@@ -35,9 +34,9 @@ class EventTest extends TestCase
         $this->index($this->productIndex);
         LaravelElasticaBridgeFacade::enableEventListener();
         $product = Product::factory()->create();
-        $document=$this->productIndex->getDocumentInstance($product);
-        $this->assertInstanceOf(Document::class,$document);
-        $this->assertSame($product->id,$document->get(IndexInterface::DOCUMENT_MODEL_ID));
+        $document = $this->productIndex->getDocumentInstance($product);
+        $this->assertInstanceOf(Document::class, $document);
+        $this->assertSame($product->id, $document->get(IndexInterface::DOCUMENT_MODEL_ID));
     }
 
     /** @test */
@@ -78,7 +77,7 @@ class EventTest extends TestCase
         LaravelElasticaBridgeFacade::disableEventListener();
         $product = Product::all()->random();
         $product->delete();
-        $this->assertInstanceOf(Document::class,$this->productIndex->getDocumentInstance($product));
+        $this->assertInstanceOf(Document::class, $this->productIndex->getDocumentInstance($product));
     }
 
     /** @test */

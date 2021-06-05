@@ -2,7 +2,6 @@
 
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
-use Elastica\Client;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeFacade;
 
 class EventTest extends TestCase

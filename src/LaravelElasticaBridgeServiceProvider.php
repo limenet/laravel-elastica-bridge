@@ -3,6 +3,7 @@
 namespace Limenet\LaravelElasticaBridge;
 
 use Illuminate\Database\Eloquent\Model;
+use function Illuminate\Events\queueable;
 use Illuminate\Support\Facades\Event;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Commands\IndexCommand;
@@ -10,9 +11,8 @@ use Limenet\LaravelElasticaBridge\Commands\StatusCommand;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 use Limenet\LaravelElasticaBridge\Services\ModelEvent;
 use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-use function Illuminate\Events\queueable;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
 {
@@ -45,12 +45,12 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
         foreach (ModelEvent::EVENTS as $name) {
             Event::listen(
                 sprintf('eloquent.%s:*', $name),
-                queueable(function (string $event, array $models)use($name) {
-                    if(!resolve(ElasticaClient::class)->listensToEvents()){
+                queueable(function (string $event, array $models) use ($name) {
+                    if (! resolve(ElasticaClient::class)->listensToEvents()) {
                         return;
                     }
-                    $modelEvent=resolve(ModelEvent::class);
-                    collect($models)->each(fn(Model $model) => $modelEvent->handle($name,$model));
+                    $modelEvent = resolve(ModelEvent::class);
+                    collect($models)->each(fn (Model $model) => $modelEvent->handle($name, $model));
                 })->onConnection(config('elastica-bridge.connection'))
             );
         }

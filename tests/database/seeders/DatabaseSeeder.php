@@ -3,7 +3,6 @@
 namespace Limenet\LaravelElasticaBridge\Tests\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeFacade;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Product;

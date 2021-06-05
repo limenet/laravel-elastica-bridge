@@ -2,34 +2,34 @@
 
 namespace Limenet\LaravelElasticaBridge\Services;
 
-use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Limenet\LaravelElasticaBridge\Index\AbstractIndex;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 
-class ModelEvent{
-public const EVENT_CREATED='created';
-public const EVENT_UPDATED='updated';
-public const EVENT_SAVED='saved';
-public const EVENT_RESTORED='restored';
-public const EVENT_DELETED='deleted';
-    public const EVENTS=[self::EVENT_CREATED,  self::EVENT_UPDATED,  self::EVENT_SAVED,  self::EVENT_RESTORED, self::EVENT_DELETED];
+class ModelEvent
+{
+    public const EVENT_CREATED = 'created';
+    public const EVENT_UPDATED = 'updated';
+    public const EVENT_SAVED = 'saved';
+    public const EVENT_RESTORED = 'restored';
+    public const EVENT_DELETED = 'deleted';
+    public const EVENTS = [self::EVENT_CREATED,  self::EVENT_UPDATED,  self::EVENT_SAVED,  self::EVENT_RESTORED, self::EVENT_DELETED];
     public function __construct(protected IndexRepository $indexRepository)
     {
     }
 
-    public function handle(string $event, Model $model){
-
+    public function handle(string $event, Model $model)
+    {
         foreach ($this->matchingIndicesForElement($model) as $index) {
-            if(!$index->getElasticaIndex()->exists()){
+            if (! $index->getElasticaIndex()->exists()) {
                 continue;
             }
 
             $shouldBePresent = true;
 
-            if(!$model->shouldIndex($index) || $event===self::EVENT_DELETED){
+            if (! $model->shouldIndex($index) || $event === self::EVENT_DELETED) {
                 $shouldBePresent = false;
             }
 
@@ -46,9 +46,9 @@ public const EVENT_DELETED='deleted';
 
     protected function ensureModelMissingFromIndex(IndexInterface $index, Model $model): void
     {
-        try{
+        try {
             $index->getElasticaIndex()->deleteById($model->getElasticsearchId());
-        }catch(NotFoundException){
+        } catch (NotFoundException) {
             //
         }
     }
@@ -63,7 +63,7 @@ public const EVENT_DELETED='deleted';
     {
         return array_filter(
             $this->indexRepository->all(),
-            fn(IndexInterface $index): bool => in_array($model::class, $index->getAllowedDocuments(), true)
+            fn (IndexInterface $index): bool => in_array($model::class, $index->getAllowedDocuments(), true)
         );
     }
 }

@@ -105,6 +105,7 @@ abstract class AbstractIndex implements IndexInterface
         } catch (NotFoundException) {
             return null;
         }
+
         return null;
     }
 
