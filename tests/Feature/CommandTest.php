@@ -18,7 +18,7 @@ class CommandTest extends TestCase
         $this->assertTrue($this->productIndex->getElasticaIndex()->exists());
     }
     /** @test */
-    public function index_command_swtiches_blue_green()
+    public function index_command_switches_blue_green()
     {
         $this->index($this->productIndex);
         $activeOld = $this->productIndex->getBlueGreenActiveElasticaIndex()->getName();
