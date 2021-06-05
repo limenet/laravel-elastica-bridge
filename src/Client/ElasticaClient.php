@@ -30,15 +30,15 @@ class ElasticaClient
         return $this->client->getIndex($name);
     }
 
-    public function enableEventListener():void
+    public function enableEventListener(): void
     {
         self::$listenToEvents = true;
     }
-    public function disableEventListener():void
+    public function disableEventListener(): void
     {
         self::$listenToEvents = false;
     }
-    public function listensToEvents():bool
+    public function listensToEvents(): bool
     {
         return self::$listenToEvents !== null
             ? self::$listenToEvents

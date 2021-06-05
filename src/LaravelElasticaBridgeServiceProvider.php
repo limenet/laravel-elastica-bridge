@@ -11,7 +11,6 @@ use Limenet\LaravelElasticaBridge\Commands\StatusCommand;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 use Limenet\LaravelElasticaBridge\Services\ModelEvent;
 use Spatie\LaravelPackageTools\Package;
-
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
@@ -40,7 +39,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
                 ->giveTagged('elasticaBridgeIndices');
     }
 
-    public function packageBooted():void
+    public function packageBooted(): void
     {
         foreach (ModelEvent::EVENTS as $name) {
             Event::listen(

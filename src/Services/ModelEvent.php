@@ -20,7 +20,7 @@ class ModelEvent
     {
     }
 
-    public function handle(string $event, Model $model):void
+    public function handle(string $event, Model $model): void
     {
         foreach ($this->matchingIndicesForElement($model) as $index) {
             if (! $index->getElasticaIndex()->exists()) {
@@ -37,8 +37,6 @@ class ModelEvent
         }
     }
 
-
-
     protected function ensureModelPresentInIndex(IndexInterface $index, Model $model): void
     {
         $index->getElasticaIndex()->addDocument($model->toElasticaDocument($index));
@@ -53,10 +51,7 @@ class ModelEvent
         }
     }
 
-
     /**
-     * @param Model $model
-     *
      * @return IndexInterface[]
      */
     public function matchingIndicesForElement(Model $model): array

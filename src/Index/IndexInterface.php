@@ -136,10 +136,6 @@ interface IndexInterface
 
     /**
      * Given an Elastica document, return the corresponding Laravel model.
-     *
-     * @param Document $document
-     *
-     * @return Model
      */
     public function getModelInstance(Document $document): Model;
 
