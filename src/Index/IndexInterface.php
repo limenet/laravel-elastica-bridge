@@ -150,5 +150,5 @@ interface IndexInterface
      *
      * @return Document
      */
-    public function getDocumentInstance(Model|ElasticsearchableInterface $model): ?Document;
+    public function getDocumentInstance(Model | ElasticsearchableInterface $model): ?Document;
 }

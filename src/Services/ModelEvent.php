@@ -4,7 +4,6 @@ namespace Limenet\LaravelElasticaBridge\Services;
 
 use Elastica\Exception\NotFoundException;
 use Illuminate\Database\Eloquent\Model;
-use Limenet\LaravelElasticaBridge\Index\AbstractIndex;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 
