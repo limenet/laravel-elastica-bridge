@@ -16,6 +16,7 @@ class ModelEvent
     public const EVENT_RESTORED = 'restored';
     public const EVENT_DELETED = 'deleted';
     public const EVENTS = [self::EVENT_CREATED,  self::EVENT_UPDATED,  self::EVENT_SAVED,  self::EVENT_RESTORED, self::EVENT_DELETED];
+
     public function __construct(protected IndexRepository $indexRepository)
     {
     }

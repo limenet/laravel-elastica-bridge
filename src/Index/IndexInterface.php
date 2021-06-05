@@ -134,7 +134,6 @@ interface IndexInterface
      */
     public function getBlueGreenInactiveElasticaIndex(): Index;
 
-
     /**
      * Given an Elastica document, return the corresponding Laravel model.
      *

@@ -49,6 +49,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
                     if (! resolve(ElasticaClient::class)->listensToEvents()) {
                         return;
                     }
+
                     $modelEvent = resolve(ModelEvent::class);
                     collect($models)->each(fn (Model $model) => $modelEvent->handle($name, $model));
                 })->onConnection(config('elastica-bridge.connection'))
