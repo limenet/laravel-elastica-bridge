@@ -8,7 +8,7 @@ class ClientTest extends TestCase
 {
     protected ElasticaClient $elasticaClient;
 
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -17,7 +17,7 @@ class IndexTest extends TestCase
     protected CustomerIndex $customerIndex;
     protected ProductIndex $productIndex;
 
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -59,7 +59,7 @@ class IndexTest extends TestCase
     public function document_to_model()
     {
         Customer::all()
-            ->each(function (Customer $customer):void {
+            ->each(function (Customer $customer): void {
                 $document = $customer->toElasticaDocument($this->customerIndex);
                 $model = $this->customerIndex->getModelInstance($document);
                 $this->assertInstanceOf(Customer::class, $model);

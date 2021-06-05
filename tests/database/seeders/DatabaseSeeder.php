@@ -10,10 +10,8 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeders.
-     *
-     * @return void
      */
-    public function run():void
+    public function run(): void
     {
         Customer::factory()->count(50)->create();
         Product::factory()->count(50)->create();

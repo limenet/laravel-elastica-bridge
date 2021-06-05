@@ -120,6 +120,6 @@ class StatusCommand extends Command
         $base = log($bytes, 1024);
         $suffixes = ['', 'K', 'M', 'G', 'T'];
 
-        return round(1024 ** ($base - floor($base)), 2).' '.$suffixes[(int)floor($base)].'B';
+        return round(1024 ** ($base - floor($base)), 2).' '.$suffixes[(int) floor($base)].'B';
     }
 }

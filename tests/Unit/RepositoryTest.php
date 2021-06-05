@@ -13,7 +13,7 @@ class RepositoryTest extends TestCase
     protected ProductIndex $productIndex;
     protected IndexRepository $indexRepository;
 
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class SetupTables extends Migration
 {
-    public function up():void
+    public function up(): void
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
@@ -61,4 +61,4 @@ class SetupTables extends Migration
             $table->integer('finished_at')->nullable();
         });
     }
-};
+}

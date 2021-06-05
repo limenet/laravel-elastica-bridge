@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch;
 
 use Limenet\LaravelElasticaBridge\Index\AbstractIndex;
@@ -21,11 +20,11 @@ class CustomerIndex extends AbstractIndex
     public function getMapping(): array
     {
         return [
-             'properties' => [
+            'properties' => [
                 'group' => [
                     'type' => 'keyword',
                 ],
-             ],
+            ],
         ];
     }
 }

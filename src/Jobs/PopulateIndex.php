@@ -45,7 +45,6 @@ class PopulateIndex extends AbstractIndexJob
             }
         }
 
-
         $this->batch()->add($jobs);
 
         $index->refresh();

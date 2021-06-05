@@ -16,15 +16,13 @@ class CustomerFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
-    public function definition():array
+    public function definition(): array
     {
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'type' => $this->faker->randomElement(['small','medium','big']),
+            'type' => $this->faker->randomElement(['small', 'medium', 'big']),
         ];
     }
 }

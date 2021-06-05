@@ -56,9 +56,9 @@ class IndexCommand extends Command
             $this->info(sprintf('Indexing %s', $indexConfig->getName()));
 
             Bus::batch([
-                    [new SetupIndex($indexConfig, (bool) $this->option('delete'))],
-                    [new PopulateIndex($indexConfig)],
-                ])
+                [new SetupIndex($indexConfig, (bool) $this->option('delete'))],
+                [new PopulateIndex($indexConfig)],
+            ])
                 ->onConnection(config('elastica-bridge.connection'))
                 ->then(function () use ($indexConfig): void {
                     ActivateIndex::dispatch($indexConfig)
