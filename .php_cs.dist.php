@@ -83,7 +83,6 @@ return (new PhpCsFixer\Config())
         'object_operator_without_whitespace' => true,
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
         'phpdoc_indent' => true,
-        'phpdoc_inline_tag' => true,
         'phpdoc_no_access' => true,
         'phpdoc_no_package' => true,
         'phpdoc_no_useless_inheritdoc' => true,
