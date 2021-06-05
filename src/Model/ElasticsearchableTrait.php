@@ -30,9 +30,9 @@ trait ElasticsearchableTrait
             array_merge(
                 $this->toElasticsearch($indexConfig),
                 [
-                     IndexInterface::DOCUMENT_MODEL_CLASS => $this::class,
-                     IndexInterface::DOCUMENT_MODEL_ID => $this->id,
-                 ]
+                    IndexInterface::DOCUMENT_MODEL_CLASS => $this::class,
+                    IndexInterface::DOCUMENT_MODEL_ID => $this->id,
+                ]
             )
         );
     }

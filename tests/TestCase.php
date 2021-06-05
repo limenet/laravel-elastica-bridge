@@ -43,7 +43,7 @@ class TestCase extends Orchestra
         config()->set('elastica-bridge.elasticseach.port', 9200);
     }
 
-    protected function defineDatabaseMigrations():void
+    protected function defineDatabaseMigrations(): void
     {
         include_once __DIR__.'/database/migrations/SetupTables.php';
         (new SetupTables())->up();

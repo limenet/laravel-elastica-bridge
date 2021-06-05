@@ -29,7 +29,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
             ->hasCommands([IndexCommand::class, StatusCommand::class]);
     }
 
-    public function packageRegistered():void
+    public function packageRegistered(): void
     {
         $this->app->singleton(ElasticaClient::class);
         $this->app->bind(ModelEvent::class);

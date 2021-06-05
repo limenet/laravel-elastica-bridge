@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch;
 
 use Limenet\LaravelElasticaBridge\Index\AbstractIndex;
