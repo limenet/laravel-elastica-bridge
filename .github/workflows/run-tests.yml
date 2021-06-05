@@ -14,14 +14,12 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0]
-        laravel: [^8.14, 9.x-dev]
+        laravel: [^8.14]
         elasticsearch: ["7.12.1", "7.13.0"]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: ^8.14
             testbench: ^6.6
-          - laravel: 9.x-dev
-            testbench: 7.0.x-dev
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - E${{ matrix.elasticsearch }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
