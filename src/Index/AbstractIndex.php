@@ -12,6 +12,7 @@ use Elastica\ResultSet;
 use Illuminate\Database\Eloquent\Model;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
+use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 use RuntimeException;
 
 abstract class AbstractIndex implements IndexInterface
@@ -98,15 +99,13 @@ abstract class AbstractIndex implements IndexInterface
         return $modelClass::findOrFail($modelId);
     }
 
-    public function getDocumentInstance(Model $model): ?Document
+    public function getDocumentInstance(Model|ElasticsearchableInterface $model): ?Document
     {
         try {
             return $this->getElasticaIndex()->getDocument($model->getElasticsearchId());
         } catch (NotFoundException) {
             return null;
         }
-
-        return null;
     }
 
     final public function hasBlueGreenIndices(): bool

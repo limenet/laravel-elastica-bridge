@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.7.2@83a0325c0a95c0ab531d6b90c877068b464377b5">
+<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
   <file src="src/Commands/IndexCommand.php">
     <PossiblyInvalidArgument occurrences="1">
       <code>$this-&gt;argument('index')</code>
@@ -23,5 +23,11 @@
     <PossiblyNullReference occurrences="1">
       <code>cancelled</code>
     </PossiblyNullReference>
+  </file>
+  <file src="src/LaravelElasticaBridgeServiceProvider.php">
+    <InvalidArgument occurrences="1"/>
+    <UnusedClosureParam occurrences="1">
+      <code>$event</code>
+    </UnusedClosureParam>
   </file>
 </files>

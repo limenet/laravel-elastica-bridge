@@ -21,7 +21,7 @@ class ModelEvent
     {
     }
 
-    public function handle(string $event, Model $model)
+    public function handle(string $event, Model $model):void
     {
         foreach ($this->matchingIndicesForElement($model) as $index) {
             if (! $index->getElasticaIndex()->exists()) {
@@ -58,7 +58,7 @@ class ModelEvent
     /**
      * @param Model $model
      *
-     * @return AbstractIndex[]
+     * @return IndexInterface[]
      */
     public function matchingIndicesForElement(Model $model): array
     {

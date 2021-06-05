@@ -40,7 +40,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
                 ->giveTagged('elasticaBridgeIndices');
     }
 
-    public function packageBooted()
+    public function packageBooted():void
     {
         foreach (ModelEvent::EVENTS as $name) {
             Event::listen(
