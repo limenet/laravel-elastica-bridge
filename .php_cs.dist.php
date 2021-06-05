@@ -13,6 +13,7 @@ $finder = Symfony\Component\Finder\Finder::create()
 return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR2' => true,
+        '@PSR4' => true,
         '@PSR12' => true,
         'array_indentation' => true,
         'array_syntax' => ['syntax' => 'short'],
@@ -93,7 +94,6 @@ return (new PhpCsFixer\Config())
         'phpdoc_trim' => true,
         'phpdoc_types' => true,
         'phpdoc_var_without_name' => true,
-        'psr4' => true,
         'self_accessor' => true,
         'simplified_null_return' => false, // disabled by Shift
         'single_line_comment_style' => [
