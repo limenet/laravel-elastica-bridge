@@ -14,16 +14,16 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0]
-        laravel: [8.*]
+        laravel: [8.*, 9.x-dev]
         elasticsearch: ["7.12.1", "7.13.0"]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: "8.*"
-            testbench: "^6.6"
-          - laravel: "9.x-dev"
-            testbench: "7.0-dev"
+          - laravel: 8.*
+            testbench: ^6.6
+          - laravel: 9.x-dev
+            testbench: 7.0-dev
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }}  - E${{ matrix.elasticsearch }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - E${{ matrix.elasticsearch }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Configure sysctl limits
@@ -64,4 +64,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./build/logs/clover.xml
           fail_ci_if_error: true
-          env_vars: P${{ matrix.php }},L${{ matrix.laravel }} ,E${{ matrix.elasticsearch }},${{ matrix.stability }},${{ matrix.os }}
+          env_vars: P${{ matrix.php }},L${{ matrix.laravel }},E${{ matrix.elasticsearch }},${{ matrix.stability }},${{ matrix.os }}
