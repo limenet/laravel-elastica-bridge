@@ -10,6 +10,7 @@ use Elastica\Index;
 class ElasticaClient
 {
     protected Client $client;
+    protected static ?bool $listenToEvents = null;
 
     public function __construct()
     {
@@ -27,5 +28,20 @@ class ElasticaClient
     public function getIndex(string $name): Index
     {
         return $this->client->getIndex($name);
+    }
+
+    public function enableEventListener(): void
+    {
+        self::$listenToEvents = true;
+    }
+    public function disableEventListener(): void
+    {
+        self::$listenToEvents = false;
+    }
+    public function listensToEvents(): bool
+    {
+        return self::$listenToEvents !== null
+            ? self::$listenToEvents
+            : config('elastica-bridge.events.listen', true);
     }
 }

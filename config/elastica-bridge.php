@@ -7,4 +7,7 @@ return [
     ],
     'indices' => [],
     'connection' => env('ELASTICSEARCH_QUEUE_CONNECTION', config('queue.default')),
+    'events' => [
+        'listen' => true,
+    ],
 ];

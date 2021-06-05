@@ -47,6 +47,9 @@ return [
         'port' => env('ELASTICSEARCH_PORT', '9200'),
     ],
     'indices' => [],
+    'events' => [
+        'listen' => true,
+    ],
 ];
 
 ```

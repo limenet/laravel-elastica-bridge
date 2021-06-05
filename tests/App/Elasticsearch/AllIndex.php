@@ -15,6 +15,6 @@ class ProductIndex extends AbstractIndex
 
     public function getAllowedDocuments(): array
     {
-        return [Customer::class, Product::class];
+        return [Customer::class, Order::class, Product::class];
     }
 }

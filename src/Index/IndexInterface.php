@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Limenet\LaravelElasticaBridge\Index;
 
+use Elastica\Document;
 use Elastica\Index;
 use Illuminate\Database\Eloquent\Model;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
+use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 
 interface IndexInterface
 {
@@ -131,4 +133,18 @@ interface IndexInterface
      * @internal
      */
     public function getBlueGreenInactiveElasticaIndex(): Index;
+
+    /**
+     * Given an Elastica document, return the corresponding Laravel model.
+     */
+    public function getModelInstance(Document $document): Model;
+
+    /**
+     * Given a Laravel model, return the corresponding Elastica document.
+     *
+     * @param Model|ElasticsearchableInterface $model
+     *
+     * @return Document
+     */
+    public function getDocumentInstance(Model | ElasticsearchableInterface $model): ?Document;
 }
