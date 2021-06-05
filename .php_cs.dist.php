@@ -38,7 +38,6 @@ return (new PhpCsFixer\Config())
         'include' => true,
         'increment_style' => ['style' => 'post'],
         'linebreak_after_opening_tag' => true,
-        'lowercase_constants' => true,
         'magic_method_casing' => true, // added from Symfony
         'magic_constant_casing' => true,
         'method_argument_space' => [
