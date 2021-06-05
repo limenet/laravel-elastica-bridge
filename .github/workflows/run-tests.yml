@@ -18,8 +18,10 @@ jobs:
         elasticsearch: ["7.12.1", "7.13.0"]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 8.*
-            testbench: ^6.6
+          - laravel: "8.*"
+            testbench: "^6.6"
+          - laravel: "9.x-dev"
+            testbench: "7.0-dev"
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }}  - E${{ matrix.elasticsearch }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
