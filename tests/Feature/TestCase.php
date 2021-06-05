@@ -57,7 +57,7 @@ class TestCase extends TestsTestCase
         }
     }
 
-    protected function index(IndexInterface $index):int
+    protected function index(IndexInterface $index): int
     {
         return $this->artisan('elastica-bridge:index', ['index' => [$index->getName()]])->run();
     }

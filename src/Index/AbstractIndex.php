@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Limenet\LaravelElasticaBridge\Index;
 
 use Elastica\Document;
+use Elastica\Exception\NotFoundException;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\ResultSet;
@@ -95,6 +96,16 @@ abstract class AbstractIndex implements IndexInterface
         [$modelClass,$modelId] = explode('|', $id);
 
         return $modelClass::findOrFail($modelId);
+    }
+
+    public function getDocumentInstance(Model $model): ?Document
+    {
+        try {
+            return $this->getElasticaIndex()->getDocument($model->getElasticsearchId());
+        } catch (NotFoundException) {
+            return null;
+        }
+        return null;
     }
 
     final public function hasBlueGreenIndices(): bool
