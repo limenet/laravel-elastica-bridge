@@ -99,7 +99,7 @@ abstract class AbstractIndex implements IndexInterface
         return $modelClass::findOrFail($modelId);
     }
 
-    public function getDocumentInstance(Model|ElasticsearchableInterface $model): ?Document
+    public function getDocumentInstance(Model | ElasticsearchableInterface $model): ?Document
     {
         try {
             return $this->getElasticaIndex()->getDocument($model->getElasticsearchId());
