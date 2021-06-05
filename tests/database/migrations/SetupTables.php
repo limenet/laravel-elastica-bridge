@@ -22,6 +22,12 @@ class SetupTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->dateTime('ordered_at');
+            $table->timestamps();
+        });
+
         Schema::create('failed_jobs', function (Blueprint $table): void {
             $table->id();
             $table->string('uuid')->unique();

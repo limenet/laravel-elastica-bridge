@@ -36,4 +36,10 @@ class CommandTest extends TestCase
         $this->assertCount(0, $this->customerIndex->searchForElements(new MatchQuery(IndexInterface::DOCUMENT_MODEL_ID, 1)));
         $this->assertCount(1, $this->customerIndex->searchForElements(new MatchQuery(IndexInterface::DOCUMENT_MODEL_ID, 2)));
     }
+    /** @test */
+    public function index_command_works_with_no_model_entries()
+    {
+        $this->index($this->orderIndex);
+        $this->assertSame(0, $this->orderIndex->getElasticaIndex()->count());
+    }
 }

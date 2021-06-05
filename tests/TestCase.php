@@ -5,6 +5,7 @@ namespace Limenet\LaravelElasticaBridge\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
+use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\OrderIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 use Limenet\LaravelElasticaBridge\Tests\Database\Seeders\DatabaseSeeder;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -24,7 +25,7 @@ class TestCase extends Orchestra
     {
         parent::resolveApplicationConfiguration($app);
 
-        $app['config']->set('elastica-bridge.indices', [CustomerIndex::class,ProductIndex::class]);
+        $app['config']->set('elastica-bridge.indices', [CustomerIndex::class, OrderIndex::class, ProductIndex::class]);
     }
 
     protected function getPackageProviders($app)
