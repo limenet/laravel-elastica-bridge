@@ -142,7 +142,6 @@ interface IndexInterface
     /**
      * Given a Laravel model, return the corresponding Elastica document.
      *
-     * @param Model|ElasticsearchableInterface $model
      *
      * @return Document
      */
