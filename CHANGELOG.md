@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## 1.3.0 - 2022-02-26
+
+- Added support for Laravel 9 (#2)
+
 ## 1.2.0 - 2021-06-05
 
 - Listen to model events and propagate changes to Elasticsearch (#1)
