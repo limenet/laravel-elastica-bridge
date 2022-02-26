@@ -20,6 +20,9 @@ jobs:
         include:
           - laravel: ^8.14
             testbench: ^6.6
+        include:
+          - laravel: ^9.0
+            testbench: ^7.0
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - E${{ matrix.elasticsearch }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
