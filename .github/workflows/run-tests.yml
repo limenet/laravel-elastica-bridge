@@ -57,7 +57,7 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: composer run test -- -vvv
+        run: composer run test-coverage -- --coverage-text
 
       - uses: codecov/codecov-action@v1
         with:
