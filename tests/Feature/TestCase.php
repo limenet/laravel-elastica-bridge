@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\Feature;
 
 use Elastica\Exception\ResponseException;
@@ -19,7 +21,8 @@ class TestCase extends TestsTestCase
     protected ProductIndex $productIndex;
     protected IndexRepository $indexRepository;
     protected ElasticaClient $elasticaClient;
-    public function setUp(): void
+
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -31,13 +34,15 @@ class TestCase extends TestsTestCase
 
         $this->cleanupIndices();
     }
-    public function tearDown(): void
+
+    protected function tearDown(): void
     {
         parent::tearDown();
 
         $this->cleanupIndices();
     }
-    protected function cleanupIndices()
+
+    protected function cleanupIndices(): void
     {
         foreach ([$this->customerIndex, $this->orderIndex, $this->productIndex] as $index) {
             try {
@@ -52,7 +57,7 @@ class TestCase extends TestsTestCase
                 if ($inactive->exists()) {
                     $inactive->delete();
                 }
-            } catch (BaseException | ResponseException) {
+            } catch (BaseException|ResponseException) {
             }
         }
     }

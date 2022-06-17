@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\App\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -12,8 +14,8 @@ use Limenet\LaravelElasticaBridge\Tests\Database\Factories\CustomerFactory;
 
 class Customer extends Model implements ElasticsearchableInterface
 {
-    use HasFactory;
     use ElasticsearchableTrait;
+    use HasFactory;
 
     public function toElasticsearch(IndexInterface $indexConfig): array
     {

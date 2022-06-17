@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Services;
 
 use Elastica\Exception\NotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
+use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 
 class ModelEvent
@@ -20,16 +23,17 @@ class ModelEvent
     {
     }
 
+    /** @param ElasticsearchableInterface&Model $model */
     public function handle(string $event, Model $model): void
     {
         foreach ($this->matchingIndicesForElement($model) as $index) {
-            if (! $index->getElasticaIndex()->exists()) {
+            if (!$index->getElasticaIndex()->exists()) {
                 continue;
             }
 
             $shouldBePresent = true;
 
-            if (! $model->shouldIndex($index) || $event === self::EVENT_DELETED) {
+            if (!$model->shouldIndex($index) || $event === self::EVENT_DELETED) {
                 $shouldBePresent = false;
             }
 
@@ -37,11 +41,13 @@ class ModelEvent
         }
     }
 
+    /** @param ElasticsearchableInterface&Model $model */
     protected function ensureModelPresentInIndex(IndexInterface $index, Model $model): void
     {
         $index->getElasticaIndex()->addDocument($model->toElasticaDocument($index));
     }
 
+    /** @param ElasticsearchableInterface&Model $model */
     protected function ensureModelMissingFromIndex(IndexInterface $index, Model $model): void
     {
         try {

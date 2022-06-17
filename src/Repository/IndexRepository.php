@@ -14,6 +14,7 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 class IndexRepository
 {
     protected array $indices;
+
     public function __construct(array $indices)
     {
         foreach ($indices as $index) {

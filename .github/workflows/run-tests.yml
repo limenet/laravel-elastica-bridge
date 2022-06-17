@@ -10,18 +10,17 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         os: [ubuntu-latest]
         php: [8.0, 8.1]
-        laravel: [^8.67, ^9.0]
-        elasticsearch: ["7.17.0"]
+        laravel: [^8.67, 9.*]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: ^8.67
-            testbench: ^6.6
-          - laravel: ^9.0
-            testbench: ^7.0
+            testbench: 6.*
+          - laravel: 9.*
+            testbench: 7.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - E${{ matrix.elasticsearch }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -39,7 +38,7 @@ jobs:
           stack-version: ${{ matrix.elasticsearch }}
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -52,10 +51,12 @@ jobs:
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
       - name: Execute tests
         run: composer run test-coverage -- --coverage-text
 

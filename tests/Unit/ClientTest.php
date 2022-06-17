@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
@@ -8,14 +10,14 @@ class ClientTest extends TestCase
 {
     protected ElasticaClient $elasticaClient;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->elasticaClient = $this->app->make(ElasticaClient::class);
     }
-    /** @test */
-    public function configured_client()
+
+    public function test_configured_client(): void
     {
         $client = $this->elasticaClient->getClient();
 

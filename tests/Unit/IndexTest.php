@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Elastica\Index;
@@ -17,15 +19,15 @@ class IndexTest extends TestCase
     protected CustomerIndex $customerIndex;
     protected ProductIndex $productIndex;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->customerIndex = $this->app->make(CustomerIndex::class);
         $this->productIndex = $this->app->make(ProductIndex::class);
     }
-    /** @test */
-    public function raw_index()
+
+    public function test_raw_index(): void
     {
         $index = $this->customerIndex->getElasticaIndex();
 
@@ -33,8 +35,7 @@ class IndexTest extends TestCase
         $this->assertSame($this->customerIndex->getName(), $index->getName());
     }
 
-    /** @test */
-    public function settings_customized()
+    public function test_settings_customized(): void
     {
         $settings = $this->customerIndex->getCreateArguments();
         $mappings = $this->customerIndex->getMapping();
@@ -44,8 +45,8 @@ class IndexTest extends TestCase
         $this->assertArrayNotHasKey('settings', $settings);
         $this->assertSame($settings['mappings'], $mappings);
     }
-    /** @test */
-    public function settings_Default()
+
+    public function test_settings__default(): void
     {
         $settings = $this->productIndex->getCreateArguments();
         $mappings = $this->productIndex->getMapping();
@@ -55,8 +56,7 @@ class IndexTest extends TestCase
         $this->assertEmpty($settings);
     }
 
-    /** @test */
-    public function document_to_model()
+    public function test_document_to_model(): void
     {
         Customer::all()
             ->each(function (Customer $customer): void {
@@ -66,8 +66,8 @@ class IndexTest extends TestCase
                 $this->assertSame($customer->id, $model->id);
             });
     }
-    /** @test */
-    public function empty_document_to_model()
+
+    public function test_empty_document_to_model(): void
     {
         /** @var Customer $customer */
         $customer = Customer::first();
@@ -77,16 +77,16 @@ class IndexTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->customerIndex->getModelInstance($document);
     }
-    /** @test */
-    public function blue_green()
+
+    public function test_blue_green(): void
     {
         $this->assertFalse($this->customerIndex->hasBlueGreenIndices());
         $this->expectException(BlueGreenIndicesIncorrectlySetupException::class);
         $this->customerIndex->getBlueGreenActiveElasticaIndex();
         $this->customerIndex->getBlueGreenInactiveElasticaIndex();
     }
-    /** @test */
-    public function results_base_case()
+
+    public function test_results_base_case(): void
     {
         $this->assertSame([], $this->customerIndex->documentResultToElements(new ResultSet(new Response('{}'), new Query(), [])));
     }
