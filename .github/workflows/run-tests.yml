@@ -60,7 +60,7 @@ jobs:
         uses: lhotari/action-upterm@v1
 
       - name: Execute tests
-        run: composer run test-coverage -- --coverage-text
+        run: composer run test-github
 
       - uses: codecov/codecov-action@v1
         with:
