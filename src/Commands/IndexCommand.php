@@ -14,36 +14,18 @@ use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 
 class IndexCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'elastica-bridge:index {index?*} {--delete}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Re-create the ES index and populate with data';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(protected ElasticaClient $elastica, protected IndexRepository $indexRepository)
-    {
+    public function __construct(
+        protected ElasticaClient $elastica,
+        protected IndexRepository $indexRepository
+    ) {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
+    public function handle(): int
     {
         foreach ($this->indexRepository->all() as $indexConfig) {
             if (
@@ -68,6 +50,6 @@ class IndexCommand extends Command
                 ->dispatch();
         }
 
-        return 0;
+        return self::SUCCESS;
     }
 }

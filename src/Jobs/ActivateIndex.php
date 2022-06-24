@@ -8,19 +8,10 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 
 class ActivateIndex extends AbstractIndexJob
 {
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public function __construct(protected IndexInterface $indexConfig)
     {
-        //
     }
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         $oldIndex = $this->indexConfig->getBlueGreenActiveElasticaIndex();

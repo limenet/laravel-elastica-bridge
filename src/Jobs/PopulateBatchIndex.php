@@ -22,19 +22,15 @@ class PopulateBatchIndex implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(protected Index $index, protected IndexInterface $indexConfig, protected string $indexDocument, protected int $limit, protected int $offset)
-    {
-        //
+    public function __construct(
+        protected Index $index,
+        protected IndexInterface $indexConfig,
+        protected string $indexDocument,
+        protected int $limit,
+        protected int $offset
+    ) {
     }
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         if ($this->batch()?->cancelled()) {
