@@ -53,8 +53,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer install --no-interaction
+
+      # - name: Install dependencies
+      #   run: |
+      #     composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+      #     composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
         run: composer run test-coverage -- --coverage-text
