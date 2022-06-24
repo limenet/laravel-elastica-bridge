@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## 1.4.0 - 2022-06-24
+
+- Update underlying skeleton (#3)
+- Indexing lock (#4)
+
 ## 1.3.0 - 2022-02-26
 
 - Added support for Laravel 9 (#2)
