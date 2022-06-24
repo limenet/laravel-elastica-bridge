@@ -16,7 +16,6 @@ class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
-        echo __METHOD__."\n";
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
