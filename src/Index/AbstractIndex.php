@@ -9,7 +9,9 @@ use Elastica\Exception\NotFoundException;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\ResultSet;
+use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
@@ -167,5 +169,10 @@ abstract class AbstractIndex implements IndexInterface
     final public function getBlueGreenInactiveElasticaIndex(): Index
     {
         return $this->client->getIndex($this->getName().$this->getBlueGreenInactiveSuffix());
+    }
+
+    final public function indexingLock(): Lock
+    {
+        return Cache::lock(__CLASS__.$this->getName());
     }
 }

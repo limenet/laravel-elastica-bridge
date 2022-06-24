@@ -14,7 +14,7 @@ use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 
 class IndexCommand extends Command
 {
-    protected $signature = 'elastica-bridge:index {index?*} {--delete}';
+    protected $signature = 'elastica-bridge:index {index?*} {--delete} {--force}';
 
     protected $description = 'Re-create the ES index and populate with data';
 
@@ -37,14 +37,30 @@ class IndexCommand extends Command
 
             $this->info(sprintf('Indexing %s', $indexConfig->getName()));
 
+            $lock = $indexConfig->indexingLock();
+
+            if ((bool) $this->option('force')) {
+                $lock->forceRelease();
+            }
+
+            if (!$lock->get()) {
+                $this->warn('Not indexing as another job is still running.');
+                continue;
+            }
+
             Bus::batch([
-                [new SetupIndex($indexConfig, (bool) $this->option('delete'))],
-                [new PopulateIndex($indexConfig)],
+                [
+                    new SetupIndex($indexConfig, (bool) $this->option('delete')),
+                    new PopulateIndex($indexConfig),
+                ],
             ])
                 ->onConnection(config('elastica-bridge.connection'))
                 ->then(function () use ($indexConfig): void {
                     ActivateIndex::dispatch($indexConfig)
                         ->onConnection(config('elastica-bridge.connection'));
+                })
+                ->finally(function () use ($indexConfig): void {
+                    $indexConfig->indexingLock()->forceRelease();
                 })
                 ->name('ES index: '.$indexConfig->getName())
                 ->dispatch();
