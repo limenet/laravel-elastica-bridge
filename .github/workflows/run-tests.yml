@@ -51,10 +51,6 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - name: php -m
-        run: |
-          php -m
-
       - name: Install dependencies
         run: |
           composer check-platform-reqs
