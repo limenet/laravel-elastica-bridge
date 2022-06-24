@@ -16,6 +16,6 @@ parameters:
 			path: src/LaravelElasticaBridgeServiceProvider.php
 
 		-
-			message: "#^Parameter \\#2 \\$model of method Limenet\\\\LaravelElasticaBridge\\\\Services\\\\ModelEvent\\:\\:handle\\(\\) expects Illuminate\\\\Database\\\\Eloquent\\\\Model&Limenet\\\\LaravelElasticaBridge\\\\Model\\\\ElasticsearchableInterface, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			message: "#^Parameter \\#2 \\$model of method Limenet\\\\LaravelElasticaBridge\\\\Services\\\\ModelEventListener\\:\\:handle\\(\\) expects Illuminate\\\\Database\\\\Eloquent\\\\Model&Limenet\\\\LaravelElasticaBridge\\\\Model\\\\ElasticsearchableInterface, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
 			count: 1
 			path: src/LaravelElasticaBridgeServiceProvider.php
