@@ -14,36 +14,18 @@ use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 
 class IndexCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'elastica-bridge:index {index?*} {--delete}';
+    protected $signature = 'elastica-bridge:index {index?*} {--delete} {--force}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Re-create the ES index and populate with data';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(protected ElasticaClient $elastica, protected IndexRepository $indexRepository)
-    {
+    public function __construct(
+        protected ElasticaClient $elastica,
+        protected IndexRepository $indexRepository
+    ) {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
+    public function handle(): int
     {
         foreach ($this->indexRepository->all() as $indexConfig) {
             if (
@@ -55,19 +37,35 @@ class IndexCommand extends Command
 
             $this->info(sprintf('Indexing %s', $indexConfig->getName()));
 
+            $lock = $indexConfig->indexingLock();
+
+            if ((bool) $this->option('force')) {
+                $lock->forceRelease();
+            }
+
+            if (!$lock->get()) {
+                $this->warn('Not indexing as another job is still running.');
+                continue;
+            }
+
             Bus::batch([
-                [new SetupIndex($indexConfig, (bool) $this->option('delete'))],
-                [new PopulateIndex($indexConfig)],
+                [
+                    new SetupIndex($indexConfig, (bool) $this->option('delete')),
+                    new PopulateIndex($indexConfig),
+                ],
             ])
                 ->onConnection(config('elastica-bridge.connection'))
                 ->then(function () use ($indexConfig): void {
                     ActivateIndex::dispatch($indexConfig)
                         ->onConnection(config('elastica-bridge.connection'));
                 })
+                ->finally(function () use ($indexConfig): void {
+                    $indexConfig->indexingLock()->forceRelease();
+                })
                 ->name('ES index: '.$indexConfig->getName())
                 ->dispatch();
         }
 
-        return 0;
+        return self::SUCCESS;
     }
 }

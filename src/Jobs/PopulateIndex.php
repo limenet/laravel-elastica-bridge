@@ -11,19 +11,10 @@ class PopulateIndex extends AbstractIndexJob
 {
     use Batchable;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public function __construct(protected IndexInterface $indexConfig)
     {
-        //
     }
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         if ($this->batch()?->cancelled()) {
@@ -41,7 +32,13 @@ class PopulateIndex extends AbstractIndexJob
             $modelCount = $indexDocument::count();
 
             for ($batchNumber = 0; $batchNumber < ceil($modelCount / $this->indexConfig->getBatchSize()); $batchNumber++) {
-                $jobs[] = new PopulateBatchIndex($index, $this->indexConfig, $indexDocument, $this->indexConfig->getBatchSize(), $batchNumber * $this->indexConfig->getBatchSize());
+                $jobs[] = new PopulateBatchIndex(
+                    $index,
+                    $this->indexConfig,
+                    $indexDocument,
+                    $this->indexConfig->getBatchSize(),
+                    $batchNumber * $this->indexConfig->getBatchSize()
+                );
             }
         }
 

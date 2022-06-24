@@ -11,7 +11,7 @@ use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Commands\IndexCommand;
 use Limenet\LaravelElasticaBridge\Commands\StatusCommand;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
-use Limenet\LaravelElasticaBridge\Services\ModelEvent;
+use Limenet\LaravelElasticaBridge\Services\ModelEventListener;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -33,7 +33,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->app->singleton(ElasticaClient::class);
-        $this->app->bind(ModelEvent::class);
+        $this->app->bind(ModelEventListener::class);
         $this->app->tag(config('elastica-bridge.indices'), 'elasticaBridgeIndices');
 
         $this->app->when(IndexRepository::class)
@@ -43,7 +43,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        foreach (ModelEvent::EVENTS as $name) {
+        foreach (ModelEventListener::EVENTS as $name) {
             Event::listen(
                 sprintf('eloquent.%s:*', $name),
                 queueable(function (string $event, array $models) use ($name): void {
@@ -51,8 +51,8 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
                         return;
                     }
 
-                    $modelEvent = resolve(ModelEvent::class);
-                    collect($models)->each(fn (Model $model) => $modelEvent->handle($name, $model));
+                    $modelEventListener = resolve(ModelEventListener::class);
+                    collect($models)->each(fn (Model $model) => $modelEventListener->handle($name, $model));
                 })->onConnection(config('elastica-bridge.connection'))
             );
         }

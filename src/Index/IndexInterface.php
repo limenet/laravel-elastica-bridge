@@ -6,6 +6,7 @@ namespace Limenet\LaravelElasticaBridge\Index;
 
 use Elastica\Document;
 use Elastica\Index;
+use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Database\Eloquent\Model;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
@@ -139,4 +140,6 @@ interface IndexInterface
      * @return Document
      */
     public function getDocumentInstance(Model|ElasticsearchableInterface $model): ?Document;
+
+    public function indexingLock(): Lock;
 }

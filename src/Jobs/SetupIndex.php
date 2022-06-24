@@ -13,19 +13,12 @@ class SetupIndex extends AbstractIndexJob
 {
     use Batchable;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(protected IndexInterface $indexConfig, protected bool $deleteExisting)
-    {
-        //
+    public function __construct(
+        protected IndexInterface $indexConfig,
+        protected bool $deleteExisting
+    ) {
     }
 
-    /**
-     * Execute the job.
-     */
     public function handle(ElasticaClient $elastica): void
     {
         if ($this->batch()?->cancelled()) {

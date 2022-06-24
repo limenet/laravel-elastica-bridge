@@ -12,36 +12,18 @@ use Symfony\Component\Console\Helper\Table;
 
 class StatusCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'elastica-bridge:status';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Displays the status of the configured Elasticsearch indices';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(protected ElasticaClient $elastica, protected IndexRepository $indexRepository)
-    {
+    public function __construct(
+        protected ElasticaClient $elastica,
+        protected IndexRepository $indexRepository
+    ) {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
+    public function handle(): int
     {
         $table = new Table($this->output);
         $table
@@ -100,7 +82,7 @@ class StatusCommand extends Command
             ->setHeaderTitle('Indices');
         $table->render();
 
-        return 0;
+        return self::SUCCESS;
     }
 
     protected function formatBoolean(bool $val): string
