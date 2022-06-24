@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0, 8.1]
         laravel: [9.*]
-        elasticsearch: ["7.17.0"]
+        elasticsearch: ["7.17.4"]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 9.*
@@ -43,7 +43,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo,xml, sqlite
           coverage: xdebug
 
       - name: Setup problem matchers
@@ -57,7 +57,7 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: composer run test-coverage -- --coverage-text
+        run: composer run test-github
 
       - uses: codecov/codecov-action@v1
         with:
