@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0, 8.1]
         laravel: [9.*]
-        elasticsearch: ["7.17.0"]
+        elasticsearch: ["7.17.4"]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 9.*
