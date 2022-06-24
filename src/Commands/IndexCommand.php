@@ -47,8 +47,8 @@ class IndexCommand extends Command
     {
         foreach ($this->indexRepository->all() as $indexConfig) {
             if (
-                ! empty($this->argument('index'))
-                && ! in_array($indexConfig->getName(), $this->argument('index'), true)
+                !empty($this->argument('index'))
+                && !in_array($indexConfig->getName(), $this->argument('index'), true)
             ) {
                 continue;
             }

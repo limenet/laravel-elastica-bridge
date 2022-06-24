@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\Feature;
 
 use Elastica\Query\BoolQuery;
@@ -8,8 +10,7 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 
 class QueryTest extends TestCase
 {
-    /** @test */
-    public function get_by_id()
+    public function test_get_by_id(): void
     {
         $id = 17;
         $this->index($this->productIndex);
@@ -18,8 +19,8 @@ class QueryTest extends TestCase
         $this->assertCount(1, $elements);
         $this->assertSame(17, $elements[0]->id);
     }
-    /** @test */
-    public function size_and_from()
+
+    public function test_size_and_from(): void
     {
         $this->index($this->productIndex);
 

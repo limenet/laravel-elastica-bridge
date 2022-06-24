@@ -16,11 +16,11 @@ use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 
 class PopulateBatchIndex implements ShouldQueue
 {
+    use Batchable;
     use Dispatchable;
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    use Batchable;
 
     /**
      * Create a new job instance.
@@ -37,7 +37,7 @@ class PopulateBatchIndex implements ShouldQueue
      */
     public function handle(): void
     {
-        if ($this->batch()->cancelled()) {
+        if ($this->batch()?->cancelled()) {
             return;
         }
 
@@ -46,7 +46,7 @@ class PopulateBatchIndex implements ShouldQueue
         /** @var ElasticsearchableInterface[] $records */
         $records = $this->indexDocument::offset($this->offset)->limit($this->limit)->get();
         foreach ($records as $record) {
-            if (! $record->shouldIndex($this->indexConfig)) {
+            if (!$record->shouldIndex($this->indexConfig)) {
                 continue;
             }
 

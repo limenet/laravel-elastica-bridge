@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge;
 
 use Illuminate\Database\Eloquent\Model;
@@ -44,8 +46,8 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
         foreach (ModelEvent::EVENTS as $name) {
             Event::listen(
                 sprintf('eloquent.%s:*', $name),
-                queueable(function (string $event, array $models) use ($name) {
-                    if (! resolve(ElasticaClient::class)->listensToEvents()) {
+                queueable(function (string $event, array $models) use ($name): void {
+                    if (!resolve(ElasticaClient::class)->listensToEvents()) {
                         return;
                     }
 

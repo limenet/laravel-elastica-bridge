@@ -1,4 +1,0 @@
-providers:
-  - Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider
-env:
-  - ELASTICSEARCH_HOST="code.swift"

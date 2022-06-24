@@ -1,0 +1,21 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|string\\|true given\\.$#"
+			count: 1
+			path: src/Commands/IndexCommand.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\|Limenet\\\\LaravelElasticaBridge\\\\Model\\\\ElasticsearchableInterface\\:\\:getElasticsearchId\\(\\)\\.$#"
+			count: 1
+			path: src/Index/AbstractIndex.php
+
+		-
+			message: "#^Parameter \\#2 \\$listener of static method Illuminate\\\\Events\\\\Dispatcher\\:\\:listen\\(\\) expects array\\|Closure\\|string\\|null, Illuminate\\\\Events\\\\QueuedClosure given\\.$#"
+			count: 1
+			path: src/LaravelElasticaBridgeServiceProvider.php
+
+		-
+			message: "#^Parameter \\#2 \\$model of method Limenet\\\\LaravelElasticaBridge\\\\Services\\\\ModelEvent\\:\\:handle\\(\\) expects Illuminate\\\\Database\\\\Eloquent\\\\Model&Limenet\\\\LaravelElasticaBridge\\\\Model\\\\ElasticsearchableInterface, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: src/LaravelElasticaBridgeServiceProvider.php

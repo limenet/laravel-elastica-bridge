@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
@@ -13,7 +15,7 @@ class RepositoryTest extends TestCase
     protected ProductIndex $productIndex;
     protected IndexRepository $indexRepository;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -21,16 +23,16 @@ class RepositoryTest extends TestCase
         $this->productIndex = $this->app->make(ProductIndex::class);
         $this->indexRepository = $this->app->make(IndexRepository::class);
     }
-    /** @test */
-    public function all()
+
+    public function test_all(): void
     {
         $this->assertCount(3, $this->indexRepository->all());
         foreach ($this->indexRepository->all() as $index) {
             $this->assertInstanceOf(IndexInterface::class, $index);
         }
     }
-    /** @test */
-    public function single()
+
+    public function test_single(): void
     {
         $this->assertInstanceOf(CustomerIndex::class, $this->indexRepository->get($this->customerIndex::class));
         $this->assertInstanceOf(ProductIndex::class, $this->indexRepository->get($this->productIndex::class));

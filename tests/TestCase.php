@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -9,19 +11,21 @@ use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\OrderIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 use Limenet\LaravelElasticaBridge\Tests\Database\Seeders\DatabaseSeeder;
 use Orchestra\Testbench\TestCase as Orchestra;
-use SetupTables;
 
 class TestCase extends Orchestra
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Limenet\\LaravelElasticaBridge\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+
+        $this->seed(DatabaseSeeder::class);
     }
-    protected function resolveApplicationConfiguration($app)
+
+    protected function resolveApplicationConfiguration($app): void
     {
         parent::resolveApplicationConfiguration($app);
 
@@ -35,18 +39,14 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
 
         config()->set('elastica-bridge.elasticseach.host', env('ELASTICSEARCH_HOST', 'localhost'));
         config()->set('elastica-bridge.elasticseach.port', 9200);
-    }
 
-    protected function defineDatabaseMigrations(): void
-    {
-        include_once __DIR__.'/database/migrations/SetupTables.php';
-        (new SetupTables())->up();
-        $this->artisan('db:seed', ['--class' => DatabaseSeeder::class])->run();
+        $migration = include __DIR__.'/database/migrations/SetupTables.php';
+        $migration->up();
     }
 }

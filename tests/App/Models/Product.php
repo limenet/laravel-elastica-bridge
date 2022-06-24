@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\App\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -11,8 +13,8 @@ use Limenet\LaravelElasticaBridge\Tests\Database\Factories\ProductFactory;
 
 class Product extends Model implements ElasticsearchableInterface
 {
-    use HasFactory;
     use ElasticsearchableTrait;
+    use HasFactory;
 
     protected static function newFactory(): Factory
     {

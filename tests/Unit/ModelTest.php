@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Elastica\Document;
@@ -14,15 +16,15 @@ class ModelTest extends TestCase
     protected CustomerIndex $customerIndex;
     protected ProductIndex $productIndex;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->customerIndex = $this->app->make(CustomerIndex::class);
         $this->productIndex = $this->app->make(ProductIndex::class);
     }
-    /** @test */
-    public function convert_to_elastica_document_customized()
+
+    public function test_convert_to_elastica_document_customized(): void
     {
         Customer::all()
             ->filter(fn (Customer $customer): bool => $customer->shouldIndex($this->customerIndex))
@@ -41,8 +43,8 @@ class ModelTest extends TestCase
                 $this->assertSame($customer::class, $document->get(IndexInterface::DOCUMENT_MODEL_CLASS));
             });
     }
-    /** @test */
-    public function convert_to_elastica_document_default()
+
+    public function test_convert_to_elastica_document_default(): void
     {
         Product::all()
         ->filter(fn (Product $product): bool => $product->shouldIndex($this->productIndex))

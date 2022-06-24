@@ -26,7 +26,7 @@ class PopulateIndex extends AbstractIndexJob
      */
     public function handle(): void
     {
-        if ($this->batch()->cancelled()) {
+        if ($this->batch()?->cancelled()) {
             return;
         }
 
@@ -45,7 +45,7 @@ class PopulateIndex extends AbstractIndexJob
             }
         }
 
-        $this->batch()->add($jobs);
+        $this->batch()?->add($jobs);
 
         $index->refresh();
     }

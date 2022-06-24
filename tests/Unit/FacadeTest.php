@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Elastica\Client;
@@ -7,8 +9,7 @@ use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeFacade;
 
 class FacadeTest extends TestCase
 {
-    /** @test */
-    public function facade()
+    public function test_facade(): void
     {
         $this->assertInstanceOf(Client::class, LaravelElasticaBridgeFacade::getClient());
     }

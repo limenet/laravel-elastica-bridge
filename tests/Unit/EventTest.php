@@ -1,19 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeFacade;
 
 class EventTest extends TestCase
 {
-    /** @test */
-    public function event_enable()
+    public function test_event_enable(): void
     {
         LaravelElasticaBridgeFacade::enableEventListener();
         $this->assertTrue(LaravelElasticaBridgeFacade::listensToEvents());
     }
-    /** @test */
-    public function event_disable()
+
+    public function test_event_disable(): void
     {
         LaravelElasticaBridgeFacade::disableEventListener();
         $this->assertFalse(LaravelElasticaBridgeFacade::listensToEvents());

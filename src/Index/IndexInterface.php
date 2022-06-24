@@ -37,7 +37,6 @@ interface IndexInterface
      * The number of Pimcore elements to be stored in the index in one batch.
      * This is used e.g. when populating the index.
      *
-     *
      * @see IndexCommand
      */
     public function getBatchSize(): int;
@@ -85,7 +84,6 @@ interface IndexInterface
     /**
      * Checks whether the blue and green indices are correctly set up.
      *
-     *
      * @internal
      */
     public function hasBlueGreenIndices(): bool;
@@ -94,7 +92,6 @@ interface IndexInterface
      * Returns the currently active blue/green suffix.
      *
      * @throws BlueGreenIndicesIncorrectlySetupException
-     *
      *
      * @internal
      */
@@ -105,7 +102,6 @@ interface IndexInterface
      *
      * @throws BlueGreenIndicesIncorrectlySetupException
      *
-     *
      * @internal
      */
     public function getBlueGreenInactiveSuffix(): string;
@@ -114,7 +110,6 @@ interface IndexInterface
      * Returns the currently active blue/green Elastica index.
      *
      * @throws BlueGreenIndicesIncorrectlySetupException
-     *
      *
      * @see IndexInterface::getElasticaIndex()
      *
@@ -126,7 +121,6 @@ interface IndexInterface
      * Returns the currently inactive blue/green Elastica index.
      *
      * @throws BlueGreenIndicesIncorrectlySetupException
-     *
      *
      * @see IndexInterface::getElasticaIndex()
      *
@@ -142,8 +136,7 @@ interface IndexInterface
     /**
      * Given a Laravel model, return the corresponding Elastica document.
      *
-     *
      * @return Document
      */
-    public function getDocumentInstance(Model | ElasticsearchableInterface $model): ?Document;
+    public function getDocumentInstance(Model|ElasticsearchableInterface $model): ?Document;
 }

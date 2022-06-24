@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Limenet\LaravelElasticaBridge\Tests\App\Models;
 
 use Illuminate\Database\Eloquent\Model;

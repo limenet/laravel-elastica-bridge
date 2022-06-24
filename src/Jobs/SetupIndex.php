@@ -12,6 +12,7 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 class SetupIndex extends AbstractIndexJob
 {
     use Batchable;
+
     /**
      * Create a new job instance.
      *
@@ -27,7 +28,7 @@ class SetupIndex extends AbstractIndexJob
      */
     public function handle(ElasticaClient $elastica): void
     {
-        if ($this->batch()->cancelled()) {
+        if ($this->batch()?->cancelled()) {
             return;
         }
 
@@ -39,7 +40,7 @@ class SetupIndex extends AbstractIndexJob
                 $aliasIndex->delete();
             }
 
-            if (! $aliasIndex->exists()) {
+            if (!$aliasIndex->exists()) {
                 $aliasIndex->create($this->indexConfig->getCreateArguments());
             }
         }

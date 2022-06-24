@@ -34,10 +34,12 @@ class ElasticaClient
     {
         self::$listenToEvents = true;
     }
+
     public function disableEventListener(): void
     {
         self::$listenToEvents = false;
     }
+
     public function listensToEvents(): bool
     {
         return self::$listenToEvents !== null
