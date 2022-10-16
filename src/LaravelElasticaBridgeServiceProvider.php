@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Limenet\LaravelElasticaBridge;
 
 use Illuminate\Database\Eloquent\Model;
+
 use function Illuminate\Events\queueable;
+
 use Illuminate\Support\Facades\Event;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Commands\IndexCommand;

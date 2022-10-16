@@ -25,6 +25,13 @@ class SetupIndex extends AbstractIndexJob
             return;
         }
 
+        if ($this->deleteExisting && $this->indexConfig->hasBlueGreenIndices()) {
+            $index = $elastica->getClient()->getIndex($this->indexConfig->getName());
+            if (count($index->getAliases()) === 0) {
+                $index->delete();
+            }
+        }
+
         foreach (IndexInterface::INDEX_SUFFIXES as $suffix) {
             $name = $this->indexConfig->getName().$suffix;
             $aliasIndex = $elastica->getIndex($name);
