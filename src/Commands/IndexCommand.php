@@ -59,6 +59,9 @@ class IndexCommand extends Command
                     ActivateIndex::dispatch($indexConfig)
                         ->onConnection(config('elastica-bridge.connection'));
                 })
+                ->catch(function () use ($indexConfig): void {
+                    $indexConfig->indexingLock()->forceRelease();
+                })
                 ->finally(function () use ($indexConfig): void {
                     $indexConfig->indexingLock()->forceRelease();
                 })
