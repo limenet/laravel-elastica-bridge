@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## v1.4.4 - 2022-10-21
+
+- *no notable changes*
+
 ## v1.4.3 - 2022-10-21
 
 - Bugfixes and improvements relating to cleaning up / migrating non-blue-green indices to blue-green indices
