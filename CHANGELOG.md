@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## v1.4.3 - 2022-10-21
+
+- Bugfixes and improvements relating to cleaning up / migrating non-blue-green indices to blue-green indices
+
 ## v1.4.2 - 2022-10-16
 
 - When blue/green indices are enabled and an index with the base name (i.e. without the blue/green suffix) exists, that index is deleted automatically to ensure indexing works as expected
