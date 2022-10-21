@@ -42,7 +42,7 @@ class PopulateBatchIndex implements ShouldQueue
         /** @var ElasticsearchableInterface[] $records */
         $records = $this->indexDocument::offset($this->offset)->limit($this->limit)->get();
         foreach ($records as $record) {
-            if (!$record->shouldIndex($this->indexConfig)) {
+            if (! $record->shouldIndex($this->indexConfig)) {
                 continue;
             }
 

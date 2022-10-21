@@ -10,6 +10,7 @@ use Elastica\Index;
 class ElasticaClient
 {
     protected Client $client;
+
     protected static ?bool $listenToEvents = null;
 
     public function __construct()

@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Limenet\LaravelElasticaBridge;
 
 use Illuminate\Database\Eloquent\Model;
-
 use function Illuminate\Events\queueable;
-
 use Illuminate\Support\Facades\Event;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Commands\IndexCommand;
@@ -49,7 +47,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
             Event::listen(
                 sprintf('eloquent.%s:*', $name),
                 queueable(function (string $event, array $models) use ($name): void {
-                    if (!resolve(ElasticaClient::class)->listensToEvents()) {
+                    if (! resolve(ElasticaClient::class)->listensToEvents()) {
                         return;
                     }
 

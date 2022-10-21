@@ -12,7 +12,9 @@ use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 class RepositoryTest extends TestCase
 {
     protected CustomerIndex $customerIndex;
+
     protected ProductIndex $productIndex;
+
     protected IndexRepository $indexRepository;
 
     protected function setUp(): void

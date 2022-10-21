@@ -29,8 +29,8 @@ class IndexCommand extends Command
     {
         foreach ($this->indexRepository->all() as $indexConfig) {
             if (
-                !empty($this->argument('index'))
-                && !in_array($indexConfig->getName(), $this->argument('index'), true)
+                ! empty($this->argument('index'))
+                && ! in_array($indexConfig->getName(), $this->argument('index'), true)
             ) {
                 continue;
             }
@@ -43,8 +43,9 @@ class IndexCommand extends Command
                 $lock->forceRelease();
             }
 
-            if (!$lock->get()) {
+            if (! $lock->get()) {
                 $this->warn('Not indexing as another job is still running.');
+
                 continue;
             }
 

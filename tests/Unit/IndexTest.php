@@ -17,6 +17,7 @@ use RuntimeException;
 class IndexTest extends TestCase
 {
     protected CustomerIndex $customerIndex;
+
     protected ProductIndex $productIndex;
 
     protected function setUp(): void

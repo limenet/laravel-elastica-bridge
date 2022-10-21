@@ -17,9 +17,13 @@ use Limenet\LaravelElasticaBridge\Tests\TestCase as TestsTestCase;
 class TestCase extends TestsTestCase
 {
     protected CustomerIndex $customerIndex;
+
     protected OrderIndex $orderIndex;
+
     protected ProductIndex $productIndex;
+
     protected IndexRepository $indexRepository;
+
     protected ElasticaClient $elasticaClient;
 
     protected function setUp(): void

@@ -34,7 +34,7 @@ class SetupIndex extends AbstractIndexJob
 
     private function migrate(ElasticaClient $elastica): void
     {
-        if (!$this->indexConfig->hasBlueGreenIndices()) {
+        if (! $this->indexConfig->hasBlueGreenIndices()) {
             return;
         }
 
@@ -71,7 +71,7 @@ class SetupIndex extends AbstractIndexJob
                 $aliasIndex->delete();
             }
 
-            if (!$aliasIndex->exists()) {
+            if (! $aliasIndex->exists()) {
                 $aliasIndex->create($this->indexConfig->getCreateArguments());
             }
         }

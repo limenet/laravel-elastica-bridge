@@ -13,10 +13,15 @@ use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 class ModelEventListener
 {
     public const EVENT_CREATED = 'created';
+
     public const EVENT_UPDATED = 'updated';
+
     public const EVENT_SAVED = 'saved';
+
     public const EVENT_RESTORED = 'restored';
+
     public const EVENT_DELETED = 'deleted';
+
     public const EVENTS = [
         self::EVENT_CREATED,
         self::EVENT_UPDATED,
@@ -29,17 +34,17 @@ class ModelEventListener
     {
     }
 
-    /** @param ElasticsearchableInterface&Model $model */
+    /** @param  ElasticsearchableInterface&Model  $model */
     public function handle(string $event, Model $model): void
     {
         foreach ($this->matchingIndicesForElement($model) as $index) {
-            if (!$index->getElasticaIndex()->exists()) {
+            if (! $index->getElasticaIndex()->exists()) {
                 continue;
             }
 
             $shouldBePresent = true;
 
-            if (!$model->shouldIndex($index) || $event === self::EVENT_DELETED) {
+            if (! $model->shouldIndex($index) || $event === self::EVENT_DELETED) {
                 $shouldBePresent = false;
             }
 
@@ -49,13 +54,13 @@ class ModelEventListener
         }
     }
 
-    /** @param ElasticsearchableInterface&Model $model */
+    /** @param  ElasticsearchableInterface&Model  $model */
     protected function ensureModelPresentInIndex(IndexInterface $index, Model $model): void
     {
         $index->getElasticaIndex()->addDocument($model->toElasticaDocument($index));
     }
 
-    /** @param ElasticsearchableInterface&Model $model */
+    /** @param  ElasticsearchableInterface&Model  $model */
     protected function ensureModelMissingFromIndex(IndexInterface $index, Model $model): void
     {
         try {

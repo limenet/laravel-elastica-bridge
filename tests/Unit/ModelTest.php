@@ -14,6 +14,7 @@ use Limenet\LaravelElasticaBridge\Tests\App\Models\Product;
 class ModelTest extends TestCase
 {
     protected CustomerIndex $customerIndex;
+
     protected ProductIndex $productIndex;
 
     protected function setUp(): void

@@ -17,16 +17,19 @@ interface IndexInterface
      * The suffix for the blue index.
      */
     public const INDEX_SUFFIX_BLUE = '--blue';
+
     /**
      * The suffix for the green index.
      */
     public const INDEX_SUFFIX_GREEN = '--green';
+
     /**
      * List of valid index suffixes.
      */
     public const INDEX_SUFFIXES = [self::INDEX_SUFFIX_BLUE, self::INDEX_SUFFIX_GREEN];
 
     public const DOCUMENT_MODEL_ID = '__id';
+
     public const DOCUMENT_MODEL_CLASS = '__class';
 
     /**
