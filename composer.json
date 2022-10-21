@@ -19,11 +19,10 @@
         "php": "^8.0",
         "laravel/framework": "^9.0",
         "ruflin/elastica": "^7.1",
-        "spatie/laravel-package-tools": "^1.9.2"
+        "spatie/laravel-package-tools": "^1.13.0"
     },
     "require-dev": {
-        "brianium/paratest": "^6.2",
-        "friendsofphp/php-cs-fixer": "^3.8",
+        "laravel/pint": "^1.0",
         "nunomaduro/collision": "^6.0",
         "nunomaduro/larastan": "^2.0.1",
         "orchestra/testbench": "^7.0",
@@ -48,12 +47,11 @@
         }
     },
     "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
-        "test-github": "vendor/bin/phpunit --coverage-text",
         "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
-        "code-swift": "docker exec -it --user=laradock -w /var/www/$(git rev-parse --show-toplevel | xargs basename | cat) $(docker ps -q --filter name=laradock_workspace-8.0_) zsh"
+        "format": "vendor/bin/pint"
     },
     "config": {
         "sort-packages": true,
