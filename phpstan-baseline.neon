@@ -6,16 +6,21 @@ parameters:
 			path: src/Commands/IndexCommand.php
 
 		-
+			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			count: 1
+			path: src/Events/EventHandler.php
+
+		-
+			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			count: 1
+			path: src/Events/EventHandler.php
+
+		-
 			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\|Limenet\\\\LaravelElasticaBridge\\\\Model\\\\ElasticsearchableInterface\\:\\:getElasticsearchId\\(\\)\\.$#"
 			count: 1
 			path: src/Index/AbstractIndex.php
 
 		-
-			message: "#^Parameter \\#2 \\$listener of static method Illuminate\\\\Events\\\\Dispatcher\\:\\:listen\\(\\) expects array\\|Closure\\|string\\|null, Illuminate\\\\Events\\\\QueuedClosure given\\.$#"
-			count: 1
-			path: src/LaravelElasticaBridgeServiceProvider.php
-
-		-
-			message: "#^Parameter \\#2 \\$model of method Limenet\\\\LaravelElasticaBridge\\\\Services\\\\ModelEventListener\\:\\:handle\\(\\) expects Illuminate\\\\Database\\\\Eloquent\\\\Model&Limenet\\\\LaravelElasticaBridge\\\\Model\\\\ElasticsearchableInterface, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			message: "#^Cannot access offset 'events' on Illuminate\\\\Contracts\\\\Foundation\\\\Application\\.$#"
 			count: 1
 			path: src/LaravelElasticaBridgeServiceProvider.php

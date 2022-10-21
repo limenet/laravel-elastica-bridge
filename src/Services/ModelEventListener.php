@@ -12,15 +12,15 @@ use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 
 class ModelEventListener
 {
-    public const EVENT_CREATED = 'created';
+    private const EVENT_CREATED = 'created';
 
-    public const EVENT_UPDATED = 'updated';
+    private const EVENT_UPDATED = 'updated';
 
-    public const EVENT_SAVED = 'saved';
+    private const EVENT_SAVED = 'saved';
 
-    public const EVENT_RESTORED = 'restored';
+    private const EVENT_RESTORED = 'restored';
 
-    public const EVENT_DELETED = 'deleted';
+    private const EVENT_DELETED = 'deleted';
 
     public const EVENTS = [
         self::EVENT_CREATED,
@@ -34,9 +34,13 @@ class ModelEventListener
     {
     }
 
-    /** @param  ElasticsearchableInterface&Model  $model */
+    /** @param  Model  $model */
     public function handle(string $event, Model $model): void
     {
+        if (! $model instanceof ElasticsearchableInterface) {
+            return;
+        }
+
         foreach ($this->matchingIndicesForElement($model) as $index) {
             if (! $index->getElasticaIndex()->exists()) {
                 continue;
