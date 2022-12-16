@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
+use Throwable;
 
 class PopulateBatchIndex implements ShouldQueue
 {
@@ -53,6 +54,12 @@ class PopulateBatchIndex implements ShouldQueue
             return;
         }
 
-        $this->index->addDocuments($esDocuments);
+        try {
+            $this->index->addDocuments($esDocuments);
+        } catch (Throwable $th) {
+            if (! $this->indexConfig->ingoreIndexingErrors()) {
+                throw $th;
+            }
+        }
     }
 }

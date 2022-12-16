@@ -174,4 +174,9 @@ abstract class AbstractIndex implements IndexInterface
     {
         return Cache::lock(__CLASS__.$this->getName());
     }
+
+    public function ingoreIndexingErrors(): bool
+    {
+        return false;
+    }
 }
