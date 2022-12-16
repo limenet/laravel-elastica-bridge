@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Limenet\LaravelElasticaBridge;
 
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
+use Limenet\LaravelElasticaBridge\Commands\DeleteCommand;
 use Limenet\LaravelElasticaBridge\Commands\IndexCommand;
 use Limenet\LaravelElasticaBridge\Commands\StatusCommand;
 use Limenet\LaravelElasticaBridge\Events\EventHandler;
@@ -25,7 +26,7 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-elastica-bridge')
             ->hasConfigFile()
-            ->hasCommands([IndexCommand::class, StatusCommand::class]);
+            ->hasCommands([DeleteCommand::class, IndexCommand::class, StatusCommand::class]);
     }
 
     public function packageRegistered(): void
