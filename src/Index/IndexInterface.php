@@ -145,4 +145,12 @@ interface IndexInterface
     public function getDocumentInstance(Model|ElasticsearchableInterface $model): ?Document;
 
     public function indexingLock(): Lock;
+
+    /**
+     * Should errors during indexing be ignored?
+     * Recommendation: set getBatchSize() to 1 if this is enabled.
+     *
+     * @return bool
+     */
+    public function ingoreIndexingErrors(): bool;
 }
