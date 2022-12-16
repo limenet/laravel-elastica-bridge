@@ -29,6 +29,9 @@ abstract class AbstractIndexJob implements ShouldQueue, ShouldBeUnique
 
     public function middleware(): array
     {
-        return [new WithoutOverlapping($this->uniqueId())];
+        return [
+            (new WithoutOverlapping($this->uniqueId()))
+                ->expireAfter(now()->addMinutes(30)),
+        ];
     }
 }
