@@ -43,7 +43,7 @@ class SetupIndex extends AbstractIndexJob
         try {
             $response = $elastica->getClient()->request(sprintf('_alias/%s', $this->indexConfig->getName()));
         } catch (ClientException|ConnectionException|ResponseException) {
-            if (count($index->getAliases()) === 0) {
+            if ($index->exists() && count($index->getAliases()) === 0) {
                 $index->delete();
             }
 
@@ -58,7 +58,9 @@ class SetupIndex extends AbstractIndexJob
             return;
         }
 
-        $index->delete();
+        if ($index->exists()) {
+            $index->delete();
+        }
     }
 
     private function cleanup(ElasticaClient $elastica): void
