@@ -149,8 +149,6 @@ interface IndexInterface
     /**
      * Should errors during indexing be ignored?
      * Recommendation: set getBatchSize() to 1 if this is enabled.
-     *
-     * @return bool
      */
     public function ingoreIndexingErrors(): bool;
 }
