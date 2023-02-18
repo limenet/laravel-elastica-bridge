@@ -34,7 +34,6 @@ class ModelEventListener
     {
     }
 
-    /** @param  Model  $model */
     public function handle(string $event, Model $model): void
     {
         if (! $model instanceof ElasticsearchableInterface) {
