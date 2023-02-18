@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## v1.6.0 - 2023-02-18
+
+- Laravel 10 #13
+
 ## v1.4.5 - 2022-10-21
 
 - Improve performance when event listener is disabled
