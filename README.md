@@ -14,8 +14,8 @@ A simple bridge between Laravel and Elasticsearch using Elastica, based on [http
 
 ## Requirements
 
-- PHP 8.0+
-- Laravel 8.0
+- PHP 8.1+
+- Laravel 10.0
 - [Job Batching](https://laravel.com/docs/8.x/queues#job-batching) is setup
 
 ## Installation
