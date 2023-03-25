@@ -14,6 +14,9 @@ interface ElasticsearchableInterface
      */
     public function getElasticsearchId(): string;
 
+    /**
+     * @return array<int|string,mixed>
+     */
     public function toElasticsearch(IndexInterface $indexConfig): array;
 
     public function shouldIndex(IndexInterface $indexConfig): bool;

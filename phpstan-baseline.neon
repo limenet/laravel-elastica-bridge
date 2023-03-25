@@ -1,6 +1,21 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Only booleans are allowed in a negated boolean, array\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Commands/DeleteCommand.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: src/Commands/IndexCommand.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
+			count: 1
+			path: src/Commands/IndexCommand.php
+
+		-
 			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|string\\|true given\\.$#"
 			count: 1
 			path: src/Commands/IndexCommand.php
@@ -19,6 +34,41 @@ parameters:
 			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\|Limenet\\\\LaravelElasticaBridge\\\\Model\\\\ElasticsearchableInterface\\:\\:getElasticsearchId\\(\\)\\.$#"
 			count: 1
 			path: src/Index/AbstractIndex.php
+
+		-
+			message: "#^Casting to string something that's already string\\.$#"
+			count: 1
+			path: src/Index/AbstractIndex.php
+
+		-
+			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\AbstractIndex\\:\\:getCreateArguments\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Index/AbstractIndex.php
+
+		-
+			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\AbstractIndex\\:\\:getMapping\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Index/AbstractIndex.php
+
+		-
+			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\AbstractIndex\\:\\:getSettings\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Index/AbstractIndex.php
+
+		-
+			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\IndexInterface\\:\\:getCreateArguments\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Index/IndexInterface.php
+
+		-
+			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\IndexInterface\\:\\:getMapping\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Index/IndexInterface.php
+
+		-
+			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\IndexInterface\\:\\:getSettings\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Index/IndexInterface.php
 
 		-
 			message: "#^Cannot access offset 'events' on Illuminate\\\\Contracts\\\\Foundation\\\\Application\\.$#"
