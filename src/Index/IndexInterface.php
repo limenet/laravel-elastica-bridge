@@ -46,11 +46,6 @@ interface IndexInterface
     public function getBatchSize(): int;
 
     /**
-     * @internal
-     */
-    public function hasMapping(): bool;
-
-    /**
      * Defines the mapping to be used for this index.
      * Passed 1:1 to Elasticsearch.
      *
@@ -67,7 +62,7 @@ interface IndexInterface
     public function getSettings(): array;
 
     /**
-     * @return array<array>
+     * @return array{mappings:non-empty-array<mixed>,settings?:array<mixed>}
      *
      * @internal
      */

@@ -7,6 +7,7 @@ namespace Limenet\LaravelElasticaBridge\Tests\Feature;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchQuery;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
+use Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice;
 
 class QueryTest extends TestCase
 {
@@ -18,6 +19,16 @@ class QueryTest extends TestCase
 
         $this->assertCount(1, $elements);
         $this->assertSame(17, $elements[0]->id);
+    }
+
+    public function test_get_by_uuid(): void
+    {
+        $uuid = Invoice::all()->first()->uuid;
+        $this->index($this->invoiceIndex);
+        $elements = $this->invoiceIndex->searchForElements(new MatchQuery(IndexInterface::DOCUMENT_MODEL_ID, $uuid));
+
+        $this->assertCount(1, $elements);
+        $this->assertSame($uuid, $elements[0]->getKey());
     }
 
     public function test_size_and_from(): void

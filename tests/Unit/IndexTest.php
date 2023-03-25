@@ -11,13 +11,17 @@ use Elastica\ResultSet;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
+use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\InvoiceIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
+use Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice;
 use RuntimeException;
 
 class IndexTest extends TestCase
 {
     protected CustomerIndex $customerIndex;
+
+    protected InvoiceIndex $invoiceIndex;
 
     protected ProductIndex $productIndex;
 
@@ -26,6 +30,7 @@ class IndexTest extends TestCase
         parent::setUp();
 
         $this->customerIndex = $this->app->make(CustomerIndex::class);
+        $this->invoiceIndex = $this->app->make(InvoiceIndex::class);
         $this->productIndex = $this->app->make(ProductIndex::class);
     }
 
@@ -39,23 +44,51 @@ class IndexTest extends TestCase
 
     public function test_settings_customized(): void
     {
-        $settings = $this->customerIndex->getCreateArguments();
-        $mappings = $this->customerIndex->getMapping();
+        $createArguments = $this->customerIndex->getCreateArguments();
 
-        $this->assertTrue($this->customerIndex->hasMapping());
-        $this->assertArrayHasKey('mappings', $settings);
-        $this->assertArrayNotHasKey('settings', $settings);
-        $this->assertSame($settings['mappings'], $mappings);
+        $this->assertArrayHasKey('mappings', $createArguments);
+        $this->assertArrayNotHasKey('settings', $createArguments);
+        $this->assertSame(
+            [
+                'mappings' => [
+                    'properties' => [
+                        'group' => [
+                            'type' => 'keyword',
+                        ],
+                        '__id' => [
+                            'type' => 'keyword',
+                        ],
+                        '__class' => [
+                            'type' => 'keyword',
+                        ],
+                    ],
+                ],
+            ],
+            $createArguments
+        );
     }
 
-    public function test_settings__default(): void
+    public function test_settings_default(): void
     {
-        $settings = $this->productIndex->getCreateArguments();
+        $createArguments = $this->productIndex->getCreateArguments();
         $mappings = $this->productIndex->getMapping();
 
-        $this->assertFalse($this->productIndex->hasMapping());
         $this->assertEmpty($mappings);
-        $this->assertEmpty($settings);
+        $this->assertSame(
+            [
+                'mappings' => [
+                    'properties' => [
+                        '__id' => [
+                            'type' => 'keyword',
+                        ],
+                        '__class' => [
+                            'type' => 'keyword',
+                        ],
+                    ],
+                ],
+            ],
+            $createArguments
+        );
     }
 
     public function test_document_to_model(): void
@@ -66,6 +99,17 @@ class IndexTest extends TestCase
                 $model = $this->customerIndex->getModelInstance($document);
                 $this->assertInstanceOf(Customer::class, $model);
                 $this->assertSame($customer->id, $model->id);
+            });
+    }
+
+    public function test_document_to_model_uuid(): void
+    {
+        Invoice::all()
+            ->each(function (Invoice $invoice): void {
+                $document = $invoice->toElasticaDocument($this->invoiceIndex);
+                $model = $this->invoiceIndex->getModelInstance($document);
+                $this->assertInstanceOf(Invoice::class, $model);
+                $this->assertSame($invoice->uuid, $model->uuid);
             });
     }
 

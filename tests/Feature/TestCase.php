@@ -10,6 +10,7 @@ use Limenet\LaravelElasticaBridge\Exception\BaseException;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
+use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\InvoiceIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\OrderIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 use Limenet\LaravelElasticaBridge\Tests\TestCase as TestsTestCase;
@@ -17,6 +18,8 @@ use Limenet\LaravelElasticaBridge\Tests\TestCase as TestsTestCase;
 class TestCase extends TestsTestCase
 {
     protected CustomerIndex $customerIndex;
+
+    protected InvoiceIndex $invoiceIndex;
 
     protected OrderIndex $orderIndex;
 
@@ -31,6 +34,7 @@ class TestCase extends TestsTestCase
         parent::setUp();
 
         $this->customerIndex = $this->app->make(CustomerIndex::class);
+        $this->invoiceIndex = $this->app->make(InvoiceIndex::class);
         $this->orderIndex = $this->app->make(OrderIndex::class);
         $this->productIndex = $this->app->make(ProductIndex::class);
         $this->indexRepository = $this->app->make(IndexRepository::class);
@@ -48,7 +52,7 @@ class TestCase extends TestsTestCase
 
     protected function cleanupIndices(): void
     {
-        foreach ([$this->customerIndex, $this->orderIndex, $this->productIndex] as $index) {
+        foreach ([$this->customerIndex, $this->invoiceIndex, $this->orderIndex, $this->productIndex] as $index) {
             try {
                 if ($index->getElasticaIndex()->hasAlias($index->getName())) {
                     $index->getElasticaIndex()->removeAlias($index->getName());
