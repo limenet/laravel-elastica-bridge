@@ -43,8 +43,6 @@ class ElasticaClient
 
     public function listensToEvents(): bool
     {
-        return self::$listenToEvents !== null
-            ? self::$listenToEvents
-            : config('elastica-bridge.events.listen', true);
+        return self::$listenToEvents ?? config('elastica-bridge.events.listen', true);
     }
 }

@@ -57,7 +57,7 @@ class StatusCommand extends Command
             if ($hasBlueGreen) {
                 try {
                     $activeBlueGreen = $indexConfig->getBlueGreenActiveElasticaIndex()->getName();
-                } catch (BlueGreenIndicesIncorrectlySetupException $exception) {
+                } catch (BlueGreenIndicesIncorrectlySetupException) {
                     $hasBlueGreen = false;
                 }
             }

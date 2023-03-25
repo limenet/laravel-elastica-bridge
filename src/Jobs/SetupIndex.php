@@ -83,7 +83,7 @@ class SetupIndex extends AbstractIndexJob
     {
         try {
             $this->indexConfig->getBlueGreenActiveSuffix();
-        } catch (BlueGreenIndicesIncorrectlySetupException $exception) {
+        } catch (BlueGreenIndicesIncorrectlySetupException) {
             $elastica->getIndex($this->indexConfig->getName().IndexInterface::INDEX_SUFFIX_BLUE)->addAlias($this->indexConfig->getName());
         }
     }
