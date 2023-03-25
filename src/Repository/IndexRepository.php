@@ -13,7 +13,7 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
  */
 class IndexRepository
 {
-    protected array $indices;
+    private array $indices;
 
     public function __construct(array $indices)
     {

@@ -17,8 +17,8 @@ class StatusCommand extends Command
     protected $description = 'Displays the status of the configured Elasticsearch indices';
 
     public function __construct(
-        protected ElasticaClient $elastica,
-        protected IndexRepository $indexRepository
+        private readonly ElasticaClient $elastica,
+        private readonly IndexRepository $indexRepository
     ) {
         parent::__construct();
     }
@@ -85,7 +85,7 @@ class StatusCommand extends Command
         return self::SUCCESS;
     }
 
-    protected function formatBoolean(bool $val): string
+    private function formatBoolean(bool $val): string
     {
         if ($val) {
             return '✓';
@@ -97,7 +97,7 @@ class StatusCommand extends Command
     /**
      * @see https://stackoverflow.com/a/2510540
      */
-    protected function formatBytes(int $bytes): string
+    private function formatBytes(int $bytes): string
     {
         $base = log($bytes, 1024);
         $suffixes = ['', 'K', 'M', 'G', 'T'];

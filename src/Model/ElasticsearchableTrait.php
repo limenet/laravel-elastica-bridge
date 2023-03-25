@@ -32,13 +32,11 @@ trait ElasticsearchableTrait
     {
         return new Document(
             $this->getElasticsearchId(),
-            array_merge(
-                $this->toElasticsearch($indexConfig),
-                [
-                    IndexInterface::DOCUMENT_MODEL_CLASS => $this::class,
-                    IndexInterface::DOCUMENT_MODEL_ID => $this->id,
-                ]
-            )
+            [
+                ...$this->toElasticsearch($indexConfig),
+                IndexInterface::DOCUMENT_MODEL_CLASS => $this::class,
+                IndexInterface::DOCUMENT_MODEL_ID => $this->id,
+            ]
         );
     }
 }

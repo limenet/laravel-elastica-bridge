@@ -15,8 +15,8 @@ class DeleteCommand extends Command
     protected $description = 'Delete all Elasticsearch indices known to the package';
 
     public function __construct(
-        protected ElasticaClient $elastica,
-        protected IndexRepository $indexRepository
+        private readonly ElasticaClient $elastica,
+        private readonly IndexRepository $indexRepository
     ) {
         parent::__construct();
     }

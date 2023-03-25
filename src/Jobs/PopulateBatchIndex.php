@@ -24,11 +24,11 @@ class PopulateBatchIndex implements ShouldQueue
     use SerializesModels;
 
     public function __construct(
-        protected Index $index,
-        protected IndexInterface $indexConfig,
-        protected string $indexDocument,
-        protected int $limit,
-        protected int $offset
+        private readonly Index $index,
+        private readonly IndexInterface $indexConfig,
+        private readonly string $indexDocument,
+        private readonly int $limit,
+        private readonly int $offset
     ) {
     }
 
