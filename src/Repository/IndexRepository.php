@@ -13,8 +13,14 @@ use Limenet\LaravelElasticaBridge\Index\IndexInterface;
  */
 class IndexRepository
 {
+    /**
+     * @var array<class-string<IndexInterface>,IndexInterface>
+     */
     private array $indices;
 
+    /**
+     * @param  IndexInterface[]  $indices
+     */
     public function __construct(array $indices)
     {
         foreach ($indices as $index) {
@@ -23,13 +29,16 @@ class IndexRepository
     }
 
     /**
-     * @return array<string,IndexInterface>
+     * @return array<class-string<IndexInterface>,IndexInterface>
      */
     public function all(): array
     {
         return $this->indices;
     }
 
+    /**
+     * @param  class-string<IndexInterface>  $key
+     */
     public function get(string $key): IndexInterface
     {
         return $this->indices[$key];

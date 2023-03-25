@@ -34,7 +34,7 @@ class PopulateBatchIndex implements ShouldQueue
 
     public function handle(): void
     {
-        if ($this->batch()?->cancelled()) {
+        if ($this->batch()?->cancelled() === true) {
             return;
         }
 

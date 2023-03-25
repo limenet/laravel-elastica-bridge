@@ -27,6 +27,9 @@ abstract class AbstractIndexJob implements ShouldQueue, ShouldBeUnique
         return $this->indexConfig::class;
     }
 
+    /**
+     * @return array<int,object>
+     */
     public function middleware(): array
     {
         return [

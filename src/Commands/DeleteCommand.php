@@ -45,6 +45,9 @@ class DeleteCommand extends Command
         return self::SUCCESS;
     }
 
+    /**
+     * @return string[]
+     */
     private function inidices(): array
     {
         $indices = [];

@@ -24,7 +24,7 @@ class SetupIndex extends AbstractIndexJob
 
     public function handle(ElasticaClient $elastica): void
     {
-        if ($this->batch()?->cancelled()) {
+        if ($this->batch()?->cancelled() === true) {
             return;
         }
         $this->migrate($elastica);
