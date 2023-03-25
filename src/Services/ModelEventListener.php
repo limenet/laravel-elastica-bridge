@@ -22,7 +22,7 @@ class ModelEventListener
 
     private const EVENT_DELETED = 'deleted';
 
-    public const EVENTS = [
+    final public const EVENTS = [
         self::EVENT_CREATED,
         self::EVENT_UPDATED,
         self::EVENT_SAVED,

@@ -172,7 +172,7 @@ abstract class AbstractIndex implements IndexInterface
 
     final public function indexingLock(): Lock
     {
-        return Cache::lock(__CLASS__.$this->getName());
+        return Cache::lock(self::class.$this->getName());
     }
 
     public function ingoreIndexingErrors(): bool

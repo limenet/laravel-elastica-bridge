@@ -10,8 +10,8 @@ use Limenet\LaravelElasticaBridge\Services\ModelEventListener;
 class EventHandler
 {
     public function __construct(
-        private ElasticaClient $elasticaClient,
-        private ModelEventListener $modelEventListener
+        private readonly ElasticaClient $elasticaClient,
+        private readonly ModelEventListener $modelEventListener
     ) {
     }
 
