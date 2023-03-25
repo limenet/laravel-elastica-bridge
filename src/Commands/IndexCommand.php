@@ -6,7 +6,6 @@ namespace Limenet\LaravelElasticaBridge\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Bus;
-use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Jobs\ActivateIndex;
 use Limenet\LaravelElasticaBridge\Jobs\PopulateIndex;
 use Limenet\LaravelElasticaBridge\Jobs\SetupIndex;
@@ -19,8 +18,7 @@ class IndexCommand extends Command
     protected $description = 'Re-create the ES index and populate with data';
 
     public function __construct(
-        protected ElasticaClient $elastica,
-        protected IndexRepository $indexRepository
+        private readonly IndexRepository $indexRepository
     ) {
         parent::__construct();
     }

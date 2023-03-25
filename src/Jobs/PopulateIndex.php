@@ -11,8 +11,9 @@ class PopulateIndex extends AbstractIndexJob
 {
     use Batchable;
 
-    public function __construct(protected IndexInterface $indexConfig)
-    {
+    public function __construct(
+        protected IndexInterface $indexConfig
+    ) {
     }
 
     public function handle(): void

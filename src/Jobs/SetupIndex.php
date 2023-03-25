@@ -18,7 +18,7 @@ class SetupIndex extends AbstractIndexJob
 
     public function __construct(
         protected IndexInterface $indexConfig,
-        protected bool $deleteExisting
+        private readonly bool $deleteExisting
     ) {
     }
 

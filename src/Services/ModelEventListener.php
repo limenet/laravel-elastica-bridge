@@ -30,8 +30,9 @@ class ModelEventListener
         self::EVENT_DELETED,
     ];
 
-    public function __construct(protected IndexRepository $indexRepository)
-    {
+    public function __construct(
+        private readonly IndexRepository $indexRepository
+    ) {
     }
 
     public function handle(string $event, Model $model): void
@@ -58,13 +59,13 @@ class ModelEventListener
     }
 
     /** @param  ElasticsearchableInterface&Model  $model */
-    protected function ensureModelPresentInIndex(IndexInterface $index, Model $model): void
+    private function ensureModelPresentInIndex(IndexInterface $index, Model $model): void
     {
         $index->getElasticaIndex()->addDocument($model->toElasticaDocument($index));
     }
 
     /** @param  ElasticsearchableInterface&Model  $model */
-    protected function ensureModelMissingFromIndex(IndexInterface $index, Model $model): void
+    private function ensureModelMissingFromIndex(IndexInterface $index, Model $model): void
     {
         try {
             $index->getElasticaIndex()->deleteById($model->getElasticsearchId());
