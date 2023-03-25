@@ -9,6 +9,7 @@ use Elastica\Query;
 use Elastica\Response;
 use Elastica\ResultSet;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
+use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
@@ -73,7 +74,7 @@ class IndexTest extends TestCase
         /** @var Customer $customer */
         $customer = Customer::first();
         $document = $customer->toElasticaDocument($this->customerIndex);
-        $document->setId(null);
+        $document->remove(IndexInterface::DOCUMENT_MODEL_ID);
 
         $this->expectException(RuntimeException::class);
         $this->customerIndex->getModelInstance($document);

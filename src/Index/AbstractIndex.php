@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Limenet\LaravelElasticaBridge\Index;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Index;
 use Elastica\Query;
@@ -89,13 +90,12 @@ abstract class AbstractIndex implements IndexInterface
 
     public function getModelInstance(Document $document): Model
     {
-        $id = $document->getId();
-
-        if (empty($id)) {
+        try {
+            $modelClass = $document->get(self::DOCUMENT_MODEL_CLASS);
+            $modelId = $document->get(self::DOCUMENT_MODEL_ID);
+        } catch(InvalidException) {
             throw new RuntimeException();
         }
-
-        [$modelClass,$modelId] = explode('|', $id);
 
         return $modelClass::findOrFail($modelId);
     }

@@ -11,7 +11,11 @@ trait ElasticsearchableTrait
 {
     final public function getElasticsearchId(): string
     {
-        return $this::class.'|'.$this->id;
+        return str($this::class)
+            ->replace('\\', ' ')
+            ->snake()
+            ->append('-', $this->id)
+            ->toString();
     }
 
     public function toElasticsearch(IndexInterface $indexConfig): array

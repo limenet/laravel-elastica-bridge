@@ -37,8 +37,12 @@ class ModelTest extends TestCase
                 $this->assertSame($customer->email, $document->get('email'));
                 $this->assertSame($customer->type, $document->get('type'));
 
-                $this->assertStringContainsString('|'.$customer->id, $document->getId());
-                $this->assertStringContainsString($customer::class.'|', $document->getId());
+                $this->assertStringContainsString('-'.$customer->id, $document->getId());
+                $this->assertStringContainsString(
+                    str($customer::class)->classBasename()->lower()->append('-')->toString(),
+                    $document->getId()
+                );
+                $this->assertMatchesRegularExpression('/[\w\d_-]/', $document->getId());
 
                 $this->assertSame($customer->id, $document->get(IndexInterface::DOCUMENT_MODEL_ID));
                 $this->assertSame($customer::class, $document->get(IndexInterface::DOCUMENT_MODEL_CLASS));
@@ -55,8 +59,12 @@ class ModelTest extends TestCase
 
                 $this->assertSame($product->name, $document->get('name'));
 
-                $this->assertStringContainsString('|'.$product->id, $document->getId());
-                $this->assertStringContainsString($product::class.'|', $document->getId());
+                $this->assertStringContainsString('-'.$product->id, $document->getId());
+                $this->assertStringContainsString(
+                    str($product::class)->classBasename()->lower()->append('-')->toString(),
+                    $document->getId()
+                );
+                $this->assertMatchesRegularExpression('/[\w\d_-]/', $document->getId());
 
                 $this->assertSame($product->id, $document->get(IndexInterface::DOCUMENT_MODEL_ID));
                 $this->assertSame($product::class, $document->get(IndexInterface::DOCUMENT_MODEL_CLASS));
