@@ -28,7 +28,7 @@ class RepositoryTest extends TestCase
 
     public function test_all(): void
     {
-        $this->assertCount(3, $this->indexRepository->all());
+        $this->assertCount(4, $this->indexRepository->all());
         foreach ($this->indexRepository->all() as $index) {
             $this->assertInstanceOf(IndexInterface::class, $index);
         }

@@ -36,15 +36,15 @@ abstract class AbstractIndex implements IndexInterface
         return [];
     }
 
-    final public function hasMapping(): bool
-    {
-        return count($this->getMapping()) > 0;
-    }
-
     final public function getCreateArguments(): array
     {
+        $mapping = $this->getMapping();
+        $mapping['properties'] ??= [];
+        $mapping['properties'][self::DOCUMENT_MODEL_ID] ??= ['type' => 'keyword'];
+        $mapping['properties'][self::DOCUMENT_MODEL_CLASS] ??= ['type' => 'keyword'];
+
         return array_filter([
-            'mappings' => $this->getMapping(),
+            'mappings' => $mapping,
             'settings' => $this->getSettings(),
         ]);
     }

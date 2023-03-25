@@ -11,21 +11,27 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('customers', function (Blueprint $table): void {
-            $table->id();
+            $table->increments('id');
             $table->string('name');
             $table->string('email');
             $table->string('type');
             $table->timestamps();
         });
 
+        Schema::create('invoices', function (Blueprint $table): void {
+            $table->uuid()->primary();
+            $table->string('status');
+            $table->timestamps();
+        });
+
         Schema::create('products', function (Blueprint $table): void {
-            $table->id();
+            $table->increments('id');
             $table->string('name');
             $table->timestamps();
         });
 
         Schema::create('orders', function (Blueprint $table): void {
-            $table->id();
+            $table->increments('id');
             $table->dateTime('ordered_at');
             $table->timestamps();
         });

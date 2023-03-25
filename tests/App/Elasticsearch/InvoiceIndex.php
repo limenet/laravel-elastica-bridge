@@ -5,24 +5,17 @@ declare(strict_types=1);
 namespace Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch;
 
 use Limenet\LaravelElasticaBridge\Index\AbstractIndex;
-use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice;
-use Limenet\LaravelElasticaBridge\Tests\App\Models\Product;
 
-class AllIndex extends AbstractIndex
+class InvoiceIndex extends AbstractIndex
 {
     public function getName(): string
     {
-        return 'testing_all';
+        return 'testing_invoice';
     }
 
     public function getAllowedDocuments(): array
     {
-        return [
-            Customer::class,
-            Invoice::class,
-            Order::class,
-            Product::class,
-        ];
+        return [Invoice::class];
     }
 }

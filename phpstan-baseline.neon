@@ -41,11 +41,6 @@ parameters:
 			path: src/Index/AbstractIndex.php
 
 		-
-			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\AbstractIndex\\:\\:getCreateArguments\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Index/AbstractIndex.php
-
-		-
 			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\AbstractIndex\\:\\:getMapping\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Index/AbstractIndex.php
@@ -54,11 +49,6 @@ parameters:
 			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\AbstractIndex\\:\\:getSettings\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Index/AbstractIndex.php
-
-		-
-			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\IndexInterface\\:\\:getCreateArguments\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Index/IndexInterface.php
 
 		-
 			message: "#^Method Limenet\\\\LaravelElasticaBridge\\\\Index\\\\IndexInterface\\:\\:getMapping\\(\\) return type has no value type specified in iterable type array\\.$#"

@@ -7,13 +7,17 @@ namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 use Elastica\Document;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
+use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\InvoiceIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
+use Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Product;
 
 class ModelTest extends TestCase
 {
     protected CustomerIndex $customerIndex;
+
+    protected InvoiceIndex $invoiceIndex;
 
     protected ProductIndex $productIndex;
 
@@ -22,6 +26,7 @@ class ModelTest extends TestCase
         parent::setUp();
 
         $this->customerIndex = $this->app->make(CustomerIndex::class);
+        $this->invoiceIndex = $this->app->make(InvoiceIndex::class);
         $this->productIndex = $this->app->make(ProductIndex::class);
     }
 
@@ -69,5 +74,25 @@ class ModelTest extends TestCase
                 $this->assertSame($product->id, $document->get(IndexInterface::DOCUMENT_MODEL_ID));
                 $this->assertSame($product::class, $document->get(IndexInterface::DOCUMENT_MODEL_CLASS));
             });
+    }
+
+    public function test_convert_to_elastica_documentuuid(): void
+    {
+        Invoice::all()
+            ->filter(fn (Invoice $invoice): bool => $invoice->shouldIndex($this->invoiceIndex))
+                ->each(function (Invoice $invoice): void {
+                    $document = $invoice->toElasticaDocument($this->invoiceIndex);
+                    $this->assertInstanceOf(Document::class, $document);
+
+                    $this->assertStringContainsString('-'.$invoice->getKey(), $document->getId());
+                    $this->assertStringContainsString(
+                        str($invoice::class)->classBasename()->lower()->append('-')->toString(),
+                        $document->getId()
+                    );
+                    $this->assertMatchesRegularExpression('/[\w\d_-]/', $document->getId());
+
+                    $this->assertSame($invoice->uuid, $document->get(IndexInterface::DOCUMENT_MODEL_ID));
+                    $this->assertSame($invoice::class, $document->get(IndexInterface::DOCUMENT_MODEL_CLASS));
+                });
     }
 }

@@ -14,7 +14,7 @@ trait ElasticsearchableTrait
         return str($this::class)
             ->replace('\\', ' ')
             ->snake()
-            ->append('-', $this->id)
+            ->append('-', $this->getKey())
             ->toString();
     }
 
@@ -35,7 +35,7 @@ trait ElasticsearchableTrait
             [
                 ...$this->toElasticsearch($indexConfig),
                 IndexInterface::DOCUMENT_MODEL_CLASS => $this::class,
-                IndexInterface::DOCUMENT_MODEL_ID => $this->id,
+                IndexInterface::DOCUMENT_MODEL_ID => $this->getKey(),
             ]
         );
     }
