@@ -1,6 +1,6 @@
 {
     "name": "limenet/laravel-elastica-bridge",
-    "description": "A simple bridge between Laravel and Elasticsearch using Elasticae",
+    "description": "A simple bridge between Laravel and Elasticsearch using Elastica",
     "keywords": [
         "limenet",
         "laravel",
