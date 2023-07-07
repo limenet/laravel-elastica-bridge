@@ -36,8 +36,8 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
         $this->app->tag(config('elastica-bridge.indices'), 'elasticaBridgeIndices');
 
         $this->app->when(IndexRepository::class)
-                ->needs('$indices')
-                ->giveTagged('elasticaBridgeIndices');
+            ->needs('$indices')
+            ->giveTagged('elasticaBridgeIndices');
 
         $this->app['events']->subscribe(EventHandler::class);
     }

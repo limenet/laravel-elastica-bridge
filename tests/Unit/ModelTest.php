@@ -57,7 +57,7 @@ class ModelTest extends TestCase
     public function test_convert_to_elastica_document_default(): void
     {
         Product::all()
-        ->filter(fn (Product $product): bool => $product->shouldIndex($this->productIndex))
+            ->filter(fn (Product $product): bool => $product->shouldIndex($this->productIndex))
             ->each(function (Product $product): void {
                 $document = $product->toElasticaDocument($this->productIndex);
                 $this->assertInstanceOf(Document::class, $document);
@@ -80,19 +80,19 @@ class ModelTest extends TestCase
     {
         Invoice::all()
             ->filter(fn (Invoice $invoice): bool => $invoice->shouldIndex($this->invoiceIndex))
-                ->each(function (Invoice $invoice): void {
-                    $document = $invoice->toElasticaDocument($this->invoiceIndex);
-                    $this->assertInstanceOf(Document::class, $document);
+            ->each(function (Invoice $invoice): void {
+                $document = $invoice->toElasticaDocument($this->invoiceIndex);
+                $this->assertInstanceOf(Document::class, $document);
 
-                    $this->assertStringContainsString('-'.$invoice->getKey(), $document->getId());
-                    $this->assertStringContainsString(
-                        str($invoice::class)->classBasename()->lower()->append('-')->toString(),
-                        $document->getId()
-                    );
-                    $this->assertMatchesRegularExpression('/[\w\d_-]/', $document->getId());
+                $this->assertStringContainsString('-'.$invoice->getKey(), $document->getId());
+                $this->assertStringContainsString(
+                    str($invoice::class)->classBasename()->lower()->append('-')->toString(),
+                    $document->getId()
+                );
+                $this->assertMatchesRegularExpression('/[\w\d_-]/', $document->getId());
 
-                    $this->assertSame($invoice->uuid, $document->get(IndexInterface::DOCUMENT_MODEL_ID));
-                    $this->assertSame($invoice::class, $document->get(IndexInterface::DOCUMENT_MODEL_CLASS));
-                });
+                $this->assertSame($invoice->uuid, $document->get(IndexInterface::DOCUMENT_MODEL_ID));
+                $this->assertSame($invoice::class, $document->get(IndexInterface::DOCUMENT_MODEL_CLASS));
+            });
     }
 }

@@ -94,7 +94,7 @@ abstract class AbstractIndex implements IndexInterface
         try {
             $modelClass = $document->get(self::DOCUMENT_MODEL_CLASS);
             $modelId = $document->get(self::DOCUMENT_MODEL_ID);
-        } catch(InvalidException) {
+        } catch (InvalidException) {
             throw new RuntimeException();
         }
 
