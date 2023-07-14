@@ -6,6 +6,7 @@ namespace Limenet\LaravelElasticaBridge\Client;
 
 use Elastica\Client;
 use Elastica\Index;
+use Limenet\LaravelElasticaBridge\Logging\SentryBreadcrumbLogger;
 
 class ElasticaClient
 {
@@ -15,10 +16,16 @@ class ElasticaClient
 
     public function __construct()
     {
-        $this->client = new Client([
+        $client = new Client([
             'host' => config('elastica-bridge.elasticsearch.host'),
             'port' => config('elastica-bridge.elasticsearch.port'),
         ]);
+
+        if (config('elastica-bridge.logging.sentry_breadcrumbs') === true && class_exists('\Sentry\Breadcrumb')) {
+            $client->setLogger(new SentryBreadcrumbLogger());
+        }
+
+        $this->client = $client;
     }
 
     public function getClient(): Client

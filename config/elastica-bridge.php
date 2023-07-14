@@ -10,4 +10,7 @@ return [
     'events' => [
         'listen' => true,
     ],
+    'logging' => [
+        'sentry_breadcrumbs' => false,
+    ],
 ];
