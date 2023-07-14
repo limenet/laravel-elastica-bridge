@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 
+use Elastica\Client;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
+use Limenet\LaravelElasticaBridge\Logging\SentryBreadcrumbLogger;
+use Psr\Log\LoggerInterface;
 
 class ClientTest extends TestCase
 {
@@ -23,5 +26,30 @@ class ClientTest extends TestCase
 
         $this->assertSame('localhost', $client->getConfig('host'));
         $this->assertEquals(9200, $client->getConfig('port'));
+
+    }
+
+    public function test_sentry_logger_not_active_by_default(): void
+    {
+        $client = $this->elasticaClient->getClient();
+
+        $this->assertNotInstanceOf(SentryBreadcrumbLogger::class, $this->getLoggerProperty($client));
+    }
+
+    public function test_sentry_logger_enabled(): void
+    {
+        config()->set('elastica-bridge.logging.sentry_breadcrumbs', true);
+        $client = (new ElasticaClient)->getClient();
+
+        $this->assertInstanceOf(SentryBreadcrumbLogger::class, $this->getLoggerProperty($client));
+    }
+
+    private function getLoggerProperty(Client $client): LoggerInterface
+    {
+        $reflectedClass = new \ReflectionClass($client);
+        $reflection = $reflectedClass->getProperty('_logger');
+        $reflection->setAccessible(true);
+
+        return $reflection->getValue($client);
     }
 }
