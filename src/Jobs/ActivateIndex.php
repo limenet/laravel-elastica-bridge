@@ -15,12 +15,8 @@ class ActivateIndex extends AbstractIndexJob
 
     public function handle(): void
     {
-        $oldIndex = $this->indexConfig->getBlueGreenActiveElasticaIndex();
         $newIndex = $this->indexConfig->getBlueGreenInactiveElasticaIndex();
-
         $newIndex->flush();
-        $oldIndex->removeAlias($this->indexConfig->getName());
-        $newIndex->addAlias($this->indexConfig->getName());
-        $oldIndex->flush();
+        $newIndex->addAlias($this->indexConfig->getName(), true);
     }
 }
