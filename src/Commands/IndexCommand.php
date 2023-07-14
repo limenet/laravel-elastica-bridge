@@ -37,7 +37,7 @@ class IndexCommand extends Command
 
             $lock = $indexConfig->indexingLock();
 
-            if ((bool) $this->option('force')) {
+            if ($this->option('force')) {
                 $lock->forceRelease();
             }
 
@@ -49,7 +49,7 @@ class IndexCommand extends Command
 
             Bus::batch([
                 [
-                    new SetupIndex($indexConfig, (bool) $this->option('delete')),
+                    new SetupIndex($indexConfig, $this->option('delete')),
                     new PopulateIndex($indexConfig),
                 ],
             ])

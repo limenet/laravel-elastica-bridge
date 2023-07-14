@@ -9,7 +9,7 @@ use Elastica\Index;
 
 class ElasticaClient
 {
-    private Client $client;
+    private readonly Client $client;
 
     private static ?bool $listenToEvents = null;
 

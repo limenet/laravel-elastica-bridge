@@ -1,22 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Only booleans are allowed in a negated boolean, array\\|bool\\|string\\|null given\\.$#"
-			count: 1
-			path: src/Commands/DeleteCommand.php
-
-		-
 			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
 			count: 1
 			path: src/Commands/IndexCommand.php
 
 		-
 			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
-			count: 1
-			path: src/Commands/IndexCommand.php
-
-		-
-			message: "#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|string\\|true given\\.$#"
 			count: 1
 			path: src/Commands/IndexCommand.php
 
