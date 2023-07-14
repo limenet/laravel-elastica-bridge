@@ -21,7 +21,7 @@ class ClientTest extends TestCase
     {
         $client = $this->elasticaClient->getClient();
 
-        $this->assertSame(config('elastica-bridge.elasticseach.host'), $client->getConfig('host'));
-        $this->assertEquals(config('elastica-bridge.elasticseach.port'), $client->getConfig('port'));
+        $this->assertSame('localhost', $client->getConfig('host'));
+        $this->assertEquals(9200, $client->getConfig('port'));
     }
 }

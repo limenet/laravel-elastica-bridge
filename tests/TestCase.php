@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Limenet\LaravelElasticaBridge\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeServiceProvider;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\InvoiceIndex;
@@ -15,6 +16,8 @@ use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -48,14 +51,10 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
-        config()->set('database.default', 'testing');
-
-        config()->set('elastica-bridge.elasticseach.host', env('ELASTICSEARCH_HOST', 'localhost'));
-        config()->set('elastica-bridge.elasticseach.port', 9200);
-
         $migration = include __DIR__.'/database/migrations/SetupTables.php';
+
         $migration->up();
     }
 }
