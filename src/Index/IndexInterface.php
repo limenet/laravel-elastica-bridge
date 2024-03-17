@@ -134,8 +134,6 @@ interface IndexInterface
 
     /**
      * Given a Laravel model, return the corresponding Elastica document.
-     *
-     * @return Document
      */
     public function getDocumentInstance(Model|ElasticsearchableInterface $model): ?Document;
 
