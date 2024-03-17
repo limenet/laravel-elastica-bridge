@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## v1.9.0 - 2024-03-17
+
+- Laravel 11 #25
+
 ## v1.6.0 - 2023-02-18
 
 - Laravel 10 #13
