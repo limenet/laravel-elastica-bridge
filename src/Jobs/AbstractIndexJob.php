@@ -13,7 +13,7 @@ use Illuminate\Queue\Middleware\WithoutOverlapping;
 use Illuminate\Queue\SerializesModels;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 
-abstract class AbstractIndexJob implements ShouldQueue, ShouldBeUnique
+abstract class AbstractIndexJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
