@@ -10,7 +10,7 @@ use RectorLaravel\Set\LaravelSetList;
 return RectorConfig::configure()
     ->withPreparedSets()
     ->withSets([
-        LaravelSetList::LARAVEL_100,
+        LaravelSetList::LARAVEL_110,
     ])
     ->withPhpSets()
     ->withPaths([

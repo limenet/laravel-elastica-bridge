@@ -10,7 +10,7 @@ use Limenet\LaravelElasticaBridge\Logging\SentryBreadcrumbLogger;
 
 class ElasticaClient
 {
-    private readonly Client $client;
+    private Client $client;
 
     private static ?bool $listenToEvents = null;
 
