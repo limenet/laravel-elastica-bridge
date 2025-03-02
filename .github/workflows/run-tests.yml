@@ -65,7 +65,7 @@ jobs:
       - name: Execute tests
         run: composer run test
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./build/logs/clover.xml
