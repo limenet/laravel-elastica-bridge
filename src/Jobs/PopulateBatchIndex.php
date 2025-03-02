@@ -29,8 +29,7 @@ class PopulateBatchIndex implements ShouldQueue
         private readonly string $indexDocument,
         private readonly int $limit,
         private readonly int $offset
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {

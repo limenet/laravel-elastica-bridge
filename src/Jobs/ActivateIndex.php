@@ -10,8 +10,7 @@ class ActivateIndex extends AbstractIndexJob
 {
     public function __construct(
         protected IndexInterface $indexConfig
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {

@@ -22,7 +22,7 @@ class ElasticaClient
         ]);
 
         if (config('elastica-bridge.logging.sentry_breadcrumbs') === true && class_exists('\Sentry\Breadcrumb')) {
-            $client->setLogger(new SentryBreadcrumbLogger());
+            $client->setLogger(new SentryBreadcrumbLogger);
         }
 
         $this->client = $client;

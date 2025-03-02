@@ -35,10 +35,10 @@ class QueryTest extends TestCase
     {
         $this->index($this->productIndex);
 
-        $elements1 = $this->productIndex->searchForElements(new BoolQuery(), 5, 0);
+        $elements1 = $this->productIndex->searchForElements(new BoolQuery, 5, 0);
         $this->assertCount(5, $elements1);
 
-        $elements2 = $this->productIndex->searchForElements(new BoolQuery(), 5, 5);
+        $elements2 = $this->productIndex->searchForElements(new BoolQuery, 5, 5);
         $this->assertCount(5, $elements2);
         $this->assertEmpty(collect($elements1)->map->id->intersect(collect($elements2)->map->id)->toArray());
     }

@@ -32,8 +32,7 @@ class ModelEventListener
 
     public function __construct(
         private readonly IndexRepository $indexRepository
-    ) {
-    }
+    ) {}
 
     public function handle(string $event, Model $model): void
     {

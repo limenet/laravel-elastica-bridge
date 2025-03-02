@@ -12,8 +12,7 @@ class EventHandler
     public function __construct(
         private readonly ElasticaClient $elasticaClient,
         private readonly ModelEventListener $modelEventListener
-    ) {
-    }
+    ) {}
 
     public function subscribe(Dispatcher $events): void
     {

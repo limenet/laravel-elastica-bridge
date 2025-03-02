@@ -134,6 +134,6 @@ class IndexTest extends TestCase
 
     public function test_results_base_case(): void
     {
-        $this->assertSame([], $this->customerIndex->documentResultToElements(new ResultSet(new Response('{}'), new Query(), [])));
+        $this->assertSame([], $this->customerIndex->documentResultToElements(new ResultSet(new Response('{}'), new Query, [])));
     }
 }

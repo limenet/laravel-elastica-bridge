@@ -95,7 +95,7 @@ abstract class AbstractIndex implements IndexInterface
             $modelClass = $document->get(self::DOCUMENT_MODEL_CLASS);
             $modelId = $document->get(self::DOCUMENT_MODEL_ID);
         } catch (InvalidException) {
-            throw new RuntimeException();
+            throw new RuntimeException;
         }
 
         return $modelClass::findOrFail($modelId);
@@ -125,7 +125,7 @@ abstract class AbstractIndex implements IndexInterface
     final public function getBlueGreenActiveSuffix(): string
     {
         if (! $this->hasBlueGreenIndices()) {
-            throw new BlueGreenIndicesIncorrectlySetupException();
+            throw new BlueGreenIndicesIncorrectlySetupException;
         }
 
         $aliases = array_filter(
@@ -134,13 +134,13 @@ abstract class AbstractIndex implements IndexInterface
         );
 
         if (count($aliases) !== 1) {
-            throw new BlueGreenIndicesIncorrectlySetupException();
+            throw new BlueGreenIndicesIncorrectlySetupException;
         }
 
         $suffix = substr((string) array_keys($aliases)[0], strlen($this->getName()));
 
         if (! in_array($suffix, self::INDEX_SUFFIXES, true)) {
-            throw new BlueGreenIndicesIncorrectlySetupException();
+            throw new BlueGreenIndicesIncorrectlySetupException;
         }
 
         return $suffix;
@@ -158,7 +158,7 @@ abstract class AbstractIndex implements IndexInterface
             return self::INDEX_SUFFIX_BLUE;
         }
 
-        throw new BlueGreenIndicesIncorrectlySetupException();
+        throw new BlueGreenIndicesIncorrectlySetupException;
     }
 
     final public function getBlueGreenActiveElasticaIndex(): Index

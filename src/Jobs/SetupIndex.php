@@ -19,8 +19,7 @@ class SetupIndex extends AbstractIndexJob
     public function __construct(
         protected IndexInterface $indexConfig,
         private readonly bool $deleteExisting
-    ) {
-    }
+    ) {}
 
     public function handle(ElasticaClient $elastica): void
     {
