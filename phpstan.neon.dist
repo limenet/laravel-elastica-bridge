@@ -6,9 +6,14 @@ parameters:
     paths:
         - src
         - config
+        - tests/App
 
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkModelProperties: true
-    checkMissingIterableValueType: true
 
+    ignoreErrors:
+        -
+            message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: config/elastica-bridge.php

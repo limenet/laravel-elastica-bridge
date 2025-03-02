@@ -7,6 +7,9 @@ namespace Limenet\LaravelElasticaBridge\Tests\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Product;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Limenet\LaravelElasticaBridge\Tests\App\Models\Product>
+ */
 class ProductFactory extends Factory
 {
     protected $model = Product::class;

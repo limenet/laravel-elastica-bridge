@@ -15,13 +15,19 @@ use Limenet\LaravelElasticaBridge\Tests\Database\Factories\InvoiceFactory;
 class Invoice extends Model implements ElasticsearchableInterface
 {
     use ElasticsearchableTrait;
+
+    /** @use HasFactory<InvoiceFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $primaryKey = 'uuid';
 
     public $incrementing = false;
 
+    /**
+     * @return Factory<self>
+     */
     protected static function newFactory(): Factory
     {
         return InvoiceFactory::new();

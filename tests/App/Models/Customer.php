@@ -15,6 +15,8 @@ use Limenet\LaravelElasticaBridge\Tests\Database\Factories\CustomerFactory;
 class Customer extends Model implements ElasticsearchableInterface
 {
     use ElasticsearchableTrait;
+
+    /** @use HasFactory<CustomerFactory> */
     use HasFactory;
 
     public function toElasticsearch(IndexInterface $indexConfig): array
@@ -27,6 +29,9 @@ class Customer extends Model implements ElasticsearchableInterface
         return ($this->id % 2) === 0;
     }
 
+    /**
+     * @return Factory<self>
+     */
     protected static function newFactory(): Factory
     {
         return CustomerFactory::new();
