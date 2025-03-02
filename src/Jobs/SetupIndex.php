@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Limenet\LaravelElasticaBridge\Jobs;
 
-use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\ResponseException;
+use Elastica\Exception\ExceptionInterface as ElasticaException;
 use Illuminate\Bus\Batchable;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
+use Limenet\LaravelElasticaBridge\Enum\IndexBlueGreenSuffix;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
+use Limenet\LaravelElasticaBridge\Util\ElasticsearchResponse;
 
 class SetupIndex extends AbstractIndexJob
 {
@@ -40,20 +40,12 @@ class SetupIndex extends AbstractIndexJob
         $index = $elastica->getClient()->getIndex($this->indexConfig->getName());
 
         try {
-            $response = $elastica->getClient()->request(sprintf('_alias/%s', $this->indexConfig->getName()));
-        } catch (ClientException|ConnectionException|ResponseException) {
+            $response = ElasticsearchResponse::getResponse($elastica->getClient()->indices()->existsAlias(['name' => $this->indexConfig->getName()]))->asBool();
+        } catch (ElasticaException) {
             if ($index->exists() && count($index->getAliases()) === 0) {
                 $index->delete();
             }
 
-            return;
-        }
-
-        if ($response->hasError()) {
-            return;
-        }
-
-        if (array_keys($response->getData())[0] !== $this->indexConfig->getName()) {
             return;
         }
 
@@ -64,8 +56,8 @@ class SetupIndex extends AbstractIndexJob
 
     private function cleanup(ElasticaClient $elastica): void
     {
-        foreach (IndexInterface::INDEX_SUFFIXES as $suffix) {
-            $name = $this->indexConfig->getName().$suffix;
+        foreach (IndexBlueGreenSuffix::cases() as $suffix) {
+            $name = $this->indexConfig->getName().$suffix->value;
             $aliasIndex = $elastica->getIndex($name);
 
             if ($this->deleteExisting && $aliasIndex->exists()) {
@@ -83,7 +75,7 @@ class SetupIndex extends AbstractIndexJob
         try {
             $this->indexConfig->getBlueGreenActiveSuffix();
         } catch (BlueGreenIndicesIncorrectlySetupException) {
-            $elastica->getIndex($this->indexConfig->getName().IndexInterface::INDEX_SUFFIX_BLUE)->addAlias($this->indexConfig->getName());
+            $elastica->getIndex($this->indexConfig->getName().IndexBlueGreenSuffix::BLUE->value)->addAlias($this->indexConfig->getName());
         }
     }
 }

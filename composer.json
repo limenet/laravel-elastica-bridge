@@ -17,8 +17,8 @@
     ],
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.0",
-        "ruflin/elastica": "^7.1 || 8.x-dev",
+        "laravel/framework": "^11.0 || ^12.0",
+        "ruflin/elastica": "^8.0",
         "spatie/laravel-package-tools": "^1.13.0"
     },
     "require-dev": {
@@ -35,7 +35,7 @@
         "psr/log": "^3.0.2",
         "rector/rector": "^2.0.9",
         "sentry/sentry": "^4.10.0",
-        "symfony/http-client": "^6.4.19"
+        "symfony/http-client": "^7.2.4"
     },
     "autoload": {
         "psr-4": {

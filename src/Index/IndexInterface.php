@@ -8,26 +8,12 @@ use Elastica\Document;
 use Elastica\Index;
 use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Database\Eloquent\Model;
+use Limenet\LaravelElasticaBridge\Enum\IndexBlueGreenSuffix;
 use Limenet\LaravelElasticaBridge\Exception\Index\BlueGreenIndicesIncorrectlySetupException;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 
 interface IndexInterface
 {
-    /**
-     * The suffix for the blue index.
-     */
-    public const INDEX_SUFFIX_BLUE = '--blue';
-
-    /**
-     * The suffix for the green index.
-     */
-    public const INDEX_SUFFIX_GREEN = '--green';
-
-    /**
-     * List of valid index suffixes.
-     */
-    public const INDEX_SUFFIXES = [self::INDEX_SUFFIX_BLUE, self::INDEX_SUFFIX_GREEN];
-
     public const DOCUMENT_MODEL_ID = '__id';
 
     public const DOCUMENT_MODEL_CLASS = '__class';
@@ -94,7 +80,7 @@ interface IndexInterface
      *
      * @internal
      */
-    public function getBlueGreenActiveSuffix(): string;
+    public function getBlueGreenActiveSuffix(): IndexBlueGreenSuffix;
 
     /**
      * Returns the currently inactive blue/green suffix.
@@ -103,7 +89,7 @@ interface IndexInterface
      *
      * @internal
      */
-    public function getBlueGreenInactiveSuffix(): string;
+    public function getBlueGreenInactiveSuffix(): IndexBlueGreenSuffix;
 
     /**
      * Returns the currently active blue/green Elastica index.

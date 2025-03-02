@@ -16,14 +16,17 @@ class ElasticaClient
 
     public function __construct()
     {
-        $client = new Client([
-            'host' => config('elastica-bridge.elasticsearch.host'),
-            'port' => config('elastica-bridge.elasticsearch.port'),
-        ]);
+        $logger = null;
 
         if (config('elastica-bridge.logging.sentry_breadcrumbs') === true && class_exists('\Sentry\Breadcrumb')) {
-            $client->setLogger(new SentryBreadcrumbLogger);
+            $logger = (new SentryBreadcrumbLogger);
         }
+
+        $client = new Client(
+            [
+                'host' => config('elastica-bridge.elasticsearch.host'),
+                'port' => config('elastica-bridge.elasticsearch.port'),
+            ], logger: $logger);
 
         $this->client = $client;
     }
