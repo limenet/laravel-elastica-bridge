@@ -49,15 +49,15 @@ class PopulateBatchIndex implements ShouldQueue
             $esDocuments[] = $record->toElasticaDocument($this->indexConfig);
         }
 
-        if (count($esDocuments) === 0) {
+        if ($esDocuments === []) {
             return;
         }
 
         try {
             $this->index->addDocuments($esDocuments);
-        } catch (Throwable $th) {
+        } catch (Throwable $throwable) {
             if (! $this->indexConfig->ingoreIndexingErrors()) {
-                throw $th;
+                throw $throwable;
             }
         }
     }

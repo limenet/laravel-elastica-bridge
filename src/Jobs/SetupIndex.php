@@ -26,6 +26,7 @@ class SetupIndex extends AbstractIndexJob
         if ($this->batch()?->cancelled() === true) {
             return;
         }
+
         $this->migrate($elastica);
         $this->cleanup($elastica);
         $this->setup($elastica);
@@ -42,7 +43,7 @@ class SetupIndex extends AbstractIndexJob
         try {
             $response = ElasticsearchResponse::getResponse($elastica->getClient()->indices()->existsAlias(['name' => $this->indexConfig->getName()]))->asBool();
         } catch (ElasticaException) {
-            if ($index->exists() && count($index->getAliases()) === 0) {
+            if ($index->exists() && $index->getAliases() === []) {
                 $index->delete();
             }
 

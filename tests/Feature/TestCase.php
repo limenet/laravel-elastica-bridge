@@ -57,11 +57,13 @@ class TestCase extends TestsTestCase
                 if ($index->getElasticaIndex()->hasAlias($index->getName())) {
                     $index->getElasticaIndex()->removeAlias($index->getName());
                 }
+
                 $active = $index->getBlueGreenActiveElasticaIndex();
                 $inactive = $index->getBlueGreenInactiveElasticaIndex();
                 if ($active->exists()) {
                     $active->delete();
                 }
+
                 if ($inactive->exists()) {
                     $inactive->delete();
                 }

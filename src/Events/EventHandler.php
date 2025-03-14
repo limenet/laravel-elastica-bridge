@@ -20,7 +20,7 @@ class EventHandler
             collect(ModelEventListener::EVENTS)
                 ->map(fn (string $name): string => sprintf('eloquent.%s:*', $name))
                 ->toArray(),
-            function ($event, $models) {
+            function ($event, $models): void {
                 if (! $this->elasticaClient->listensToEvents()) {
                     return;
                 }

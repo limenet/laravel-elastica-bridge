@@ -32,6 +32,7 @@ class DeleteCommand extends Command
             if (! $client->exists()) {
                 continue;
             }
+
             $this->info($index);
 
             foreach ($client->getAliases() as $alias) {

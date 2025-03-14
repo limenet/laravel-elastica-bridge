@@ -23,11 +23,7 @@ use RuntimeException;
 
 abstract class AbstractIndex implements IndexInterface
 {
-    public function __construct(
-        protected ElasticaClient $client
-    ) {
-        $this->client = $client;
-    }
+    public function __construct(protected ElasticaClient $client) {}
 
     public function getMapping(): array
     {

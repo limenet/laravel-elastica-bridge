@@ -23,7 +23,7 @@ class TestCase extends Orchestra
         $this->setUpDatabase();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Limenet\\LaravelElasticaBridge\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName): string => 'Limenet\\LaravelElasticaBridge\\Tests\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
 
         $this->seed(DatabaseSeeder::class);
