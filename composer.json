@@ -35,6 +35,7 @@
         "psr/log": "^3.0.2",
         "rector/rector": "^2.0.10",
         "sentry/sentry": "^4.10.0",
+        "spatie/phpunit-watcher": "^1.24",
         "symfony/http-client": "^7.2.4"
     },
     "autoload": {
@@ -56,6 +57,10 @@
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage",
+        "test:watch": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor/bin/phpunit-watcher watch < /dev/tty"
+        ],
         "format": "vendor/bin/pint",
         "rector": "vendor/bin/rector process"
     },
