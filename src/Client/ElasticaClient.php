@@ -41,17 +41,17 @@ class ElasticaClient
         return $this->client->getIndex($name);
     }
 
-    public function enableEventListener(): void
+    public static function enableEventListener(): void
     {
         self::$listenToEvents = true;
     }
 
-    public function disableEventListener(): void
+    public static function disableEventListener(): void
     {
         self::$listenToEvents = false;
     }
 
-    public function listensToEvents(): bool
+    public static function listensToEvents(): bool
     {
         return self::$listenToEvents ?? config('elastica-bridge.events.listen', true);
     }

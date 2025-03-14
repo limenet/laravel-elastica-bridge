@@ -10,7 +10,6 @@ use Limenet\LaravelElasticaBridge\Services\ModelEventListener;
 class EventHandler
 {
     public function __construct(
-        private readonly ElasticaClient $elasticaClient,
         private readonly ModelEventListener $modelEventListener
     ) {}
 
@@ -21,13 +20,13 @@ class EventHandler
                 ->map(fn (string $name): string => sprintf('eloquent.%s:*', $name))
                 ->toArray(),
             function ($event, $models): void {
-                if (! $this->elasticaClient->listensToEvents()) {
+                if (! ElasticaClient::listensToEvents()) {
                     return;
                 }
 
                 dispatch(function () use ($event, $models): void {
                     $name = (str($event)->before(':')->after('.'));
-                    if (! $this->elasticaClient->listensToEvents()) {
+                    if (! ElasticaClient::listensToEvents()) {
                         return;
                     }
 

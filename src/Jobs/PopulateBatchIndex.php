@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Limenet\LaravelElasticaBridge\Jobs;
 
-use Elastica\Index;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,6 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
+use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 use Throwable;
 
 class PopulateBatchIndex implements ShouldQueue
@@ -23,16 +23,19 @@ class PopulateBatchIndex implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
+    /**
+     * @param  class-string<IndexInterface>  $indexConfigKey
+     */
     public function __construct(
-        private readonly Index $index,
-        private readonly IndexInterface $indexConfig,
+        protected string $indexConfigKey,
         private readonly string $indexDocument,
         private readonly int $limit,
         private readonly int $offset
     ) {}
 
-    public function handle(): void
+    public function handle(IndexRepository $indexRepository): void
     {
+        $indexConfig = $indexRepository->get($this->indexConfigKey);
         if ($this->batch()?->cancelled() === true) {
             return;
         }
@@ -42,11 +45,11 @@ class PopulateBatchIndex implements ShouldQueue
         /** @var ElasticsearchableInterface[] $records */
         $records = $this->indexDocument::offset($this->offset)->limit($this->limit)->get();
         foreach ($records as $record) {
-            if (! $record->shouldIndex($this->indexConfig)) {
+            if (! $record->shouldIndex($indexConfig)) {
                 continue;
             }
 
-            $esDocuments[] = $record->toElasticaDocument($this->indexConfig);
+            $esDocuments[] = $record->toElasticaDocument($indexConfig);
         }
 
         if ($esDocuments === []) {
@@ -54,9 +57,9 @@ class PopulateBatchIndex implements ShouldQueue
         }
 
         try {
-            $this->index->addDocuments($esDocuments);
+            $indexConfig->getBlueGreenInactiveElasticaIndex()->addDocuments($esDocuments);
         } catch (Throwable $throwable) {
-            if (! $this->indexConfig->ingoreIndexingErrors()) {
+            if (! $indexConfig->ingoreIndexingErrors()) {
                 throw $throwable;
             }
         }

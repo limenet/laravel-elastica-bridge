@@ -20,11 +20,14 @@ abstract class AbstractIndexJob implements ShouldBeUnique, ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected IndexInterface $indexConfig;
+    /**
+     * @var class-string<IndexInterface>
+     */
+    protected string $indexConfigKey;
 
     public function uniqueId(): string
     {
-        return $this->indexConfig::class;
+        return $this->indexConfigKey;
     }
 
     /**

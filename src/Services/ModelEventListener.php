@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Limenet\LaravelElasticaBridge\Services;
 
-use Elastica\Exception\NotFoundException;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Illuminate\Database\Eloquent\Model;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
@@ -29,10 +29,6 @@ class ModelEventListener
         self::EVENT_RESTORED,
         self::EVENT_DELETED,
     ];
-
-    public function __construct(
-        private readonly IndexRepository $indexRepository
-    ) {}
 
     public function handle(string $event, Model $model): void
     {
@@ -68,7 +64,7 @@ class ModelEventListener
     {
         try {
             $index->getElasticaIndex()->deleteById($model->getElasticsearchId());
-        } catch (NotFoundException) {
+        } catch (ClientResponseException) {
         }
     }
 
@@ -78,7 +74,7 @@ class ModelEventListener
     public function matchingIndicesForElement(Model $model): array
     {
         return array_filter(
-            $this->indexRepository->all(),
+            app(IndexRepository::class)->all(),
             fn (IndexInterface $index): bool => in_array($model::class, $index->getAllowedDocuments(), true)
         );
     }

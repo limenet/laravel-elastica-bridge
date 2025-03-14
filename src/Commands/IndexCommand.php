@@ -47,22 +47,24 @@ class IndexCommand extends Command
                 continue;
             }
 
+            $indexConfigKey = $indexConfig::class;
+
             Bus::batch([
                 [
-                    new SetupIndex($indexConfig, $this->option('delete')),
-                    new PopulateIndex($indexConfig),
+                    new SetupIndex($indexConfigKey, $this->option('delete')),
+                    new PopulateIndex($indexConfigKey),
                 ],
             ])
                 ->onConnection(config('elastica-bridge.connection'))
-                ->then(function () use ($indexConfig): void {
-                    ActivateIndex::dispatch($indexConfig)
+                ->then(function () use ($indexConfigKey): void {
+                    ActivateIndex::dispatch($indexConfigKey)
                         ->onConnection(config('elastica-bridge.connection'));
                 })
-                ->catch(function () use ($indexConfig): void {
-                    $indexConfig->indexingLock()->forceRelease();
+                ->catch(function () use ($indexConfigKey): void {
+                    app(IndexRepository::class)->get($indexConfigKey)->indexingLock()->forceRelease();
                 })
-                ->finally(function () use ($indexConfig): void {
-                    $indexConfig->indexingLock()->forceRelease();
+                ->finally(function () use ($indexConfigKey): void {
+                    app(IndexRepository::class)->get($indexConfigKey)->indexingLock()->forceRelease();
                 })
                 ->name('ES index: '.$indexConfig->getName())
                 ->dispatch();

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Limenet\LaravelElasticaBridge\Tests\Feature;
 
-use Elastica\Exception\ResponseException;
+use Elastica\Exception\ExceptionInterface;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Exception\BaseException;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
@@ -67,7 +67,7 @@ class TestCase extends TestsTestCase
                 if ($inactive->exists()) {
                     $inactive->delete();
                 }
-            } catch (BaseException|ResponseException) {
+            } catch (BaseException|ExceptionInterface) {
             }
         }
     }
