@@ -25,10 +25,12 @@ class IndexCommand extends Command
 
     public function handle(): int
     {
+        /** @var array<int,string> $indices */
+        $indices = $this->argument('index');
         foreach ($this->indexRepository->all() as $indexConfig) {
             if (
-                ! empty($this->argument('index'))
-                && ! in_array($indexConfig->getName(), $this->argument('index'), true)
+                ! empty($indices)
+                && ! in_array($indexConfig->getName(), $indices, true)
             ) {
                 continue;
             }
@@ -37,7 +39,9 @@ class IndexCommand extends Command
 
             $lock = $indexConfig->indexingLock();
 
-            if ($this->option('force')) {
+            /** @var bool $force */
+            $force = $this->option('force');
+            if ($force) {
                 $lock->forceRelease();
             }
 
@@ -49,9 +53,12 @@ class IndexCommand extends Command
 
             $indexConfigKey = $indexConfig::class;
 
+            /** @var bool $delete */
+            $delete = $this->option('delete');
+
             Bus::batch([
                 [
-                    new SetupIndex($indexConfigKey, $this->option('delete')),
+                    new SetupIndex($indexConfigKey, $delete),
                     new PopulateIndex($indexConfigKey),
                 ],
             ])

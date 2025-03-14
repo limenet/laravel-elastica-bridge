@@ -23,7 +23,9 @@ class DeleteCommand extends Command
 
     public function handle(): int
     {
-        if (! $this->option('force') && ! $this->confirm('Do you want to proceed? (y/N)', false)) {
+        /** @var bool $force */
+        $force = $this->option('force');
+        if (! $force && ! $this->confirm('Do you want to proceed? (y/N)', false)) {
             return self::SUCCESS;
         }
 

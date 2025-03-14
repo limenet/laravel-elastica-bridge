@@ -28,6 +28,7 @@
         "nunomaduro/collision": "^8.6.1",
         "orchestra/testbench": "^9.11 || ^10.1",
         "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan": "^2.1.8",
         "phpstan/phpstan-deprecation-rules": "^2.0.1",
         "phpstan/phpstan-phpunit": "^2.0.4",
         "phpstan/phpstan-strict-rules": "^2.0.3",
