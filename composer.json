@@ -34,7 +34,7 @@
         "phpstan/phpstan-strict-rules": "^2.0.4",
         "phpunit/phpunit": "^11.5.15",
         "psr/log": "^3.0.2",
-        "rector/rector": "^2.0.10",
+        "rector/rector": "^2.0.11",
         "sentry/sentry": "^4.10.0",
         "spatie/phpunit-watcher": "^1.24",
         "symfony/http-client": "^7.2.4"
