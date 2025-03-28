@@ -53,7 +53,8 @@ class ModelEvent implements ShouldQueue
         private readonly string $event,
         private readonly string $modelClass,
         private readonly string $keyName,
-        private readonly mixed $keyValue
+        private readonly mixed $keyValue,
+        private readonly string $elasticsearchId,
     ) {
         $this->onConnection(config('elastica-bridge.connection'));
     }
@@ -63,10 +64,18 @@ class ModelEvent implements ShouldQueue
         $model = $this->modelClass::query()->where($this->keyName, $this->keyValue)->first();
 
         if (! $model instanceof ElasticsearchableInterface || ! $model instanceof Model) {
+            foreach ($this->matchingIndicesForElement() as $index) {
+                if (! $index->getElasticaIndex()->exists()) {
+                    continue;
+                }
+
+                $this->ensureModelMissingFromIndex($index);
+            }
+
             return;
         }
 
-        foreach ($this->matchingIndicesForElement($model) as $index) {
+        foreach ($this->matchingIndicesForElement() as $index) {
             if (! $index->getElasticaIndex()->exists()) {
                 continue;
             }
@@ -79,7 +88,7 @@ class ModelEvent implements ShouldQueue
 
             $shouldBePresent
                 ? $this->ensureModelPresentInIndex($index, $model)
-                : $this->ensureModelMissingFromIndex($index, $model);
+                : $this->ensureModelMissingFromIndex($index);
         }
     }
 
@@ -89,11 +98,10 @@ class ModelEvent implements ShouldQueue
         $index->getElasticaIndex()->addDocument($model->toElasticaDocument($index));
     }
 
-    /** @param  ElasticsearchableInterface&Model  $model */
-    private function ensureModelMissingFromIndex(IndexInterface $index, Model $model): void
+    private function ensureModelMissingFromIndex(IndexInterface $index): void
     {
         try {
-            $index->getElasticaIndex()->deleteById($model->getElasticsearchId());
+            $index->getElasticaIndex()->deleteById($this->elasticsearchId);
         } catch (ClientResponseException) {
         }
     }
@@ -101,11 +109,11 @@ class ModelEvent implements ShouldQueue
     /**
      * @return IndexInterface[]
      */
-    public function matchingIndicesForElement(Model $model): array
+    public function matchingIndicesForElement(): array
     {
         return array_filter(
             app(IndexRepository::class)->all(),
-            fn (IndexInterface $index): bool => in_array($model::class, $index->getAllowedDocuments(), true)
+            fn (IndexInterface $index): bool => in_array($this->modelClass, $index->getAllowedDocuments(), true)
         );
     }
 }

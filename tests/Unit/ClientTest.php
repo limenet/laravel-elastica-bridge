@@ -24,8 +24,8 @@ class ClientTest extends TestCase
     {
         $client = $this->elasticaClient->getClient();
 
-        $this->assertSame('localhost', $client->getConfig('host'));
-        $this->assertEquals(9200, $client->getConfig('port'));
+        $this->assertSame('localhost', $client->getTransport()->getNodePool()->nextNode()->getUri()->getHost());
+        $this->assertSame(9200, $client->getTransport()->getNodePool()->nextNode()->getUri()->getPort());
 
     }
 

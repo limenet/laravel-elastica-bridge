@@ -44,7 +44,7 @@ class EventTest extends TestCase
         LaravelElasticaBridgeFacade::disableEventListener();
         $product = Product::all()->random();
         $oldName = $product->name;
-        $newName = \Carbon\Carbon::now()->getTimestamp();
+        $newName = now()->getTimestamp();
         $product->name = $newName;
         $this->assertSame($oldName, $this->productIndex->getDocumentInstance($product)->get('name'));
         $this->assertNotSame($oldName, $newName);
@@ -59,7 +59,7 @@ class EventTest extends TestCase
         LaravelElasticaBridgeFacade::enableEventListener();
         $product = Product::all()->random();
         $oldName = $product->name;
-        $newName = \Carbon\Carbon::now()->getTimestamp();
+        $newName = 'doc-'.now()->getTimestamp();
         $product->name = $newName;
         $this->assertSame($oldName, $this->productIndex->getDocumentInstance($product)->get('name'));
         $this->assertNotSame($oldName, $newName);

@@ -29,7 +29,8 @@ class EventHandler
                         $name,
                         $model::class,
                         $model->getKeyName(),
-                        $model->getKey()
+                        $model->getKey(),
+                        $model->getElasticsearchId()
                     ));
             });
     }
