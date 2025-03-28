@@ -10,7 +10,6 @@ use Limenet\LaravelElasticaBridge\Commands\IndexCommand;
 use Limenet\LaravelElasticaBridge\Commands\StatusCommand;
 use Limenet\LaravelElasticaBridge\Events\EventHandler;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
-use Limenet\LaravelElasticaBridge\Services\ModelEventListener;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -32,7 +31,6 @@ class LaravelElasticaBridgeServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->app->singleton(ElasticaClient::class);
-        $this->app->bind(ModelEventListener::class);
         $this->app->tag(config('elastica-bridge.indices'), 'elasticaBridgeIndices');
 
         $this->app->when(IndexRepository::class)

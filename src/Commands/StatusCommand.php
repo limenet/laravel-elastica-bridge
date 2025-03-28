@@ -29,8 +29,8 @@ class StatusCommand extends Command
         $table
             ->setHeaders(['Host', 'Port', 'Version'])
             ->setRows([[
-                $this->elastica->getClient()->getConfig('host'),
-                $this->elastica->getClient()->getConfig('port'),
+                $this->elastica->getClient()->getTransport()->getNodePool()->nextNode()->getUri()->getHost(),
+                $this->elastica->getClient()->getTransport()->getNodePool()->nextNode()->getUri()->getPort(),
                 $this->elastica->getClient()->getVersion(),
             ]])
             ->setHeaderTitle('Cluster');

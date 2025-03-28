@@ -5,18 +5,15 @@ namespace Limenet\LaravelElasticaBridge\Events;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Model;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
-use Limenet\LaravelElasticaBridge\Services\ModelEventListener;
+use Limenet\LaravelElasticaBridge\Jobs\ModelEvent;
+use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 
 class EventHandler
 {
-    public function __construct(
-        private readonly ModelEventListener $modelEventListener
-    ) {}
-
     public function subscribe(Dispatcher $events): void
     {
         $events->listen(
-            collect(ModelEventListener::EVENTS)
+            collect(ModelEvent::EVENTS)
                 ->map(fn (string $name): string => sprintf('eloquent.%s:*', $name))
                 ->toArray(),
             function ($event, $models): void {
@@ -24,14 +21,16 @@ class EventHandler
                     return;
                 }
 
-                dispatch(function () use ($event, $models): void {
-                    $name = (str($event)->before(':')->after('.'));
-                    if (! ElasticaClient::listensToEvents()) {
-                        return;
-                    }
+                $name = str($event)->before(':')->after('.')->toString();
 
-                    collect($models)->each(fn (Model $model) => $this->modelEventListener->handle($name, $model));
-                })->onConnection(config('elastica-bridge.connection'));
+                collect($models)
+                    ->filter(fn (Model $model): bool => $model instanceof ElasticsearchableInterface)
+                    ->each(fn (Model $model) => ModelEvent::dispatch(
+                        $name,
+                        $model::class,
+                        $model->getKeyName(),
+                        $model->getKey()
+                    ));
             });
     }
 }

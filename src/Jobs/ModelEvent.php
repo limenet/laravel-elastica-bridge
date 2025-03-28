@@ -2,16 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Limenet\LaravelElasticaBridge\Services;
+namespace Limenet\LaravelElasticaBridge\Jobs;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Illuminate\Bus\Batchable;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 
-class ModelEventListener
+class ModelEvent implements ShouldQueue
 {
+    use Batchable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+
     private const EVENT_CREATED = 'created';
 
     private const EVENT_UPDATED = 'updated';
@@ -30,9 +42,27 @@ class ModelEventListener
         self::EVENT_DELETED,
     ];
 
-    public function handle(string $event, Model $model): void
+    /**
+     * @template TModel of ElasticsearchableInterface&Model
+     *
+     * @param  class-string<TModel>  $modelClass
+     * @param  model-property<TModel>  $keyName
+     * @return void
+     */
+    public function __construct(
+        private readonly string $event,
+        private readonly string $modelClass,
+        private readonly string $keyName,
+        private readonly mixed $keyValue
+    ) {
+        $this->onConnection(config('elastica-bridge.connection'));
+    }
+
+    public function handle(): void
     {
-        if (! $model instanceof ElasticsearchableInterface) {
+        $model = $this->modelClass::query()->where($this->keyName, $this->keyValue)->first();
+
+        if (! $model instanceof ElasticsearchableInterface || ! $model instanceof Model) {
             return;
         }
 
@@ -43,7 +73,7 @@ class ModelEventListener
 
             $shouldBePresent = true;
 
-            if (! $model->shouldIndex($index) || $event === self::EVENT_DELETED) {
+            if (! $model->shouldIndex($index) || $this->event === self::EVENT_DELETED) {
                 $shouldBePresent = false;
             }
 

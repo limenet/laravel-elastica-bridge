@@ -23,10 +23,13 @@ class ElasticaClient
         }
 
         $client = new Client(
-            [
-                'host' => config('elastica-bridge.elasticsearch.host'),
-                'port' => config('elastica-bridge.elasticsearch.port'),
-            ], logger: $logger);
+            sprintf(
+                'http://%s:%d',
+                config('elastica-bridge.elasticsearch.host'),
+                config('elastica-bridge.elasticsearch.port')
+            ),
+            logger: $logger
+        );
 
         $this->client = $client;
     }

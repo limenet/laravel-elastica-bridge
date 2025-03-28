@@ -13,6 +13,12 @@ parameters:
 			path: src/Commands/IndexCommand.php
 
 		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<\(int\|string\),Limenet\\LaravelElasticaBridge\\Model\\ElasticsearchableInterface\>\:\:each\(\) expects callable\(Limenet\\LaravelElasticaBridge\\Model\\ElasticsearchableInterface, int\|string\)\: mixed, Closure\(Illuminate\\Database\\Eloquent\\Model\)\: Illuminate\\Foundation\\Bus\\PendingDispatch given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Events/EventHandler.php
+
+		-
 			message: '#^Unable to resolve the template type TKey in call to function collect$#'
 			identifier: argument.templateType
 			count: 1
