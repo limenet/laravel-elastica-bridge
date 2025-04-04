@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## v2.0.0-beta.1 - 2025-04-04
+
+- Laravel 12
+- Elasticsearch 8
+- Improved typing, modernize code base
+- Performance improvements
+
 ## v1.9.0 - 2024-03-17
 
 - Laravel 11 #25
