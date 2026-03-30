@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice>
+ * @extends Factory<Invoice>
  */
 class InvoiceFactory extends Factory
 {

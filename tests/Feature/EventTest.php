@@ -25,7 +25,7 @@ class EventTest extends TestCase
         $this->index($this->productIndex);
         LaravelElasticaBridgeFacade::disableEventListener();
         $product = Product::factory()->create();
-        $this->assertNotInstanceOf(\Elastica\Document::class, $this->productIndex->getDocumentInstance($product));
+        $this->assertNotInstanceOf(Document::class, $this->productIndex->getDocumentInstance($product));
     }
 
     public function test_event_create_enabled_listener(): void
@@ -82,7 +82,7 @@ class EventTest extends TestCase
         LaravelElasticaBridgeFacade::enableEventListener();
         $product = Product::all()->random();
         $product->delete();
-        $this->assertNotInstanceOf(\Elastica\Document::class, $this->productIndex->getDocumentInstance($product));
+        $this->assertNotInstanceOf(Document::class, $this->productIndex->getDocumentInstance($product));
     }
 
     public function test_event_delete_model_not_in_index(): void
@@ -90,7 +90,7 @@ class EventTest extends TestCase
         $this->index($this->customerIndex);
         LaravelElasticaBridgeFacade::enableEventListener();
         $customer = Customer::findOrFail(1);
-        $this->assertNotInstanceOf(\Elastica\Document::class, $this->customerIndex->getDocumentInstance($customer));
+        $this->assertNotInstanceOf(Document::class, $this->customerIndex->getDocumentInstance($customer));
         $customer->delete();
         $this->assertNull($this->customerIndex->getDocumentInstance($customer));
     }
