@@ -22,22 +22,22 @@
         "spatie/laravel-package-tools": "^1.13.0"
     },
     "require-dev": {
-        "driftingly/rector-laravel": "^2.2.0",
-        "larastan/larastan": "^3.9.3",
-        "laravel/pint": "^1.29.0",
-        "nunomaduro/collision": "^8.9.1",
-        "orchestra/testbench": " ^10.11 || ^11.0",
+        "driftingly/rector-laravel": "^2.6.2",
+        "larastan/larastan": "^3.12.2",
+        "laravel/pint": "^1.32.1",
+        "nunomaduro/collision": "^8.9.5",
+        "orchestra/testbench": " ^10.11 || ^11.3",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^2.1.45",
-        "phpstan/phpstan-deprecation-rules": "^2.0.4",
-        "phpstan/phpstan-phpunit": "^2.0.16",
-        "phpstan/phpstan-strict-rules": "^2.0.10",
-        "phpunit/phpunit": "^12.5.14",
+        "phpstan/phpstan": "^2.2.16",
+        "phpstan/phpstan-deprecation-rules": "^2.0.5",
+        "phpstan/phpstan-phpunit": "^2.0.21",
+        "phpstan/phpstan-strict-rules": "^2.0.12",
+        "phpunit/phpunit": "^12.5.37",
         "psr/log": "^3.0.2",
-        "rector/rector": "^2.3.9",
-        "sentry/sentry": "^4.23.1",
+        "rector/rector": "^2.6.7",
+        "sentry/sentry": "^4.32.0",
         "spatie/phpunit-watcher": "^1.24.4",
-        "symfony/http-client": "^7.4 || ^8.0.7"
+        "symfony/http-client": "^7.4 || ^8.1.8"
     },
     "autoload": {
         "psr-4": {
