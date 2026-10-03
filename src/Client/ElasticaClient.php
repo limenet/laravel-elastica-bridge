@@ -7,6 +7,7 @@ namespace Limenet\LaravelElasticaBridge\Client;
 use Elastica\Client;
 use Elastica\Index;
 use Limenet\LaravelElasticaBridge\Logging\SentryBreadcrumbLogger;
+use Psr\Log\LogLevel;
 
 class ElasticaClient
 {
@@ -19,7 +20,7 @@ class ElasticaClient
         $logger = null;
 
         if (config('elastica-bridge.logging.sentry_breadcrumbs') === true && class_exists('\Sentry\Breadcrumb')) {
-            $logger = (new SentryBreadcrumbLogger);
+            $logger = new SentryBreadcrumbLogger(config('elastica-bridge.logging.level', LogLevel::DEBUG));
         }
 
         $client = new Client(

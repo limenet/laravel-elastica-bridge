@@ -7,6 +7,7 @@ namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 use Elastica\Client;
 use Limenet\LaravelElasticaBridge\Client\ElasticaClient;
 use Limenet\LaravelElasticaBridge\Logging\SentryBreadcrumbLogger;
+use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
 class ClientTest extends TestCase
@@ -42,6 +43,16 @@ class ClientTest extends TestCase
         $client = (new ElasticaClient)->getClient();
 
         $this->assertInstanceOf(SentryBreadcrumbLogger::class, $this->getLoggerProperty($client));
+    }
+
+    public function test_sentry_logger_uses_the_configured_level(): void
+    {
+        config()->set('elastica-bridge.logging.sentry_breadcrumbs', true);
+        config()->set('elastica-bridge.logging.level', 'verbose');
+
+        $this->expectException(InvalidArgumentException::class);
+
+        new ElasticaClient;
     }
 
     private function getLoggerProperty(Client $client): LoggerInterface

@@ -12,5 +12,8 @@ return [
     ],
     'logging' => [
         'sentry_breadcrumbs' => false,
+        // the least severe PSR-3 level which is still logged; Elasticsearch logs
+        // the full request and response bodies at 'debug'
+        'level' => env('ELASTICSEARCH_LOG_LEVEL', 'debug'),
     ],
 ];
