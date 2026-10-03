@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## v2.1.0 - 2026-03-30
+
+- Laravel 13
+- Drop support for Laravel 11 and PHP 8.2 (now requires PHP 8.3+ and Laravel 12 or 13)
+
 ## v2.0.0-beta.1 - 2025-04-04
 
 - Laravel 12
