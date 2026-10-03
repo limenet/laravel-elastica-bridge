@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## v2.2.0 - 2026-10-03
+
+- Configurable minimum log level for Sentry breadcrumbs via `elastica-bridge.logging.level` / `ELASTICSEARCH_LOG_LEVEL` (defaults to `debug`, so nothing changes unless it is set). Elasticsearch logs full request and response bodies at `debug`, so raising it reduces memory use when `sentry_breadcrumbs` is enabled.
+
 ## v2.1.0 - 2026-03-30
 
 - Laravel 13
