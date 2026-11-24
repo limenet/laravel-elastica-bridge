@@ -15,7 +15,10 @@ jobs:
         os: [ubuntu-latest]
         php: [8.4, 8.5]
         laravel: [12.*, 13.*]
-        elasticsearch: ["7.17.18", "8.12.2"]
+        elasticsearch:
+          - { server: "7.17.18", elastica: "^8.0" }
+          - { server: "8.12.2", elastica: "^8.0" }
+          - { server: "9.2.0", elastica: "^9.0" }
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 12.*
@@ -23,7 +26,7 @@ jobs:
           - laravel: 13.*
             testbench: 11.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - E${{ matrix.elasticsearch }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - E${{ matrix.elasticsearch.server }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Configure sysctl limits
@@ -36,7 +39,7 @@ jobs:
       - name: Start Elasticsearch
         uses: elastic/elastic-github-actions/elasticsearch@master
         with:
-          stack-version: ${{ matrix.elasticsearch }}
+          stack-version: ${{ matrix.elasticsearch.server }}
           security-enabled: false
 
       - name: Checkout code
@@ -56,7 +59,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "ruflin/elastica:${{ matrix.elasticsearch.elastica }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: List Installed Dependencies
@@ -70,4 +73,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./build/logs/clover.xml
           fail_ci_if_error: true
-          env_vars: P${{ matrix.php }},L${{ matrix.laravel }},E${{ matrix.elasticsearch }},${{ matrix.stability }},${{ matrix.os }}
+          env_vars: P${{ matrix.php }},L${{ matrix.laravel }},E${{ matrix.elasticsearch.server }},${{ matrix.stability }},${{ matrix.os }}
