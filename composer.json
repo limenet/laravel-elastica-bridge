@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "laravel/framework": "^12.0 || ^13.0",
         "ruflin/elastica": "^8.0",
         "spatie/laravel-package-tools": "^1.13.0"
@@ -32,7 +32,7 @@
         "phpstan/phpstan-deprecation-rules": "^2.0.6",
         "phpstan/phpstan-phpunit": "^2.1.2",
         "phpstan/phpstan-strict-rules": "^2.1.2",
-        "phpunit/phpunit": "^12.5.45",
+        "phpunit/phpunit": "^13.4.8",
         "psr/log": "^3.0.2",
         "rector/rector": "^2.8.5",
         "sentry/sentry": "^4.38.0",
