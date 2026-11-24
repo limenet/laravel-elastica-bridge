@@ -68,7 +68,7 @@ abstract class AbstractIndex implements IndexInterface
         return $this->documentResultToElements(
             $this->getElasticaIndex()
                 ->search(
-                    new Query($query)
+                    (new Query($query))
                         ->setSize($size)
                         ->setFrom($from)
                 )
