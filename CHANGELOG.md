@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-elastica-bridge` will be documented in this file.
 
+## v2.3.0 - 2026-11-24
+
+- Elasticsearch 9 (via Elastica 9); Elasticsearch 7.17 and 8 remain supported with Elastica 8
+- Drop support for PHP 8.3 (now requires PHP 8.4+)
+
 ## v2.2.0 - 2026-10-03
 
 - Configurable minimum log level for Sentry breadcrumbs via `elastica-bridge.logging.level` / `ELASTICSEARCH_LOG_LEVEL` (defaults to `debug`, so nothing changes unless it is set). Elasticsearch logs full request and response bodies at `debug`, so raising it reduces memory use when `sentry_breadcrumbs` is enabled.
