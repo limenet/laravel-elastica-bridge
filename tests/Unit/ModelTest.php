@@ -13,13 +13,13 @@ use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Product;
 
-class ModelTest extends TestCase
+final class ModelTest extends TestCase
 {
-    protected CustomerIndex $customerIndex;
+    private CustomerIndex $customerIndex;
 
-    protected InvoiceIndex $invoiceIndex;
+    private InvoiceIndex $invoiceIndex;
 
-    protected ProductIndex $productIndex;
+    private ProductIndex $productIndex;
 
     protected function setUp(): void
     {
@@ -42,10 +42,10 @@ class ModelTest extends TestCase
                 $this->assertSame($customer->email, $document->get('email'));
                 $this->assertSame($customer->type, $document->get('type'));
 
-                $this->assertStringContainsString('-'.$customer->id, $document->getId());
+                $this->assertStringContainsString('-'.$customer->id, (string) $document->getId());
                 $this->assertStringContainsString(
                     str($customer::class)->classBasename()->lower()->append('-')->toString(),
-                    $document->getId()
+                    (string) $document->getId()
                 );
                 $this->assertMatchesRegularExpression('/[\w\d_-]/', $document->getId());
 
@@ -64,10 +64,10 @@ class ModelTest extends TestCase
 
                 $this->assertSame($product->name, $document->get('name'));
 
-                $this->assertStringContainsString('-'.$product->id, $document->getId());
+                $this->assertStringContainsString('-'.$product->id, (string) $document->getId());
                 $this->assertStringContainsString(
                     str($product::class)->classBasename()->lower()->append('-')->toString(),
-                    $document->getId()
+                    (string) $document->getId()
                 );
                 $this->assertMatchesRegularExpression('/[\w\d_-]/', $document->getId());
 
@@ -84,10 +84,10 @@ class ModelTest extends TestCase
                 $document = $invoice->toElasticaDocument($this->invoiceIndex);
                 $this->assertInstanceOf(Document::class, $document);
 
-                $this->assertStringContainsString('-'.$invoice->getKey(), $document->getId());
+                $this->assertStringContainsString('-'.$invoice->getKey(), (string) $document->getId());
                 $this->assertStringContainsString(
                     str($invoice::class)->classBasename()->lower()->append('-')->toString(),
-                    $document->getId()
+                    (string) $document->getId()
                 );
                 $this->assertMatchesRegularExpression('/[\w\d_-]/', $document->getId());
 

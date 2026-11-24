@@ -10,7 +10,7 @@ use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeFacade;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Product;
 
-class EventTest extends TestCase
+final class EventTest extends TestCase
 {
     public function test_event_missing_index(): void
     {

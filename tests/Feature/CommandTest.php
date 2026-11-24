@@ -7,7 +7,7 @@ namespace Limenet\LaravelElasticaBridge\Tests\Feature;
 use Elastica\Query\MatchQuery;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 
-class CommandTest extends TestCase
+final class CommandTest extends TestCase
 {
     public function test_status(): void
     {

@@ -7,7 +7,7 @@ namespace Limenet\LaravelElasticaBridge\Tests\Unit;
 use Elastica\Client;
 use Limenet\LaravelElasticaBridge\LaravelElasticaBridgeFacade;
 
-class FacadeTest extends TestCase
+final class FacadeTest extends TestCase
 {
     public function test_facade(): void
     {

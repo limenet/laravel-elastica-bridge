@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Limenet\LaravelElasticaBridge\Jobs;
 
 use Illuminate\Bus\Batchable;
-use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Foundation\Queue\Queueable;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Model\ElasticsearchableInterface;
 use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
@@ -18,10 +15,7 @@ use Throwable;
 class PopulateBatchIndex implements ShouldQueue
 {
     use Batchable;
-    use Dispatchable;
-    use InteractsWithQueue;
     use Queueable;
-    use SerializesModels;
 
     /**
      * @param  class-string<IndexInterface>  $indexConfigKey

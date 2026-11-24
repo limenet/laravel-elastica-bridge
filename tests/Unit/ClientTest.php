@@ -10,9 +10,9 @@ use Limenet\LaravelElasticaBridge\Logging\SentryBreadcrumbLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
-class ClientTest extends TestCase
+final class ClientTest extends TestCase
 {
-    protected ElasticaClient $elasticaClient;
+    private ElasticaClient $elasticaClient;
 
     protected function setUp(): void
     {
@@ -59,7 +59,6 @@ class ClientTest extends TestCase
     {
         $reflectedClass = new \ReflectionClass($client);
         $reflection = $reflectedClass->getProperty('_logger');
-        $reflection->setAccessible(true);
 
         return $reflection->getValue($client);
     }

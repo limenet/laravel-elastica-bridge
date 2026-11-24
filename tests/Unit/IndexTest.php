@@ -17,13 +17,13 @@ use Limenet\LaravelElasticaBridge\Tests\App\Models\Customer;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice;
 use RuntimeException;
 
-class IndexTest extends TestCase
+final class IndexTest extends TestCase
 {
-    protected CustomerIndex $customerIndex;
+    private CustomerIndex $customerIndex;
 
-    protected InvoiceIndex $invoiceIndex;
+    private InvoiceIndex $invoiceIndex;
 
-    protected ProductIndex $productIndex;
+    private ProductIndex $productIndex;
 
     protected function setUp(): void
     {

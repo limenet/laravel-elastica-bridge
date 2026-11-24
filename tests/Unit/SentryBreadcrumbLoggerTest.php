@@ -11,7 +11,7 @@ use Sentry\Breadcrumb;
 use Sentry\ClientBuilder;
 use Sentry\SentrySdk;
 
-class SentryBreadcrumbLoggerTest extends TestCase
+final class SentryBreadcrumbLoggerTest extends TestCase
 {
     /**
      * @var list<Breadcrumb>

@@ -9,7 +9,7 @@ use Elastica\Query\MatchQuery;
 use Limenet\LaravelElasticaBridge\Index\IndexInterface;
 use Limenet\LaravelElasticaBridge\Tests\App\Models\Invoice;
 
-class QueryTest extends TestCase
+final class QueryTest extends TestCase
 {
     public function test_get_by_id(): void
     {

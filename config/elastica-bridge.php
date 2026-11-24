@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'elasticsearch' => [
         'host' => env('ELASTICSEARCH_HOST', 'localhost'),

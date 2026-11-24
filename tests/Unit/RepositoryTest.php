@@ -9,13 +9,13 @@ use Limenet\LaravelElasticaBridge\Repository\IndexRepository;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\CustomerIndex;
 use Limenet\LaravelElasticaBridge\Tests\App\Elasticsearch\ProductIndex;
 
-class RepositoryTest extends TestCase
+final class RepositoryTest extends TestCase
 {
-    protected CustomerIndex $customerIndex;
+    private CustomerIndex $customerIndex;
 
-    protected ProductIndex $productIndex;
+    private ProductIndex $productIndex;
 
-    protected IndexRepository $indexRepository;
+    private IndexRepository $indexRepository;
 
     protected function setUp(): void
     {
